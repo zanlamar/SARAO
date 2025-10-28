@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 .content-empty-state {
@@ -141,6 +141,7 @@
 
 .footer-icon:hover {
   color: var(--color-azul);
+  transform: scale(1.05);
 }
 
 /* ===== BOTÓN + DESTACADO EN FOOTER ===== */
@@ -165,29 +166,28 @@
   color: var(--color-dark);
 }
 
-.icon-plus-footer {
-  width: 1.5rem;
-  height: 1.5rem;
+.footer-icon-add svg {
+  width: 1.25rem;
+  height: 1.25rem;
   stroke-width: 2.5;
 }
 
 @media (min-width: 640px) {
-  .icon-plus-footer {
-    width: 1.75rem;
-    height: 1.75rem;
+  .footer-icon-add svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
-/* ===== RESPONSIVE - TABLET ===== */
+/* ===== RESPONSIVE ===== */
 @media (min-width: 640px) {
-  .home-container {
-    padding-top: 4rem;
+  .main-content {
+    padding: 2rem;
   }
 }
 
-/* ===== RESPONSIVE - DESKTOP ===== */
 @media (min-width: 1024px) {
-  .home-container {
-    padding-top: 4rem;
+  .main-content {
+    padding: 2rem 4rem;
   }
 }
