@@ -4,7 +4,7 @@
         <!-- Logo y nombre -->
         <div class="navbar-logo">
             <img 
-            src="assets/images/download.png"
+            src="assets/images/sarao-logo.png"
             alt="SARAO Logo" 
             class="logo-img"
             routerLink="/landing"
@@ -13,15 +13,14 @@
 
         <!-- Botones de autenticación -->
         <div class="navbar-buttons">
-            <button class="btn btn-primary"
-            routerLink="/register">
-            Register
-            </button>
-            <button class="btn btn-secondary"
-            routerLink="/login">
-            Login
-            </button>
+            @if (authService.currentUser()) {
+                <a routerLink="/home" class="btn btn-primary">Home</a>
+                <button (click)="onLogout()" class="btn btn-dark">Logout</button>
+            } @else {
+                <a routerLink="/login" class="btn btn-secondary">Login</a>
+                <a routerLink="/register" class="btn btn-primary">Register</a>
+        }
         </div>
-        </div>
+        </div>  
     </div>
 </nav>
