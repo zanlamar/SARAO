@@ -5,17 +5,14 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  margin-top: 8rem;
+  /* margin-top: 8rem; */
   background-color: var(--color-ice);
-  margin-left: -100vw;  
-  margin-right: -100vw; 
-  padding-left: calc(1rem + 100vw); 
-  padding-right: calc(1rem + 100vw);  
+  min-height: 90vh;
 }
 
 @media (min-width: 640px) {
   .hero-section {
-    padding-top: 0;
+    padding: 1rem;
   }
 }
 
