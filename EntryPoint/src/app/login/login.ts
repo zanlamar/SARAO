@@ -31,7 +31,7 @@ export class Login {
       const result = await this.authService.login(this.email, this.password);
 
       if (result.success) {
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home'; // pendiente
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home'; 
         
         if (returnUrl === '/login' || returnUrl === '/register') {
           this.router.navigate(['/home']);

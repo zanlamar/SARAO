@@ -19,6 +19,12 @@
   justify-content: center;
   align-items: center;
   height: 8rem;
+  transition: height 0.3s ease; /* ← Animación suave */
+}
+
+/* En /home, la navbar se hace más pequeña */
+.navbar-home .navbar-inner {
+  height: 4rem;
 }
 
 @media (min-width: 640px) {
@@ -44,11 +50,22 @@
   max-width: 14rem;
   width: auto;
   object-fit: contain;
+  transition: max-width 0.3s ease; 
 }
 
 @media (min-width: 640px) {
   .logo-img {
     max-width: 10rem;
+  }
+}
+
+.navbar-home .logo-img {
+  max-width: 8rem; /* Logo más pequeño en /home */
+}
+
+@media (min-width: 640px) {
+  .navbar-home .logo-img {
+    max-width: 6rem;
   }
 }
 
@@ -65,6 +82,7 @@
   }
 }
 
+/* ===== BOTONES EN LANDING/LOGIN/REGISTER ===== */
 .navbar-buttons {
   display: none;
 }
@@ -81,7 +99,85 @@
   }
 }
 
-/* ===== BOTONES ===== */
+/* ===== BOTONES EN /HOME ===== */
+.navbar-buttons-home {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-greeting {
+  font-size: 0.875rem;
+  color: var(--color-ice);
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .navbar-greeting {
+    font-size: 1rem;
+  }
+}
+
+/* ===== BOTÓN + EN NAVBAR ===== */
+.btn-icon-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-banana);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-icon-add:hover {
+  background-color: #ffc107;
+  transform: scale(1.1);
+}
+
+.icon-plus {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-dark);
+  stroke-width: 2;
+}
+
+/* ===== BELL ICON CON BADGE ===== */
+.notification-bell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-bell {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-ice);
+  stroke-width: 1.5;
+  transition: color 0.2s ease;
+}
+
+.notification-bell:hover .icon-bell {
+  color: var(--color-banana);
+}
+
+/* Badge (punto rojo) */
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-salmon);
+  border-radius: 50%;
+  border: 2px solid var(--color-dark);
+}
+
+/* ===== BOTONES ESTÁNDAR ===== */
 .btn {
   padding: 0.5rem 1rem;
   border: none;
@@ -118,4 +214,35 @@
 .btn-secondary:hover {
   background-color: var(--color-ice);
   color: var(--color-dark);
+}
+
+.btn-dark {
+  background-color: #1a1a1a;
+  color: var(--color-ice);
+}
+
+.btn-dark:hover {
+  background-color: #333;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 640px) {
+  .navbar-content {
+    padding: 0 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-content {
+    padding: 0 12rem;
+  }
+}
+
+.navbar-inner {
+  height: 8rem;
+  transition: height 0.3s ease; /* ← Animación suave */
+}
+
+.navbar-home .navbar-inner {
+  height: 4rem; /* ← Se hace pequeña en /home */
 }

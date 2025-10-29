@@ -1,7 +1,7 @@
-<nav class="navbar">
+<nav class="navbar" [ngClass]="{ 'navbar-home': isHome }">
     <div class="navbar-content">
         <div class="navbar-inner">
-        <!-- Logo y nombre -->
+        <!-- Logo -->
         <div class="navbar-logo">
             <img 
             src="assets/images/sarao-logo.png"
@@ -11,16 +11,44 @@
             >
         </div>
 
-        <!-- Botones de autenticación -->
-        <div class="navbar-buttons">
-            @if (authService.currentUser()) {
+        <!-- BOTONES EN LANDING/LOGIN/REGISTER (cuando NO estamos en /home) -->
+        @if (!isHome && authService.currentUser()) {
+            <div class="navbar-buttons">
                 <a routerLink="/home" class="btn btn-primary">Home</a>
                 <button (click)="onLogout()" class="btn btn-dark">Logout</button>
-            } @else {
+            </div>
+        }
+        
+        @if (!isHome && !authService.currentUser()) {
+            <div class="navbar-buttons">
                 <a routerLink="/login" class="btn btn-secondary">Login</a>
                 <a routerLink="/register" class="btn btn-primary">Register</a>
+            </div>
         }
-        </div>
+
+        <!-- CONTENIDO EN /HOME (cuando SÍ estamos en /home) -->
+        @if (isHome) {
+            <div class="navbar-buttons-home">
+                <!-- Hello, Username (solo en tablet+) -->
+                <span class="navbar-greeting">Hello, {{ username }}</span>
+
+                <!-- Botón + destacado -->
+                <a href="#" class="btn-icon-add">
+                    <svg class="icon-plus" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </a>
+
+                <!-- Bell Icon (notificaciones) -->
+                <div class="notification-bell">
+                    <svg class="icon-bell" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31M5.25 9c0-.01 0-.02 0-.03m13.5 0c0-.01 0-.02 0-.03m0 0a8.997 8.997 0 00-13.5 0m13.5 0h.008v.008h-.008" />
+                    </svg>
+                    <!-- Badge (punto rojo) -->
+                    <span class="notification-badge"></span>
+                </div>
+            </div>
+        }
         </div>  
     </div>
 </nav>
