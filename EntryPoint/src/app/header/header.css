@@ -131,6 +131,14 @@
   }
 }
 
+@media (max-width: 640px) {
+  .navbar-greeting {
+    display: none !important;
+  }
+}
+
+
+
 /* ===== BOTÓN + (ADD) ===== */
 .btn-icon-add {
   display: flex;
@@ -273,3 +281,26 @@
     padding: 0 1rem;
   }
 }
+
+.notification-bell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-ice);
+}
+
+.icon-bell {
+  font-size: 24px;
+  color: currentColor;
+}
+
+/* .notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+} */
