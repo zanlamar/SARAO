@@ -5,7 +5,7 @@
   min-height: 100vh;
   background-color: var(--color-ice);
   color: var(--color-dark);
-  padding-top: 4rem; /* Espacio para la navbar fija */
+  /*padding-top: 3rem;  Espacio para la navbar fija */
 }
 
 /* ===== CONTENIDO PRINCIPAL ===== */
@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .empty-title {
