@@ -10,7 +10,7 @@
             <div class="form-row full">
                 <mat-form-field>
                 <mat-label>Event Name</mat-label>
-                <input matInput formControlName="eventName" placeholder="Enter event name" />
+                <input matInput formControlName="eventTitle" placeholder="Enter event name" />
                 </mat-form-field>
             </div>
 
@@ -55,7 +55,7 @@
             <div class="form-row full">
                 <mat-form-field>
                 <mat-label>Event Description</mat-label>
-                <textarea matInput formControlName="eventDescription" placeholder="Describe your event..."></textarea>
+                <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
 
@@ -79,9 +79,9 @@
             <!-- Radio: +1 allowed (ancho completo) -->
             <div class="form-row">
                 <label>Are +1 people allowed?</label>
-                <mat-radio-group formControlName="allowedPlus1">
-                <mat-radio-button value="true">Yes</mat-radio-button>
-                <mat-radio-button value="false">No</mat-radio-button>
+                <mat-radio-group formControlName="allowedPlusOne">
+                <mat-radio-button [value]="true">Yes</mat-radio-button>
+                <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
 
@@ -102,8 +102,8 @@
             <div class="form-row">
                 <label>Do you want a bring list?</label>
                 <mat-radio-group formControlName="bringList">
-                <mat-radio-button value="true">Yes</mat-radio-button>
-                <mat-radio-button value="false">No</mat-radio-button>
+                    <mat-radio-button [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
 
@@ -113,8 +113,8 @@
                 <button mat-button (click)="onSubmit()">Create Event</button>
             </div>
         </form>
-    </mat-step>
-        </mat-stepper>
+        </mat-step>
+    </mat-stepper>
     </div>
 
     <app-footer></app-footer>

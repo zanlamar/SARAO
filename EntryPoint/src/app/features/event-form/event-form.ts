@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -10,7 +10,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTimepickerModule } from '@angular/material/timepicker';
-import { Footer } from '../../shared/components/footer/footer';  
+import { Footer } from '../../shared/components/footer/footer'; 
+import { AuthService } from '../../core/services/auth.service'; 
+import { EventService } from '../../core/services/event.service'; 
+import { EventFormDTO } from '../../core/models/event.model';
 
 @Component({
   selector: 'app-event-form',
@@ -19,7 +22,8 @@ import { Footer } from '../../shared/components/footer/footer';
   styleUrl: './event-form.css',
   standalone: true
 })
-export class EventForm {
+export class EventForm implements OnInit {
+
   step1FormGroup: FormGroup;
   step2FormGroup: FormGroup;
   step3FormGroup: FormGroup;
@@ -28,31 +32,39 @@ export class EventForm {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private eventService: EventService,
+
   ) {
     this.step1FormGroup = this.formBuilder.group({
-      eventName: ['', Validators.required],
+      eventTitle: ['', Validators.required],
       startDate: ['', Validators.required],
       startTime: ['', Validators.required],
       location: ['', Validators.required]
     });
 
     this.step2FormGroup = this.formBuilder.group({
-      eventDescription: ['', Validators.required],
+      description: ['', Validators.required],
       image: ['', Validators.required],
-      allowedPlus1: ['', Validators.required]
+      allowedPlusOne: [false, Validators.required],
+
     });
 
     this.step3FormGroup = this.formBuilder.group({
-      bringList: ['', Validators.required]
+      bringList: ['']
     });
   }
 
+  ngOnInit(): void {
+    // Aquí no necesitas nada aún
+  }
+
   onFileSelected(event: any) {
-    const file = event.target.files[0];
+    const file = event.target.files[0]; // Obtén el archivo del input
     if (file) {
-      this.selectedFileName = file.name;
-      this.step2FormGroup.patchValue({ image: file });
+      this.selectedFileName = file.name; // Guarda el nombre para mostrar
+      this.step2FormGroup.patchValue({ image: file }); // Actualiza el formulario
     }
   }
 
@@ -62,13 +74,49 @@ export class EventForm {
   }
 
   onSubmit() {
-    if (this.step1FormGroup.valid && this.step2FormGroup.valid && this.step3FormGroup.valid) {
-      console.log('Formulario completado:', {
-        step1: this.step1FormGroup.value,
-        step2: this.step2FormGroup.value,
-        step3: this.step3FormGroup.value
-      });
+    // primero se chequea que no haya error 
+    if (!this.step1FormGroup.valid || !this.step2FormGroup.valid || !this.step3FormGroup.valid) {
+      console.log('Error. Formulario incompleto');
+      return;
+    }
+
+    // despues se chequea el ID del usuario
+    const user = this.authService.currentUser();
+      if (!user) {
+        console.log('Error. No hay usuario autenticado');
+        return;
+      };
+
+    // se recogen los valores de los 3 steps y se rellena el objeto
+    const eventData: EventFormDTO = {
+      title: this.step1FormGroup.value.eventTitle,
+      description: this.step2FormGroup.value.description,
+      eventDate: new Date(this.step1FormGroup.value.startDate),
+      eventTime: this.step1FormGroup.value.startTime,
+      location: {
+        alias: this.step1FormGroup.value.location,
+        address: '',
+      },
+      imageUrl: this.step2FormGroup.value.image,
+      allowPlusOne: this.step2FormGroup.value.allowedPlusOne,
+      bringList: this.step3FormGroup.value.bringList ? this.step3FormGroup.value.bringList.split(',') : [],
+    };
+    console.log('Datos recogidos:', eventData);
+
+    // se llama al servicio para crear el evento de una vez
+    this.eventService.createEvent(eventData, user.uid).subscribe({
+      next: (createdEvent) => {
+        console.log('Evento creado:', createdEvent);
+        // TODO: Limpiar formulario y redirigir
+
+        // this.router.navigate(['/event', event.id]); redirigir a la vista previa, probablemente
+      },
+      error: (error) => {
+        console.error('Error al crear el evento:', error);
+      }
+    });
+
+
       // Aquí datos al backend
     }
   }
-}
