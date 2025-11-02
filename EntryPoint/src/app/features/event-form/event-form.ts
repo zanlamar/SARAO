@@ -10,10 +10,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { Footer } from '../../shared/components/footer/footer';  
 
 @Component({
   selector: 'app-event-form',
-  imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatRadioModule, MatTimepickerModule],
+  imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatRadioModule, MatTimepickerModule, Footer],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
   standalone: true

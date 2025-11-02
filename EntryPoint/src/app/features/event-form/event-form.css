@@ -1,4 +1,6 @@
-/* ===== EVENT FORM CONTAINER ===== */
+/* ===== EVENT FORM - ESTILOS LIMPIOS Y ORGANIZADOS ===== */
+
+/* ===== SECCIÓN PRINCIPAL ===== */
 .event-form-section {
   flex: 1;
   display: flex;
@@ -6,22 +8,28 @@
   justify-content: center;
   padding: 2rem 1rem;
   background-color: var(--color-ice);
-  min-height: calc(100vh - 4rem); /* Resta altura de navbar en /home */
+  min-height: calc(100vh - 4rem);
+  padding-top: 5rem;
+  padding-bottom: 100px;
 }
 
 @media (min-width: 640px) {
   .event-form-section {
-    padding: 3rem 2rem;
+    padding: 1.5rem 2rem;
+    padding-top: 5rem;
+    padding-bottom: 80px;
   }
 }
 
 @media (min-width: 1024px) {
   .event-form-section {
     padding: 3rem 6rem;
+    padding-top: 5rem;
+    padding-bottom: 100px;
   }
 }
 
-/* ===== EVENT FORM CONTAINER ===== */
+/* ===== CONTENEDOR DEL FORMULARIO ===== */
 .event-form-container {
   width: 100%;
   max-width: 900px;
@@ -33,11 +41,19 @@
 
 @media (min-width: 640px) {
   .event-form-container {
-    padding: 3rem;
+    padding: 1.5rem;
+    max-width: 600px;
   }
 }
 
-/* ===== FORM LAYOUT - DOS COLUMNAS ===== */
+@media (min-width: 1024px) {
+  .event-form-container {
+    padding: 2rem;
+    max-width: 900px;
+  }
+}
+
+/* ===== FORM LAYOUT (2 COLUMNAS) ===== */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -52,12 +68,11 @@
   }
 }
 
-/* Una columna completa */
 .form-row.full {
   grid-template-columns: 1fr;
 }
 
-/* ===== MATERIAL STEPPER OVERRIDES ===== */
+/* ===== STEPPER ===== */
 ::ng-deep .mat-mdc-stepper {
   background-color: transparent;
   box-shadow: none;
@@ -74,6 +89,22 @@
 
 ::ng-deep .mat-mdc-step-header.mat-mdc-active .mat-mdc-step-header-label-state {
   color: var(--color-azul);
+}
+
+/* Stepper responsive en mobile */
+@media (max-width: 640px) {
+  ::ng-deep .mat-step-label {
+    display: none !important;
+  }
+
+  ::ng-deep .mat-mdc-step-header {
+    min-width: 50px !important;
+    gap: 0 !important;
+  }
+
+  ::ng-deep .mat-mdc-stepper-header-container {
+    gap: 0.5rem !important;
+  }
 }
 
 /* ===== FORM FIELDS ===== */
@@ -112,7 +143,7 @@ textarea[matInput] {
   resize: vertical;
 }
 
-/* ===== LABELS (RADIO BUTTONS, ETC) ===== */
+/* ===== LABELS ===== */
 label {
   display: block;
   margin-bottom: 1rem;
@@ -154,17 +185,12 @@ label {
   color: var(--color-dark);
 }
 
-/* Button container for stepper navigation */
 .button-container {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e0e0e0;
-}
+  justify-content: center;
+  margin-top: 2rem;}
 
-/* ===== BUTTON STYLES ===== */
 button[mat-button] {
   padding: 0.75rem 2rem;
   border-radius: 9999px;
@@ -208,11 +234,8 @@ button[matStepperPrevious]:hover {
   display: none;
 }
 
-/* ===== DATEPICKER Y TIMEPICKER ===== */
-::ng-deep .mat-mdc-datepicker-toggle-default-icon {
-  color: var(--color-azul);
-}
-
+/* ===== DATEPICKER Y TIMEPICKER - ICONOS ===== */
+::ng-deep .mat-mdc-datepicker-toggle-default-icon,
 ::ng-deep .mat-timepicker-toggle-default-icon {
   color: var(--color-azul);
 }
@@ -222,10 +245,9 @@ button[matStepperPrevious]:hover {
   cursor: pointer;
 }
 
-/* ===== DATEPICKER BACKDROP ===== */
+/* ===== OVERLAY BACKDROP ===== */
 ::ng-deep .cdk-overlay-pane {
   z-index: 1000 !important;
-  background-color: white !important;
 }
 
 ::ng-deep .cdk-overlay-backdrop {
@@ -238,8 +260,38 @@ button[matStepperPrevious]:hover {
   height: 100vh !important;
 }
 
-/* ===== TIMEPICKER - CENTRADO ===== */
+/* ===== DATEPICKER (CALENDARIO) ===== */
+::ng-deep .mat-datepicker-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  padding: 20px !important;
+  z-index: 1001 !important;
+}
 
+::ng-deep .mat-calendar {
+  width: 350px !important;
+  max-width: 100% !important;
+}
+
+::ng-deep .mat-calendar-body-label {
+  visibility: hidden !important;
+}
+
+::ng-deep .mat-calendar-body-cell-content:hover {
+  background-color: var(--color-banana) !important;
+  cursor: pointer !important;
+}
+
+::ng-deep .mat-tooltip {
+  visibility: hidden !important;
+}
+
+/* ===== TIMEPICKER ===== */
 ::ng-deep .mat-timepicker-container {
   width: 300px !important;
   display: flex !important;
@@ -253,7 +305,6 @@ button[matStepperPrevious]:hover {
   font-size: 1.2rem !important;
 }
 
-/* Botones del timepicker */
 ::ng-deep .mat-timepicker-toggle-button,
 ::ng-deep .mat-timepicker-content button {
   cursor: pointer !important;
@@ -262,21 +313,13 @@ button[matStepperPrevious]:hover {
 }
 
 /* ===== TIMEPICKER HOVER ===== */
-::ng-deep .mat-timepicker-clock-cell:hover {
-  background-color: var(--color-banana) !important;
-  color: var(--color-dark) !important;
-  cursor: pointer !important;
-  transform: scale(1.1);
-  transition: all 0.2s ease !important;
-}
-
 ::ng-deep .mat-mdc-option:hover {
   background-color: var(--color-banana) !important;
   color: var(--color-dark) !important;
   cursor: pointer !important;
 }
 
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
+/* ===== RESPONSIVE (MOBILE) ===== */
 @media (max-width: 640px) {
   .event-form-container {
     padding: 1.5rem;
@@ -294,67 +337,5 @@ button[matStepperPrevious]:hover {
 
   label {
     font-size: 0.9rem;
-  }
-}
-
-/* ===== BACKDROP (fondo semi-transparente) ===== */
-::ng-deep .cdk-overlay-backdrop {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(8px);
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-}
-
-/* ===== DATEPICKER CONTENT (la caja del calendario) ===== */
-::ng-deep .mat-datepicker-content {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  padding: 20px !important;
-  z-index: 1001 !important;
-}
-
-/* ===== CALENDAR (el grid de fechas) ===== */
-::ng-deep .mat-calendar {
-  width: 350px !important;
-  max-width: 100% !important;
-}
-
-::ng-deep .mat-tooltip {
-  visibility: hidden !important;
-}
-
-/* ===== CALENDAR BODY (días del mes) ===== */
-
-::ng-deep .mat-calendar-body-label {
-  visibility: hidden !important; /* Oculta etiquetas como "OCT" */
-}
-
-/* Contenido de cada celda (número del día) */
-::ng-deep .mat-calendar-body-cell-content:hover {
-  background-color: var(--color-banana) !important;
-  cursor: pointer !important;
-}
-/* ===== STEPPER RESPONSIVE ===== */
-/* Stepper responsive en mobile */
-@media (max-width: 640px) {
-  ::ng-deep .mat-step-label {
-    display: none !important;
-  }
-
-  ::ng-deep .mat-mdc-step-header {
-    min-width: 50px !important;
-    gap: 0 !important;
-  }
-
-  ::ng-deep .mat-mdc-stepper-header-container {
-    gap: 0.5rem !important;
   }
 }

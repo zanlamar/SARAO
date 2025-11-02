@@ -5,7 +5,14 @@
   min-height: 100vh;
   background-color: var(--color-ice);
   color: var(--color-dark);
-  padding-top: 4rem; /* Espacio para la navbar fija */
+  padding-top: 8rem;  /* Espacio para navbar fija en desktop */
+  padding-bottom: 80px; /* Espacio para footer fijo */
+}
+
+@media (max-width: 640px) {
+  .home-container {
+    padding-top: 4rem; /* Navbar más pequeña en mobile */
+  }
 }
 
 /* ===== CONTENIDO PRINCIPAL ===== */
@@ -22,7 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .empty-title {
