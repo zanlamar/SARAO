@@ -1,16 +1,14 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, from, Observable } from "rxjs";
+import { from, Observable } from "rxjs";
 import { Event, EventFormDTO } from "../models/event.model";
 import { SupabaseService } from "./supabase.service";
 import { AuthService } from "./auth.service";
+import { mapEventFormDTOToSupabase, mapSupabaseResponseToEvent, getSupabaseUserId } from "../helpers/event.mapper";
 
 @Injectable({
     providedIn: 'root'
 })
 export class EventService {
-    // BehaviourSubject para que los componentes se suscriban a cambios 
-    private events$ = new BehaviorSubject<Event[]>([]);
-
     constructor(
         private supabaseService: SupabaseService,
         private authService: AuthService
@@ -20,10 +18,10 @@ export class EventService {
     // PARA CREAR UN EVENTO
     async createEvent(eventData: EventFormDTO): Promise<Event> {
         //buscamos el userId
-        const userId = await this.getSupabaseUserId();
+        const userId = await getSupabaseUserId(this.authService, this.supabaseService);
 
         // preparamos los datos
-        const eventToInsert = this.mapEventFormDTOToSupabase(eventData, userId);
+        const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);
 
         // lo insertamos
         const { data, error } = await this.supabaseService.getClient()
@@ -34,7 +32,7 @@ export class EventService {
         if (error) throw new Error(error.message);
 
         //mapear y devolver
-        return this.mapSupabaseResponseToEvent(data[0]);
+        return mapSupabaseResponseToEvent(data[0]);
 
     }
 
@@ -45,7 +43,7 @@ export class EventService {
     }
 
     private async getUserEvents(): Promise<Event[]> {
-        const userId = await this.getSupabaseUserId();
+        const userId = await getSupabaseUserId(this.authService, this.supabaseService);
 
         const { data, error } = await this.supabaseService.getClient()
         .from('events')
@@ -54,7 +52,7 @@ export class EventService {
 
         if (error) throw new Error(error.message);
 
-        return data.map((event: any) => this.mapSupabaseResponseToEvent(event));
+        return data.map((event: any) => mapSupabaseResponseToEvent(event));
     }
 
 
@@ -63,8 +61,8 @@ export class EventService {
         return from(this.updateEventAsync(eventId, eventData));
     }
     private async updateEventAsync(eventId: string, eventData: EventFormDTO): Promise<Event> {
-        const userId = await this.getSupabaseUserId();
-        const eventToUpdate = this.mapEventFormDTOToSupabase(eventData, userId);
+        const userId = await getSupabaseUserId(this.authService, this.supabaseService);
+        const eventToUpdate = mapEventFormDTOToSupabase(eventData, userId);
 
         const { data, error } = await this.supabaseService.getClient()
         .from('events')
@@ -73,9 +71,9 @@ export class EventService {
         .eq('creator_id', userId)
         .select();
 
-        if (error) throw new Error(error.message);
+        if (error) throw new Error(error.message);  
 
-        return this.mapSupabaseResponseToEvent(data[0]);
+        return mapSupabaseResponseToEvent(data[0]);
     }
 
     // PARA BORRAR
@@ -83,7 +81,7 @@ export class EventService {
         return from(this.deleteEventAsync(eventId));
     }
     private async deleteEventAsync(eventId: string): Promise<void> {
-        const userId = await this.getSupabaseUserId();
+        const userId = await getSupabaseUserId(this.authService, this.supabaseService);
 
         const { error } = await this.supabaseService.getClient()
             .from('events')
