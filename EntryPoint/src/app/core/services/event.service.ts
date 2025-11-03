@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, from, Observable } from "rxjs";
 import { Event, EventFormDTO } from "../models/event.model";
+import { SupabaseService } from "./supabase.service";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,55 +11,87 @@ export class EventService {
     // BehaviourSubject para que los componentes se suscriban a cambios 
     private events$ = new BehaviorSubject<Event[]>([]);
 
+    constructor(
+        private supabaseService: SupabaseService,
+        private authService: AuthService
+    ) { }
 
-    constructor() { }
 
-    /**
-     * Expone eventos como Observable (solo lectura)
-     */
+    // PARA CREAR UN EVENTO
+    async createEvent(eventData: EventFormDTO): Promise<Event> {
+        //buscamos el userId
+        const userId = await this.getSupabaseUserId();
+
+        // preparamos los datos
+        const eventToInsert = this.mapEventFormDTOToSupabase(eventData, userId);
+
+        // lo insertamos
+        const { data, error } = await this.supabaseService.getClient()
+        .from('events')
+        .insert([eventToInsert])
+        .select();
+
+        if (error) throw new Error(error.message);
+
+        //mapear y devolver
+        return this.mapSupabaseResponseToEvent(data[0]);
+
+    }
+
+    // PARA ENCONTRAR LOS EVENTOS DE UN USER
     getEvents(): Observable<Event[]> {
-        return this.events$.asObservable();
+        // lo convertimos en observable
+        return from(this.getUserEvents());
     }
 
-    /**
-     * Crea un nuevo evento
-     * @param eventData Datos completos del evento (ya validados)
-     * @param userId ID del usuario autenticado
-     * @returns Observable que emite el evento creado
-     */
+    private async getUserEvents(): Promise<Event[]> {
+        const userId = await this.getSupabaseUserId();
 
-    createEvent(eventData: EventFormDTO, userId: string): Observable<Event> {
-        // logica para validar datos
-        // crear ID único
-        // guardar en supabase
-        // subir imagen a supabase Storage
-        // emitir evento creado
-    
-    console.log('Evento creado de',userId);
-    return new Observable(observer => {
-        observer.next({} as Event);   
-    })
+        const { data, error } = await this.supabaseService.getClient()
+        .from('events')
+        .select()
+        .eq('creator_id', userId);
+
+        if (error) throw new Error(error.message);
+
+        return data.map((event: any) => this.mapSupabaseResponseToEvent(event));
     }
 
-    getEventsByUser(userId: string): Observable<Event[]> {
-        // Consulta a Supabase: SELECT * FROM events WHERE userId = ?
-        return new Observable(observer => {
-            observer.next([]);
-        })
+
+    // PARA MODIFICAR
+    updateEvent(eventId: string, eventData: EventFormDTO): Observable<Event> {
+        return from(this.updateEventAsync(eventId, eventData));
+    }
+    private async updateEventAsync(eventId: string, eventData: EventFormDTO): Promise<Event> {
+        const userId = await this.getSupabaseUserId();
+        const eventToUpdate = this.mapEventFormDTOToSupabase(eventData, userId);
+
+        const { data, error } = await this.supabaseService.getClient()
+        .from('events')
+        .update(eventToUpdate)
+        .eq('id', eventId)
+        .eq('creator_id', userId)
+        .select();
+
+        if (error) throw new Error(error.message);
+
+        return this.mapSupabaseResponseToEvent(data[0]);
     }
 
-    updateEvent(eventId: string, updates: Partial<Event>): Observable<Event> {
-        // UPDATE events SER... WHERE is = ?
-        return new Observable(observer => {
-            observer.next({} as Event);
-        })
-    }
-
+    // PARA BORRAR
     deleteEvent(eventId: string): Observable<void> {
-        // DELETE FROM events WHERE id = ?
-        return new Observable(observer => {
-            observer.next();
-        })
+        return from(this.deleteEventAsync(eventId));
+    }
+    private async deleteEventAsync(eventId: string): Promise<void> {
+        const userId = await this.getSupabaseUserId();
+
+        const { error } = await this.supabaseService.getClient()
+            .from('events')
+            .delete()
+            .eq('id', eventId)
+            .eq('creator_id', userId);
+
+        if (error) throw new Error(error.message);
     }
 
     

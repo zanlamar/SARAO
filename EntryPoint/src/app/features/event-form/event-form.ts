@@ -104,7 +104,7 @@ export class EventForm implements OnInit {
     console.log('Datos recogidos:', eventData);
 
     // se llama al servicio para crear el evento de una vez
-    this.eventService.createEvent(eventData, user.uid).subscribe({
+    this.eventService.createEvent(eventData).subscribe({
       next: (createdEvent) => {
         console.log('Evento creado:', createdEvent);
         // TODO: Limpiar formulario y redirigir
