@@ -87,6 +87,8 @@ export class EventForm implements OnInit {
         return;
       };
 
+    const imageFile = this.step2FormGroup.value.image;
+
     // se recogen los valores de los 3 steps y se rellena el objeto
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
@@ -106,7 +108,7 @@ export class EventForm implements OnInit {
 
     // se llama al servicio para crear el evento de una vez
     try {
-      const createdEvent = await this.eventService.createEvent(eventData);
+      const createdEvent = await this.eventService.createEvent(eventData, imageFile);
       console.log('Evento creado:', createdEvent);
     // TODO: Limpiar formulario y redirigir a la página de eventos
     } catch (error:any) {

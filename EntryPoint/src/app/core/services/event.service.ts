@@ -16,7 +16,7 @@ export class EventService {
 
 
     // PARA CREAR UN EVENTO
-    async createEvent(eventData: EventFormDTO): Promise<Event> {
+    async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
         //buscamos el userId
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         console.log('✅ userId obtenido:', userId, 'tipo:', typeof userId);
