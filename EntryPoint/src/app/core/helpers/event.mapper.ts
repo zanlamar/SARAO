@@ -9,6 +9,8 @@ export async function getSupabaseUserId(
     supabaseService: SupabaseService
 ): Promise<string> {
     const firebaseUid = authService.currentUser().uid;
+    console.log('🔍 Buscando usuario con firebase_uid:', firebaseUid);
+
 
     const { data, error } = await supabaseService.getClient()
         .from('users')
@@ -16,8 +18,18 @@ export async function getSupabaseUserId(
         .eq('firebase_uid', firebaseUid)
         .maybeSingle();
 
-    if (error) throw new Error(`Error on finding the user: ${error.message}`);
-    if (!data) throw new Error('User not found in the database');
+        console.log('📊 Resultado de la query:', { data, error });
+
+
+    if (error) {
+        console.error('Error al buscar el usuario:', error);
+        throw new Error(`Error on finding the user: ${error.message}`);
+    }
+    if (!data) {
+        console.error('User not found in the database');
+        throw new Error('User not found in the database');
+    }
+    console.log('✅ Usuario encontrado con ID:', data.id);
     return data.id;
 }
 
@@ -32,9 +44,9 @@ export function mapEventFormDTOToSupabase(
         creator_id: userId,
         title: eventData.title,
         description: eventData.description,
-        event_date: eventData.eventDate,
-        event_time: eventData.eventTime,
-        image_url: eventData.imageUrl,
+        event_date: eventData.eventDate.toISOString().split('T')[0],
+        event_time: new Date(eventData.eventTime).toTimeString().slice(0, 5),
+        image_url: null,
         location_alias: eventData.location.alias,
         allow_companion: eventData.allowPlusOne, 
         bring_list: eventData.bringList || false,

@@ -19,15 +19,23 @@ export class EventService {
     async createEvent(eventData: EventFormDTO): Promise<Event> {
         //buscamos el userId
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
+        console.log('✅ userId obtenido:', userId, 'tipo:', typeof userId);
+
 
         // preparamos los datos
         const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);
+        console.log('📤 Datos a insertar:', eventToInsert);
+        console.log('🔑 creator_id en los datos:', eventToInsert.creator_id);
+
+
 
         // lo insertamos
         const { data, error } = await this.supabaseService.getClient()
         .from('events')
         .insert([eventToInsert])
         .select();
+        console.log('📊 Respuesta INSERT completa:', JSON.stringify({ data, error }, null, 2));
+
 
         if (error) throw new Error(error.message);
 
