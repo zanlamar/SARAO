@@ -73,7 +73,7 @@ export class EventForm implements OnInit {
     fileInput.click();
   }
 
-  onSubmit() {
+  async onSubmit() {
     // primero se chequea que no haya error 
     if (!this.step1FormGroup.valid || !this.step2FormGroup.valid || !this.step3FormGroup.valid) {
       console.log('Error. Formulario incompleto');
@@ -87,6 +87,8 @@ export class EventForm implements OnInit {
         return;
       };
 
+    const imageFile = this.step2FormGroup.value.image;
+
     // se recogen los valores de los 3 steps y se rellena el objeto
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
@@ -99,24 +101,21 @@ export class EventForm implements OnInit {
       },
       imageUrl: this.step2FormGroup.value.image,
       allowPlusOne: this.step2FormGroup.value.allowedPlusOne,
-      bringList: this.step3FormGroup.value.bringList ? this.step3FormGroup.value.bringList.split(',') : [],
+      bringList: this.step3FormGroup.value.bringList || false,
     };
     console.log('Datos recogidos:', eventData);
+    console.log('🔑 Firebase UID actual:', this.authService.currentUser().uid);
 
     // se llama al servicio para crear el evento de una vez
-    this.eventService.createEvent(eventData, user.uid).subscribe({
-      next: (createdEvent) => {
-        console.log('Evento creado:', createdEvent);
-        // TODO: Limpiar formulario y redirigir
-
-        // this.router.navigate(['/event', event.id]); redirigir a la vista previa, probablemente
-      },
-      error: (error) => {
-        console.error('Error al crear el evento:', error);
-      }
-    });
-
-
-      // Aquí datos al backend
-    }
+    try {
+      const createdEvent = await this.eventService.createEvent(eventData, imageFile);
+      console.log('Evento creado:', createdEvent);
+    // TODO: Limpiar formulario y redirigir a la página de eventos
+    } catch (error:any) {
+      console.error('Error al crear el evento:', error);
+      console.error('❌ ERROR COMPLETO:', error);
+      console.error('❌ Mensaje:', error.message);
+      console.error('❌ Stack:', error.stack);
+    };
   }
+}
