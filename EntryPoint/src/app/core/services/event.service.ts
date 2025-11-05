@@ -3,7 +3,7 @@ import { from, Observable } from "rxjs";
 import { Event, EventFormDTO } from "../models/event.model";
 import { SupabaseService } from "./supabase.service";
 import { AuthService } from "./auth.service";
-import { mapEventFormDTOToSupabase, mapSupabaseResponseToEvent, getSupabaseUserId } from "../helpers/event.mapper";
+import { mapEventFormDTOToSupabase, mapSupabaseResponseToEvent, getSupabaseUserId } from "../helpers-supabase/event.mapper";
 import { StorageService } from "./storage.service";
 
 @Injectable({
