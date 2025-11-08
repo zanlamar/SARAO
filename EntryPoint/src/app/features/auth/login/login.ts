@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
@@ -31,6 +31,7 @@ export class Login {
       const result = await this.authService.login(this.email, this.password);
 
       if (result.success) {
+        await this.authService.waitForAuthentication();
         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home'; 
         
         if (returnUrl === '/login' || returnUrl === '/register') {
@@ -38,6 +39,7 @@ export class Login {
         } else {
           this.router.navigateByUrl(returnUrl);
         }
+
       } else {
         this.errorMessage.set('Invalid password or email');
       }

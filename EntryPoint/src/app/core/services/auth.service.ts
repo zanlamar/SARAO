@@ -1,4 +1,4 @@
-import { Injectable, signal } from "@angular/core";
+import { effect, Injectable, signal } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { SupabaseService } from "./supabase.service";
@@ -70,4 +70,19 @@ export class AuthService {
     isAuthenticated(): boolean {
         return this.currentUser() !== null;
     }
-};
+
+    waitForAuthentication(): Promise<void> {
+        return new Promise((resolve) => {
+            if (this.currentUser() !== null) {
+                resolve();
+                return;
+            }
+            const effectRef = effect(() => {
+                if (this.currentUser() !== null) {
+                    effectRef.destroy();  
+                    resolve(); 
+                }
+            });
+        });
+    }
+}
