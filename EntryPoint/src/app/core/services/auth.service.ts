@@ -1,6 +1,8 @@
 import { Injectable, signal } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
 import { Router } from "@angular/router";
+import { SupabaseService } from "./supabase.service";
+
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,8 @@ export class AuthService {
 
     constructor(
         private auth: Auth,
-        private router: Router
+        private router: Router,
+        private supabaseService: SupabaseService,
     ) {
         user(this.auth).subscribe(user => {
             this.currentUser.set(user);
@@ -24,11 +27,25 @@ export class AuthService {
                 email,
                 password
             );
+
+            const firebaseUid = credential.user.uid;
+
+            try {
+                await this.supabaseService.getClient()
+                    .from('users')           
+                    .insert({ 
+                        firebase_uid: firebaseUid,
+                        email: email
+                    });
+                
+            } catch (supabaseError: any) {
+                console.error('Error al guardar en Supabase:', supabaseError.message);
+            }
+
             return { success: true, user: credential.user };
             
         } catch (error: any) {
             return { success: false, error: error.message};
-            
         }
     }
 

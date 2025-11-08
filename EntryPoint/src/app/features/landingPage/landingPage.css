@@ -1,19 +1,18 @@
 /* ===== HERO SECTION (BODY) ===== */
 .hero-section {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
+  /* margin-top: 8rem; */
   background-color: var(--color-ice);
-  min-height: calc(95vh - 90px);
+  min-height: 90vh;
 }
 
 @media (min-width: 640px) {
   .hero-section {
-    padding-top: 0;
+    padding: 1rem;
   }
 }
 
@@ -91,7 +90,6 @@
     font-size: 1rem;
   }
 }
-
 
 .btn-primary {
   background-color: var(--color-azul);

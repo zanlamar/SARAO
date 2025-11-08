@@ -19,7 +19,11 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              { "glob": "**/*", "input": "public", "output": "/" },
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
               "src/assets"
             ],
             "styles": [
@@ -74,15 +78,33 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              { "glob": "**/*", "input": "public", "output": "/" },
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
               "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
