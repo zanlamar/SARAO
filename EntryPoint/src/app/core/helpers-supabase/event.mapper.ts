@@ -45,7 +45,7 @@ export function mapEventFormDTOToSupabase(
         title: eventData.title,
         description: eventData.description,
         event_date: eventData.eventDate.toISOString().split('T')[0],
-        event_time: new Date(eventData.eventTime).toTimeString().slice(0, 5),
+        event_time: new Date(eventData.eventTime).toTimeString().slice(0, 5), 
         image_url: eventData.imageUrl || null,
         location_alias: eventData.location.alias,
         allow_companion: eventData.allowPlusOne, 

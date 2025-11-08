@@ -20,7 +20,7 @@ export class Header implements OnInit {
   isCreateEvent = false;
   username = 'Pendón';
 
-   constructor() {
+  constructor() {
     console.log('Header component initialized'); 
   }
 

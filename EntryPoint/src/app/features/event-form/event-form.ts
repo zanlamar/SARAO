@@ -109,6 +109,7 @@ export class EventForm implements OnInit {
     // se llama al servicio para crear el evento de una vez
     try {
       const createdEvent = await this.eventService.createEvent(eventData, imageFile);
+      this.router.navigate(['/calendar-view']);
       console.log('Evento creado:', createdEvent);
     // TODO: Limpiar formulario y redirigir a la página de eventos
     } catch (error:any) {

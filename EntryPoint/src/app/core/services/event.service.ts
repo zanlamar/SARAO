@@ -33,15 +33,11 @@ export class EventService {
         console.log('🖼️ imageUrl original:', imageUrl);
 
 
-
-
         // preparamos los datos
         const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);
         console.log('📸 image_url en eventToInsert:', eventToInsert.image_url);
         console.log('📤 Datos a insertar:', eventToInsert);
         console.log('🔑 creator_id en los datos:', eventToInsert.creator_id);
-
-
 
         // lo insertamos
         const { data, error } = await this.supabaseService.getClient()
@@ -52,7 +48,6 @@ export class EventService {
 
 
         if (error) throw new Error(error.message);
-
         //mapear y devolver
         return mapSupabaseResponseToEvent(data[0]);
 
@@ -113,6 +108,4 @@ export class EventService {
 
         if (error) throw new Error(error.message);
     }
-
-    
 }
