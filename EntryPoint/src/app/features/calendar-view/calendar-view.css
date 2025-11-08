@@ -1,11 +1,17 @@
-/* ===== CONTENEDOR PRINCIPAL ===== */
+/* Contenedor y layout principal */
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .calendar-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f3ff;
-  padding-top: 5rem; /* Espacio para el navbar fijo */
-  padding-bottom: 0; /* El footer se posiciona abajo */
+  background-color: var(--color-ice);
+  padding-top: 5rem;
+  padding-bottom: 0;
 }
 
 .calendar-content {
@@ -16,7 +22,7 @@
   width: 100%;
 }
 
-/* ===== GRID PRINCIPAL (2 COLUMNAS) ===== */
+/* Grid principal 2 columnas */
 .calendar-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -30,325 +36,26 @@
   }
 }
 
-/* ===== COLUMNA IZQUIERDA: EVENTOS ===== */
+/* Orden de columnas */
 .events-column {
   order: 2;
+}
+
+.calendar-column {
+  order: 1;
 }
 
 @media (min-width: 1024px) {
   .events-column {
     order: 1;
   }
-}
 
-/* ===== HEADER EVENTOS ===== */
-.events-header {
-  margin-bottom: 1.5rem;
-}
-
-.events-title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
-}
-
-.events-subtitle {
-  font-size: 1rem;
-  color: #6b7280;
-  margin-bottom: 1rem;
-}
-
-/* ===== BOTONES FILTRO (UPCOMING/HOSTING) ===== */
-.filter-buttons {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.25rem;
-  background-color: #e0e7ff;
-  border-radius: 0.5rem;
-  width: fit-content;
-  margin-bottom: 1.5rem;
-}
-
-.filter-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: #e0e7ff;
-  color: #4f46e5;
-}
-
-.filter-btn.active {
-  background-color: #4f46e5;
-  color: white;
-}
-
-.filter-btn:hover {
-  background-color: #c7d2fe;
-}
-
-.filter-btn.active:hover {
-  background-color: #4338ca;
-}
-
-/* ===== LISTA DE EVENTOS ===== */
-.events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* ===== TARJETA DE EVENTO ===== */
-.event-card {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.event-card:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.event-image {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.event-image-placeholder {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  background-color: #e0e7ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 1.5rem;
-}
-
-.event-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.event-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 0.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.event-location {
-  font-size: 0.8rem;
-  color: #6b7280;
-  margin-bottom: 0.25rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.event-datetime {
-  font-size: 0.75rem;
-  color: #9ca3af;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 0.75rem;
-  color: #6b7280;
-}
-
-/* ===== COLUMNA DERECHA: CALENDARIO ===== */
-.calendar-column {
-  order: 1;
-}
-
-@media (min-width: 1024px) {
   .calendar-column {
     order: 2;
   }
 }
 
-/* ===== HEADER CALENDARIO ===== */
-.calendar-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .calendar-header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.calendar-month {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1f2937;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.calendar-nav {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.calendar-btn {
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  color: #4f46e5;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  transition: all 0.2s ease;
-}
-
-.calendar-btn:hover {
-  background-color: #f3f4f6;
-  color: #4338ca;
-}
-
-.calendar-btn svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-/* ===== GRID CALENDARIO ===== */
-.calendar-grid-container {
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background-color: white;
-}
-
-/* ===== HEADER DÍAS DE LA SEMANA ===== */
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background-color: #f0f4ff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.calendar-weekday {
-  padding: 0.75rem;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4f46e5;
-  text-transform: uppercase;
-  border-right: 1px solid #e5e7eb;
-}
-
-.calendar-weekday:last-child {
-  border-right: none;
-}
-
-/* ===== GRID DÍAS ===== */
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.calendar-day {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0.5rem;
-  border-right: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: white;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  min-height: 5rem;
-  font-size: 0.875rem;
-}
-
-.calendar-day:nth-child(7n) {
-  border-right: none;
-}
-
-/* Última fila sin borde inferior */
-.calendar-day:nth-last-child(-n+7) {
-  border-bottom: none;
-}
-
-.calendar-day:hover {
-  background-color: #f3f4f6;
-}
-
-.calendar-day.other-month {
-  background-color: #fafafa;
-  color: #d1d5db;
-}
-
-.calendar-day.today {
-  background-color: #e0e7ff;
-}
-
-.calendar-day.today .day-number {
-  color: #4f46e5;
-  font-weight: 700;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #4f46e5;
-  color: white;
-}
-
-.day-number {
-  font-weight: 600;
-  color: #1f2937;
-  font-size: 0.875rem;
-}
-
-.day-events {
-  display: flex;
-  gap: 0.25rem;
-  margin-top: 0.25rem;
-  flex-wrap: wrap;
-}
-
-.day-event-dot {
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 50%;
-  background-color: #a78bfa;
-}
-
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media (max-width: 1023px) {
   .calendar-grid {
     grid-template-columns: 1fr;
@@ -367,22 +74,5 @@
 @media (max-width: 768px) {
   .calendar-content {
     padding: 1rem 0.5rem;
-  }
-
-  .calendar-day {
-    min-height: 3.5rem;
-    padding: 0.375rem;
-  }
-
-  .day-number {
-    font-size: 0.75rem;
-  }
-
-  .calendar-month {
-    font-size: 1.25rem;
-  }
-
-  .events-title {
-    font-size: 1.5rem;
   }
 }
