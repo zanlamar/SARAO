@@ -26,21 +26,21 @@ export class Header implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkRoute();
+      this.checkRoute();
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.checkRoute();
       });
-  }
+    }
 
-  private checkRoute() {
-    this.isHome = this.router.url === '/home';
-    this.isCreateEvent = this.router.url === '/create' || this.router.url === '/calendar-view';
-  }
+    private checkRoute() {
+      this.isHome = this.router.url === '/home';
+      this.isCreateEvent = this.router.url === '/create' || this.router.url === '/calendar-view';
+    }
 
-  onLogout() {
-    this.authService.logout();
+    onLogout() {
+      this.authService.logout();
+    }
   }
-}

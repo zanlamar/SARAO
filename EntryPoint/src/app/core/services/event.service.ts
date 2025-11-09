@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { from, Observable } from "rxjs";
 import { Event, EventFormDTO } from "../models/event.model";
 import { AuthService } from "./auth.service";
@@ -11,6 +11,9 @@ import { SupabaseService } from "./supabase.service";
     providedIn: 'root'
 })
 export class EventService {
+
+    eventPreview = signal<Event | null>(null);
+    
     constructor(
         private authService: AuthService,
         private storageService: StorageService,
