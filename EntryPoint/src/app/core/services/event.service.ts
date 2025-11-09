@@ -12,7 +12,7 @@ import { SupabaseService } from "./supabase.service";
 })
 export class EventService {
 
-    eventPreview = signal<Event | null>(null);
+    eventPreview = signal<EventFormDTO | null>(null);
     
     constructor(
         private authService: AuthService,

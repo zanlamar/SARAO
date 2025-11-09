@@ -1,0 +1,92 @@
+<div class="preview-wrapper">
+    <main class="preview-container">
+        
+        @if (event) {
+        <div class="preview-content">
+            
+            <!-- HEADER -->
+            <div class="preview-header">
+            <h1 class="preview-title">{{ event.title }}</h1>
+            <button class="btn-close" (click)="onEdit()">✕</button>
+            </div>
+
+            <!-- IMAGEN -->
+            <div class="preview-image">
+            @if (event.imageUrl) {
+                <img [src]="event.imageUrl" alt="{{ event.title }}" />
+            } @else {
+                <div class="image-placeholder">📅</div>
+            }
+            </div>
+
+            <!-- DETALLES -->
+            <div class="preview-details">
+            <div class="detail-item">
+                <span class="detail-label">📅 Fecha:</span>
+                <span class="detail-value">{{ event.eventDate | date: 'long' }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">⏰ Hora:</span>
+                <span class="detail-value">{{ event.eventTime }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">📍 Ubicación:</span>
+                <span class="detail-value">{{ event.location.alias }}</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">📝 Descripción:</span>
+                <p class="detail-value">{{ event.description }}</p>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">➕ Acompañante permitido:</span>
+                <span class="detail-value">
+                {{ event.allowPlusOne ? '✅ Sí' : '❌ No' }}
+                </span>
+            </div>
+
+            @if (event.bringList) {
+                <div class="detail-item">
+                <span class="detail-label">📋 Bring List:</span>
+                <span class="detail-value">✅ Sí</span>
+                </div>
+            }
+            </div>
+
+            <!-- RSVP SECTION -->
+            <div class="rsvp-section">
+            <h3 class="rsvp-title">RSVP</h3>
+            <div class="rsvp-buttons">
+                <button class="rsvp-btn rsvp-yes">
+                <span class="rsvp-icon">✅</span>
+                <span class="rsvp-label">YES</span>
+                </button>
+                <button class="rsvp-btn rsvp-maybe">
+                <span class="rsvp-icon">🤔</span>
+                <span class="rsvp-label">MAYBE</span>
+                </button>
+                <button class="rsvp-btn rsvp-no">
+                <span class="rsvp-icon">❌</span>
+                <span class="rsvp-label">NO</span>
+                </button>
+            </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="preview-buttons">
+            <button class="btn-secondary" (click)="onEdit()">Edit</button>
+            <button class="btn-primary" (click)="onConfirm()">Confirm & Create</button>
+            </div>
+        </div>
+        } @else {
+        <div class="no-event">
+            <p>No event to preview</p>
+        </div>
+        }
+
+    </main>
+    <app-footer></app-footer>
+</div>
