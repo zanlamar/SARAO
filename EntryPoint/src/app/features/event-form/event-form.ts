@@ -93,7 +93,7 @@ export class EventForm implements OnInit {
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
       description: this.step2FormGroup.value.description,
-      eventDate: new Date(this.step1FormGroup.value.startDate),
+      eventDate: this.adjustDateForTimezone(this.step1FormGroup.value.startDate),
       eventTime: this.step1FormGroup.value.startTime,
       location: {
         alias: this.step1FormGroup.value.location,
@@ -122,5 +122,14 @@ export class EventForm implements OnInit {
       console.error('❌ Mensaje:', error.message);
       console.error('❌ Stack:', error.stack);
     };
+  }
+
+  private adjustDateForTimezone(date: Date): Date {
+    if (!date) return new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    
+    return new Date(year, month, day, 0, 0, 0, 0);
   }
 }

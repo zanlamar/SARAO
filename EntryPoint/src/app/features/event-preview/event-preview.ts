@@ -22,6 +22,8 @@ export class EventPreview implements OnInit {
 
   ngOnInit(): void {
     this.event = this.eventService.eventPreview();
+    console.log('Event preview:', this.event);
+    console.log('Event time:', this.event?.eventTime);
   }
 
   onEdit(): void {

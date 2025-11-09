@@ -54,7 +54,8 @@
             @if (day.isCurrentMonth) {
                 <div class="day-events">
                 @for (event of getEventsForDay(day.dateString, userEvents$()); track event.id) {
-                    <span class="day-event-dot"></span>
+                    <!-- <span class="day-event-dot"></span> -->
+                    💃
                     }
                 </div>
             }

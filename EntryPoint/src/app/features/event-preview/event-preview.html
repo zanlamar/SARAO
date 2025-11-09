@@ -22,36 +22,36 @@
             <!-- DETALLES -->
             <div class="preview-details">
             <div class="detail-item">
-                <span class="detail-label">📅 Fecha:</span>
-                <span class="detail-value">{{ event.eventDate | date: 'long' }}</span>
+                <span class="detail-label">📅 Date</span>
+                <span class="detail-value">{{ event.eventDate | date: 'fullDate' }}</span>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">⏰ Hora:</span>
-                <span class="detail-value">{{ event.eventTime }}</span>
+                <span class="detail-label">⏰ Time</span>
+                <span class="detail-value">{{ event.eventTime | date: 'shortTime' }}h</span>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">📍 Ubicación:</span>
+                <span class="detail-label">📍 Where </span>
                 <span class="detail-value">{{ event.location.alias }}</span>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">📝 Descripción:</span>
+                <span class="detail-label">📝 Description</span>
                 <p class="detail-value">{{ event.description }}</p>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">➕ Acompañante permitido:</span>
+                <span class="detail-label">💃💃 Can I bring someone?</span>
                 <span class="detail-value">
-                {{ event.allowPlusOne ? '✅ Sí' : '❌ No' }}
+                {{ event.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
                 </span>
             </div>
 
             @if (event.bringList) {
                 <div class="detail-item">
-                <span class="detail-label">📋 Bring List:</span>
-                <span class="detail-value">✅ Sí</span>
+                <span class="detail-label">📋 Should I bring something?</span>
+                <span class="detail-value">✅ Yes please</span>
                 </div>
             }
             </div>
