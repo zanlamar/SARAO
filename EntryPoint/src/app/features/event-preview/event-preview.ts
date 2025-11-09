@@ -13,30 +13,37 @@ import { Footer } from '../../shared/components/footer/footer';
   standalone: true,
 })
 export class EventPreview implements OnInit {
-    event: EventFormDTO | null = null;
-    
-    constructor(
-      private eventService: EventService,
-      private router: Router,
-    ) {}
+  event: EventFormDTO | null = null;
+  
+  constructor(
+    private eventService: EventService,
+    private router: Router,
+  ) {}
 
-    ngOnInit(): void {
-      this.event = this.eventService.eventPreview();
-    }
-
-    onEdit(): void {
-      this.router.navigate(['/create']);
-    }
-
-    async onConfirm(): Promise<void> {
-      if (!this.event) return;
-        try {
-          console.log('Event confirmed:', this.event);
-          // PENDING: GUARDAR EN BASE DE DATOS
-          this.router.navigate(['/calendar-view']);
-        } catch (error) {
-          console.error('Error confirming event:', error);
-        }
+  ngOnInit(): void {
+    this.event = this.eventService.eventPreview();
   }
+
+  onEdit(): void {
+    this.router.navigate(['/create']);
+  }
+
+  async onConfirm(): Promise<void> {
+    if (!this.event) return;
+      try {
+        const imageFile = this.eventService.imageFilePreview;
+        await this.eventService.createEvent(this.event, imageFile);
+
+        console.log('Event confirmed and saved:', this.event);
+        this.eventService.eventPreview.set(null);
+        this.eventService.imageFilePreview = null;
+
+        // PENDING: GUARDAR EN BASE DE DATOS
+        this.router.navigate(['/calendar-view']);
+      } catch (error) {
+        console.error('Error confirming event:', error);
+      }
+  }
+
 }
 

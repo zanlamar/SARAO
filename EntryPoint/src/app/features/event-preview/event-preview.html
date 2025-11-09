@@ -12,7 +12,7 @@
 
             <!-- IMAGEN -->
             <div class="preview-image">
-            @if (event.imageUrl) {
+                @if (event.imageUrl && event.imageUrl !== '') {
                 <img [src]="event.imageUrl" alt="{{ event.title }}" />
             } @else {
                 <div class="image-placeholder">📅</div>

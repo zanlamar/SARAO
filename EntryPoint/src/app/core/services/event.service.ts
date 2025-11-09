@@ -13,6 +13,7 @@ import { SupabaseService } from "./supabase.service";
 export class EventService {
 
     eventPreview = signal<EventFormDTO | null>(null);
+    imageFilePreview: File | null = null;
     
     constructor(
         private authService: AuthService,

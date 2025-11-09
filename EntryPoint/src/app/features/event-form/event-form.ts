@@ -99,7 +99,7 @@ export class EventForm implements OnInit {
         alias: this.step1FormGroup.value.location,
         address: '',
       },
-      imageUrl: this.step2FormGroup.value.image,
+      imageUrl: '',
       allowPlusOne: this.step2FormGroup.value.allowedPlusOne,
       bringList: this.step3FormGroup.value.bringList || false,
     };
@@ -108,9 +108,13 @@ export class EventForm implements OnInit {
 
     // se llama al servicio para crear el evento de una vez
     try {
-      const createdEvent = await this.eventService.createEvent(eventData, imageFile);
-      this.router.navigate(['/calendar-view']);
-      console.log('Evento creado:', createdEvent);
+      // preview temporal antes de guardar
+      this.eventService.eventPreview.set(eventData);
+      this.eventService.imageFilePreview = imageFile;
+      
+      console.log('Evento guardado en preview:', eventData);
+      this.router.navigate(['/event-preview']);
+      
     // TODO: Limpiar formulario y redirigir a la página de eventos
     } catch (error:any) {
       console.error('Error al crear el evento:', error);
