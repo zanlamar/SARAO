@@ -45,6 +45,7 @@ export function mapEventFormDTOToSupabase(
         title: eventData.title,
         description: eventData.description,
         event_date: eventData.eventDate.toISOString().split('T')[0],
+        // event_date: eventData.eventDate,
         event_time: new Date(eventData.eventTime).toTimeString().slice(0, 5), 
         image_url: eventData.imageUrl || null,
         location_alias: eventData.location.alias,
@@ -56,12 +57,12 @@ export function mapEventFormDTOToSupabase(
 
 
 // funcion para mapear la respuesta de Supabase a tipo Event
-
 export function mapSupabaseResponseToEvent(data: any): Event {
     return {
         title: data.title,
         description: data.description,
         eventDate: new Date(data.event_date),
+        // eventDate: data.event_date,
         eventTime: data.event_time,
         imageUrl: data.image_url,
         location: {

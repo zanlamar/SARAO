@@ -45,6 +45,7 @@
                     (click)="onDayClick(day)"
                     [class.other-month]="!day.isCurrentMonth"
                     [class.today]="day.isToday"
+                    [class.selected]="selectedDate$() === day.dateString"
                     class="calendar-day"
                 >
             <!-- Número del día -->

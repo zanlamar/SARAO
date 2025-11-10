@@ -1,6 +1,3 @@
-<!-- <div class="events-column"> -->
-
-<!-- Lista de eventos -->
 <div class="events-list">
     
     <!-- Sin eventos -->
@@ -35,13 +32,12 @@
         <h3 class="event-title">{{ event.title }}</h3>
         <p class="event-location">📍 {{ event.location.alias }}</p>
         <p class="event-datetime">
-            {{ event.eventDate | date: 'short' }} 
+            {{ event.eventDate.toLocaleDateString() }} 
             @if (event.eventTime) {
-            • {{ event.eventTime }}
+            • Time: {{ event.eventTime.slice(0, 5) }} h
             }
         </p>
         </div>
     </div>
     }
 </div>
-<!-- </div> -->

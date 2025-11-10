@@ -35,8 +35,8 @@ export class EventPreview implements OnInit {
       try {
         const imageFile = this.eventService.imageFilePreview;
         await this.eventService.createEvent(this.event, imageFile);
-
         console.log('Event confirmed and saved:', this.event);
+
         this.eventService.eventPreview.set(null);
         this.eventService.imageFilePreview = null;
 

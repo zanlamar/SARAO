@@ -169,6 +169,24 @@
   background-color: #a78bfa;
 }
 
+/* ===== DÍA SELECCIONADO ===== */
+.calendar-day.selected {
+  background-color: #fef3c7;  /* Fondo amarillo claro */
+  border: 2px solid #fbbf24;  /* Borde amarillo */
+}
+
+.calendar-day.selected .day-number {
+  color: #1f2937;
+  font-weight: 700;
+  background-color: #fbbf24;  /* Fondo amarillo en el número */
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .calendar-day {
