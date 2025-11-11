@@ -1,6 +1,7 @@
 <nav class="navbar" [ngClass]="{ 
     'navbar-home': isHome,
     'navbar-create-event': isCreateEvent,
+    'navbar-event-preview': isEventPreview,
     'navbar-calendar-view': isCalendarView  }">
     
     <div class="navbar-content">
@@ -15,8 +16,8 @@
             >
         </div>
 
-            <!-- BOTONES EN LANDING/LOGIN/REGISTER (cuando NO estamos en rutas autenticadas) -->
-    @if (!isHome && !isCreateEvent && authService.currentUser()) {
+    <!-- BOTONES EN LANDING/LOGIN/REGISTER (cuando NO estamos en rutas autenticadas) -->
+    @if ((isHome || isCalendarView) && authService.currentUser()) {
         <div class="navbar-buttons">
             <a routerLink="/home" class="btn btn-primary">Home</a>
             <button (click)="onLogout()" class="btn-logout">
@@ -26,17 +27,7 @@
         </div>
     }
 
-    <!-- ===== USUARIO NO AUTENTICADO ===== -->
-    @else {
-        <div class="navbar-buttons">
-            <a routerLink="/login" class="btn btn-secondary">Login</a>
-            <a routerLink="/register" class="btn btn-primary">Register</a>
-        </div>
-    }
-        </div>
-
-    <!-- CONTENIDO EN /CREATE-EVENT (de momento vacío, lo llenarás después) -->
-    @if (isCreateEvent) {
+    @if (isCreateEvent || isEventPreview) {
         <div class="navbar-buttons-create">
             <button (click)="onLogout()" class="btn-logout">
                 <span class="material-symbols-outlined">logout</span>
@@ -49,5 +40,13 @@
             </div>
         </div>
     }
+    <!-- ===== USUARIO NO AUTENTICADO ===== -->
+    @else if (!authService.currentUser()) {
+        <div class="navbar-buttons">
+            <a routerLink="/login" class="btn btn-secondary">Login</a>
+            <a routerLink="/register" class="btn btn-primary">Register</a>
+        </div>
+    }
+        </div>
     </div>
 </nav>

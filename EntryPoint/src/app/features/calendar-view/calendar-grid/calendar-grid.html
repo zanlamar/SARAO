@@ -45,6 +45,7 @@
                     (click)="onDayClick(day)"
                     [class.other-month]="!day.isCurrentMonth"
                     [class.today]="day.isToday"
+                    [class.selected]="selectedDate$() === day.dateString"
                     class="calendar-day"
                 >
             <!-- Número del día -->
@@ -54,7 +55,8 @@
             @if (day.isCurrentMonth) {
                 <div class="day-events">
                 @for (event of getEventsForDay(day.dateString, userEvents$()); track event.id) {
-                    <span class="day-event-dot"></span>
+                    <!-- <span class="day-event-dot"></span> -->
+                    💃
                     }
                 </div>
             }

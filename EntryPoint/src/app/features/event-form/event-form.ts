@@ -12,7 +12,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Footer } from '../../shared/components/footer/footer'; 
 import { AuthService } from '../../core/services/auth.service'; 
-import { EventService } from '../../core/services/event.service'; 
+import { EventService } from '../../core/services/event.service';   
+import { StorageService } from '../../core/services/storage.service';
 import { EventFormDTO } from '../../core/models/event.model';
 
 @Component({
@@ -35,7 +36,7 @@ export class EventForm implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private eventService: EventService,
-
+    private storageService: StorageService
   ) {
     this.step1FormGroup = this.formBuilder.group({
       eventTitle: ['', Validators.required],
@@ -57,14 +58,20 @@ export class EventForm implements OnInit {
   }
 
   ngOnInit(): void {
-    // Aquí no necesitas nada aún
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0]; // Obtén el archivo del input
+  async onFileSelected(event: any) {
+    const file = event.target.files[0]; 
     if (file) {
-      this.selectedFileName = file.name; // Guarda el nombre para mostrar
-      this.step2FormGroup.patchValue({ image: file }); // Actualiza el formulario
+      this.selectedFileName = file.name;
+
+      try {
+        const imageUrl = await this.storageService.uploadImage(file);
+        this.step2FormGroup.patchValue({ image: imageUrl });
+        console.log('Imagen subida:', imageUrl);
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+      }
     }
   }
 
@@ -87,19 +94,21 @@ export class EventForm implements OnInit {
         return;
       };
 
-    const imageFile = this.step2FormGroup.value.image;
+    const imageUrl = this.step2FormGroup.value.image;
+    // const imageFile = this.step2FormGroup.value.image;
+    console.log('🔍 imageUrl guardada:', imageUrl);
 
     // se recogen los valores de los 3 steps y se rellena el objeto
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
       description: this.step2FormGroup.value.description,
-      eventDate: new Date(this.step1FormGroup.value.startDate),
+      eventDate: this.adjustDateForTimezone(this.step1FormGroup.value.startDate),
       eventTime: this.step1FormGroup.value.startTime,
       location: {
         alias: this.step1FormGroup.value.location,
         address: '',
       },
-      imageUrl: this.step2FormGroup.value.image,
+      imageUrl: imageUrl  || '',
       allowPlusOne: this.step2FormGroup.value.allowedPlusOne,
       bringList: this.step3FormGroup.value.bringList || false,
     };
@@ -108,9 +117,13 @@ export class EventForm implements OnInit {
 
     // se llama al servicio para crear el evento de una vez
     try {
-      const createdEvent = await this.eventService.createEvent(eventData, imageFile);
-      this.router.navigate(['/calendar-view']);
-      console.log('Evento creado:', createdEvent);
+      // preview temporal antes de guardar
+      this.eventService.eventPreview.set(eventData);
+      // this.eventService.imageFilePreview = imageFile;
+      
+      console.log('Evento guardado en preview:', eventData);
+      this.router.navigate(['/event-preview']);
+      
     // TODO: Limpiar formulario y redirigir a la página de eventos
     } catch (error:any) {
       console.error('Error al crear el evento:', error);
@@ -118,5 +131,14 @@ export class EventForm implements OnInit {
       console.error('❌ Mensaje:', error.message);
       console.error('❌ Stack:', error.stack);
     };
+  }
+
+  private adjustDateForTimezone(date: Date): Date {
+    if (!date) return new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    
+    return new Date(year, month, day, 0, 0, 0, 0);
   }
 }
