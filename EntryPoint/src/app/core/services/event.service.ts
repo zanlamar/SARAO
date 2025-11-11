@@ -31,7 +31,6 @@ export class EventService {
             const imageUrl = await this.storageService.uploadImage(imageFile);
             eventData.imageUrl = imageUrl;
         }
-
         // preparamos los datos
         const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);
         return this.eventDataService.insertEvent(eventToInsert);
