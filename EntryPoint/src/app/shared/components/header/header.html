@@ -2,7 +2,8 @@
     'navbar-home': isHome,
     'navbar-create-event': isCreateEvent,
     'navbar-event-preview': isEventPreview,
-    'navbar-calendar-view': isCalendarView  }">
+    'navbar-calendar-view': isCalendarView,
+    'navbar-shareable-url': isShareableUrl  }">
     
     <div class="navbar-content">
         <div class="navbar-inner">
@@ -17,7 +18,7 @@
         </div>
 
     <!-- BOTONES EN LANDING/LOGIN/REGISTER (cuando NO estamos en rutas autenticadas) -->
-    @if ((isHome || isCalendarView) && authService.currentUser()) {
+    @if ((isHome) && authService.currentUser()) {
         <div class="navbar-buttons">
             <a routerLink="/home" class="btn btn-primary">Home</a>
             <button (click)="onLogout()" class="btn-logout">
@@ -27,7 +28,7 @@
         </div>
     }
 
-    @if (isCreateEvent || isEventPreview) {
+    @if ((isCreateEvent || isEventPreview || isShareableUrl || isCalendarView) && authService.currentUser()) {
         <div class="navbar-buttons-create">
             <button (click)="onLogout()" class="btn-logout">
                 <span class="material-symbols-outlined">logout</span>

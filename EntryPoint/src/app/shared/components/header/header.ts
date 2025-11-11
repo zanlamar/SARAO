@@ -20,6 +20,7 @@ export class Header implements OnInit {
   isCreateEvent = false;
   isCalendarView = false;
   isEventPreview = false;
+  isShareableUrl = false;
   username = 'Pendón';
 
   constructor() {
@@ -27,7 +28,7 @@ export class Header implements OnInit {
   }
 
   ngOnInit(): void {
-      this.checkRoute();
+    this.checkRoute();
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -41,6 +42,7 @@ export class Header implements OnInit {
       this.isCreateEvent = this.router.url === '/create';
       this.isCalendarView = this.router.url === '/calendar-view';
       this.isEventPreview = this.router.url === '/event-preview';
+      this.isShareableUrl = this.router.url === '/shareable-url';
     }
 
     onLogout() {

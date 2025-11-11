@@ -1,12 +1,10 @@
 <div class="events-list">
-    
     <!-- Sin eventos -->
     @if (events$().length === 0) {
         <div class="content-empty-state">
             <h2 class="empty-title"> No saraos yet 💤</h2>
             <!-- Botón para crear primer sarao -->
-            <button class="btn-create-sarao"
-            routerLink="/create">
+            <button class="btn-create-sarao" routerLink="/create">
                 Create your first sarao!
             </button>
         </div>
@@ -14,30 +12,48 @@
     
     <!-- Con eventos -->
     @for (event of events$(); track event.id) {
-    <div class="event-card">
-        
-        <!-- Imagen -->
-        @if (event.imageUrl && event.imageUrl !== '') {
-        <img 
-            [src]="event.imageUrl" 
+        <div class="event-card">
+            <!-- Imagen -->
+            @if (event.imageUrl && event.imageUrl !== '') {
+                <img 
+                    [src]="event.imageUrl" 
             alt="{{ event.title }}"
-            class="event-image"
-        />
-        } @else {
-        <div class="event-image-placeholder">📅</div>
-        }
-        
-        <!-- Contenido -->
-        <div class="event-content">
-        <h3 class="event-title">{{ event.title }}</h3>
-        <p class="event-location">📍 {{ event.location.alias }}</p>
-        <p class="event-datetime">
-            {{ event.eventDate.toLocaleDateString() }} 
-            @if (event.eventTime) {
-            • Time: {{ event.eventTime.slice(0, 5) }} h
+                    class="event-image"
+                />
+            } @else {
+                <div class="event-image-placeholder">📅</div>
             }
-        </p>
+            
+            <!-- Contenido -->
+            <div class="event-content">
+                <div class="event-title-container">
+                    <h3 class="event-title">{{ event.title }}</h3>
+                    <div class="event-icons">
+                        <span 
+                            class="material-symbols-outlined icon-edit"
+                            routerLink="/event-preview"
+                            (click)="onEditEvent(event)"
+                            >edit_document</span>
+                        <span 
+                            class="material-symbols-outlined icon-delete"
+                            routerLink="/event-preview"
+                            (click)="onDelete(event)"
+                            >delete</span>
+                        <span 
+                            class="material-symbols-outlined icon-see"
+                            routerLink="/event-preview"
+                            (click)="onSee(event)"
+                            >visibility</span>
+                    </div>
+                </div>
+                <p class="event-location">📍 {{ event.location.alias || 'No location' }}</p>
+                <p class="event-datetime">
+                    {{ event.eventDate.toLocaleDateString() || 'No date' }}
+                    @if (event.eventTime) {
+                        • Time: {{ event.eventTime.slice(0, 5) }}h
+                    }
+                </p>
+            </div>
         </div>
-    </div>
     }
 </div>

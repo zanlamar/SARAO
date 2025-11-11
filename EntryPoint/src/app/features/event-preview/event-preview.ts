@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO } from '../../core/models/event.model';
 import { Footer } from '../../shared/components/footer/footer';
@@ -13,41 +13,79 @@ import { Footer } from '../../shared/components/footer/footer';
   standalone: true,
 })
 export class EventPreview implements OnInit {
-  event: EventFormDTO | null = null;
-  imagePreviewUrl: string | null = null;
+  private eventService = inject(EventService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
+  event = signal<EventFormDTO | null>(null);
+  isCreating = signal<boolean>(false);
   
   constructor(
-    private eventService: EventService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.event = this.eventService.eventPreview();
+      this.route.params.subscribe(params => {
+      const eventId = params['id'];
+      console.log('🔍 Route params:', { eventId });
+      
+      if (eventId) {
+        this.loadEventFromDatabase(eventId);
+        this.isCreating.set(false);
+      } else {
+        this.event.set(this.eventService.eventPreview());
+        this.isCreating.set(true);
+        console.log('✅ isCreating = true');
+      }
+    });
+  }
 
-    console.log('Event preview:', this.event);
-    console.log('Event time:', this.event?.eventTime);
+  private async loadEventFromDatabase(eventId: string): Promise<void> {
+    try {
+      const loadedEvent = await this.eventService.getEventById(eventId);
+      this.event.set(loadedEvent);
+      console.log('Evento cargado desde BD:', loadedEvent);
+    } catch (error) {
+      console.error('Error loading event from database:', error);
+      this.router.navigate(['/calendar-view']);
+    }
   }
 
   onEdit(): void {
-    this.router.navigate(['/create']);
+    if (this.isCreating()) {
+      this.router.navigate(['/create']);
+    } else {
+      console.log('Edición no disponible aún');
+    }
   }
-
+  
   async onConfirm(): Promise<void> {
-    if (!this.event) return;
-    console.log('📸 Event.imageUrl antes de createEvent:', this.event.imageUrl);
-      try {
-        await this.eventService.createEvent(this.event, null);
-        console.log('Event confirmed and saved:', this.event);
+    console.log('🎯 onConfirm iniciado');
 
-        this.eventService.eventPreview.set(null);
-        this.eventService.imageFilePreview = null;
+    if (!this.isCreating()) {
+    console.log('❌ No estamos en modo creación');
+    return; 
+    }
 
-        // PENDING: GUARDAR EN BASE DE DATOS
-        this.router.navigate(['/calendar-view']);
-      } catch (error) {
-        console.error('Error confirming event:', error);
-      }
+    try {
+      console.log('📝 Llamando createEvent...');
+      const savedEvent = await this.eventService.createEvent(
+        this.event() as EventFormDTO,
+        null
+      );
+      console.log('✅ Evento guardado:', savedEvent);
+      console.log('🔗 Navegando a:', `/shareable-url/${savedEvent.id}`);
+
+      this.eventService.eventPreview.set(null);
+      this.router.navigate(['/shareable-url', savedEvent.id]);
+    } catch (error) {
+      console.error('❌ Error al confirmar el evento:', error);
+    }
   }
 
+  onBack(): void {
+    this.router.navigate(['/calendar-view']);
+  }
 }
+
+
 

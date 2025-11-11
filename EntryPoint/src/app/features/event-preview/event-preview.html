@@ -7,16 +7,16 @@
     
     <main class="preview-container">
         
-        @if (event) {
+        @if (event()) {
         <div class="preview-content">
             
             <!-- TÍTULO -->
-            <h1 class="preview-title">{{ event.title }}</h1>
+            <h1 class="preview-title">{{ event()?.title }}</h1>
 
             <!-- IMAGEN -->
             <div class="preview-image">
-                @if (event.imageUrl && event.imageUrl !== '') {
-                    <img [src]="event.imageUrl" alt="{{ event.title }}" />
+                @if (event()?.imageUrl && event()?.imageUrl !== '') {
+                    <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
                 } @else {
                     <div class="image-placeholder">📅</div>
                 }
@@ -26,25 +26,25 @@
             <div class="preview-main-details">
                 <div class="main-detail">
                     <span class="main-label">📅 DATE</span>
-                    <span class="main-value">{{ event.eventDate | date: 'fullDate' }}</span>
+                    <span class="main-value">{{ event()?.eventDate | date: 'fullDate' }}</span>
                 </div>
 
                 <div class="main-detail">
                     <span class="main-label">⏰ TIME</span>
-                    <span class="main-value">{{ event.eventTime | date: 'shortTime' }}h</span>
+                    <span class="main-value">{{ event()?.eventTime | date: 'shortTime' }}h</span>
                 </div>
             </div>
 
             <!-- WHERE (SEPARADO) -->
             <div class="preview-where">
                 <span class="main-label">📍 WHERE</span>
-                <span class="main-value">{{ event.location.alias }}</span>
+                <span class="main-value">{{ event()?.location?.alias }}</span>
             </div>
 
             <!-- DESCRIPCIÓN -->
             <div class="preview-description">
                 <h3 class="description-title">LISTEN UP</h3>
-                <p>{{ event.description }}</p>
+                <p>{{ event()?.description }}</p>
             </div>
 
             <!-- EXTRAS (CON COLOR DIFERENTE) -->
@@ -52,11 +52,11 @@
                 <div class="extra-item">
                     <span class="extra-label">💃 Can I bring someone?</span>
                     <span class="extra-value">
-                        {{ event.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
+                        {{ event()?.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
                     </span>
                 </div>
 
-                @if (event.bringList) {
+                @if (event()?.bringList) {
                     <div class="extra-item">
                         <span class="extra-label">📋 Should I bring something?</span>
                         <span class="extra-value">✅ Yes please</span>
