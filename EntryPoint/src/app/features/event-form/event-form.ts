@@ -12,7 +12,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Footer } from '../../shared/components/footer/footer'; 
 import { AuthService } from '../../core/services/auth.service'; 
-import { EventService } from '../../core/services/event.service'; 
+import { EventService } from '../../core/services/event.service';   
+import { StorageService } from '../../core/services/storage.service';
 import { EventFormDTO } from '../../core/models/event.model';
 
 @Component({
@@ -35,7 +36,7 @@ export class EventForm implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private eventService: EventService,
-
+    private storageService: StorageService
   ) {
     this.step1FormGroup = this.formBuilder.group({
       eventTitle: ['', Validators.required],
@@ -57,14 +58,20 @@ export class EventForm implements OnInit {
   }
 
   ngOnInit(): void {
-    // Aquí no necesitas nada aún
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0]; // Obtén el archivo del input
+  async onFileSelected(event: any) {
+    const file = event.target.files[0]; 
     if (file) {
-      this.selectedFileName = file.name; // Guarda el nombre para mostrar
-      this.step2FormGroup.patchValue({ image: file }); // Actualiza el formulario
+      this.selectedFileName = file.name;
+
+      try {
+        const imageUrl = await this.storageService.uploadImage(file);
+        this.step2FormGroup.patchValue({ image: imageUrl });
+        console.log('Imagen subida:', imageUrl);
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+      }
     }
   }
 
@@ -87,7 +94,9 @@ export class EventForm implements OnInit {
         return;
       };
 
-    const imageFile = this.step2FormGroup.value.image;
+    const imageUrl = this.step2FormGroup.value.image;
+    // const imageFile = this.step2FormGroup.value.image;
+    console.log('🔍 imageUrl guardada:', imageUrl);
 
     // se recogen los valores de los 3 steps y se rellena el objeto
     const eventData: EventFormDTO = {
@@ -99,7 +108,7 @@ export class EventForm implements OnInit {
         alias: this.step1FormGroup.value.location,
         address: '',
       },
-      imageUrl: '',
+      imageUrl: imageUrl  || '',
       allowPlusOne: this.step2FormGroup.value.allowedPlusOne,
       bringList: this.step3FormGroup.value.bringList || false,
     };
@@ -110,7 +119,7 @@ export class EventForm implements OnInit {
     try {
       // preview temporal antes de guardar
       this.eventService.eventPreview.set(eventData);
-      this.eventService.imageFilePreview = imageFile;
+      // this.eventService.imageFilePreview = imageFile;
       
       console.log('Evento guardado en preview:', eventData);
       this.router.navigate(['/event-preview']);

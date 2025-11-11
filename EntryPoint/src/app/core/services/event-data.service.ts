@@ -11,6 +11,12 @@ export class EventDataService {
     constructor(private supabaseService: SupabaseService) { }
 
     async insertEvent(eventToInsert: any): Promise<Event> {
+        console.log('🔍 Datos que van a Supabase:', {
+            title: eventToInsert.title,
+            image_url: eventToInsert.image_url,
+            image_url_length: eventToInsert.image_url?.length,
+        });
+        
         const { data, error } = await this.supabaseService.getClient()
             .from('events')
             .insert([eventToInsert])

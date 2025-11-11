@@ -1,85 +1,88 @@
 <div class="preview-wrapper">
+    <!-- ACTION BUTTONS (ARRIBA) -->
+    <div class="preview-top-buttons">
+        <button class="btn-secondary" (click)="onEdit()">< EDIT</button>
+        <button class="btn-primary" (click)="onConfirm()">CONFIRM ></button>
+    </div>
+    
     <main class="preview-container">
         
         @if (event) {
         <div class="preview-content">
             
-            <!-- HEADER -->
-            <div class="preview-header">
+            <!-- TÍTULO -->
             <h1 class="preview-title">{{ event.title }}</h1>
-            <button class="btn-close" (click)="onEdit()">✕</button>
-            </div>
 
             <!-- IMAGEN -->
             <div class="preview-image">
                 @if (event.imageUrl && event.imageUrl !== '') {
-                <img [src]="event.imageUrl" alt="{{ event.title }}" />
-            } @else {
-                <div class="image-placeholder">📅</div>
-            }
+                    <img [src]="event.imageUrl" alt="{{ event.title }}" />
+                } @else {
+                    <div class="image-placeholder">📅</div>
+                }
             </div>
 
-            <!-- DETALLES -->
-            <div class="preview-details">
-            <div class="detail-item">
-                <span class="detail-label">📅 Date</span>
-                <span class="detail-value">{{ event.eventDate | date: 'fullDate' }}</span>
-            </div>
-
-            <div class="detail-item">
-                <span class="detail-label">⏰ Time</span>
-                <span class="detail-value">{{ event.eventTime | date: 'shortTime' }}h</span>
-            </div>
-
-            <div class="detail-item">
-                <span class="detail-label">📍 Where </span>
-                <span class="detail-value">{{ event.location.alias }}</span>
-            </div>
-
-            <div class="detail-item">
-                <span class="detail-label">📝 Description</span>
-                <p class="detail-value">{{ event.description }}</p>
-            </div>
-
-            <div class="detail-item">
-                <span class="detail-label">💃💃 Can I bring someone?</span>
-                <span class="detail-value">
-                {{ event.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
-                </span>
-            </div>
-
-            @if (event.bringList) {
-                <div class="detail-item">
-                <span class="detail-label">📋 Should I bring something?</span>
-                <span class="detail-value">✅ Yes please</span>
+            <!-- DETALLES PRINCIPALES (EN LÍNEA) -->
+            <div class="preview-main-details">
+                <div class="main-detail">
+                    <span class="main-label">📅 DATE</span>
+                    <span class="main-value">{{ event.eventDate | date: 'fullDate' }}</span>
                 </div>
-            }
+
+                <div class="main-detail">
+                    <span class="main-label">⏰ TIME</span>
+                    <span class="main-value">{{ event.eventTime | date: 'shortTime' }}h</span>
+                </div>
+            </div>
+
+            <!-- WHERE (SEPARADO) -->
+            <div class="preview-where">
+                <span class="main-label">📍 WHERE</span>
+                <span class="main-value">{{ event.location.alias }}</span>
+            </div>
+
+            <!-- DESCRIPCIÓN -->
+            <div class="preview-description">
+                <h3 class="description-title">LISTEN UP</h3>
+                <p>{{ event.description }}</p>
+            </div>
+
+            <!-- EXTRAS (CON COLOR DIFERENTE) -->
+            <div class="preview-extras">
+                <div class="extra-item">
+                    <span class="extra-label">💃 Can I bring someone?</span>
+                    <span class="extra-value">
+                        {{ event.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
+                    </span>
+                </div>
+
+                @if (event.bringList) {
+                    <div class="extra-item">
+                        <span class="extra-label">📋 Should I bring something?</span>
+                        <span class="extra-value">✅ Yes please</span>
+                    </div>
+                }
             </div>
 
             <!-- RSVP SECTION -->
             <div class="rsvp-section">
-            <h3 class="rsvp-title">RSVP</h3>
-            <div class="rsvp-buttons">
-                <button class="rsvp-btn rsvp-yes">
-                <span class="rsvp-icon">✅</span>
-                <span class="rsvp-label">YES</span>
-                </button>
-                <button class="rsvp-btn rsvp-maybe">
-                <span class="rsvp-icon">🤔</span>
-                <span class="rsvp-label">MAYBE</span>
-                </button>
-                <button class="rsvp-btn rsvp-no">
-                <span class="rsvp-icon">❌</span>
-                <span class="rsvp-label">NO</span>
-                </button>
+                <h3 class="rsvp-title">RSVP</h3>
+                <div class="rsvp-buttons">
+                    <button class="rsvp-btn rsvp-yes">
+                        <span class="rsvp-icon">✅</span>
+                        <span class="rsvp-label">YES</span>
+                    </button>
+                    <button class="rsvp-btn rsvp-maybe">
+                        <span class="rsvp-icon">🤔</span>
+                        <span class="rsvp-label">MAYBE</span>
+                    </button>
+                    <button class="rsvp-btn rsvp-no">
+                        <span class="rsvp-icon">❌</span>
+                        <span class="rsvp-label">NO</span>
+                    </button>
+                </div>
             </div>
-            </div>
-
-            <!-- ACTION BUTTONS -->
-            <div class="preview-buttons">
-            <button class="btn-secondary" (click)="onEdit()">Edit</button>
-            <button class="btn-primary" (click)="onConfirm()">Confirm & Create</button>
-            </div>
+            
         </div>
         } @else {
         <div class="no-event">

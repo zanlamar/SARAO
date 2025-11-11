@@ -17,7 +17,7 @@
     <div class="event-card">
         
         <!-- Imagen -->
-        @if (event.imageUrl) {
+        @if (event.imageUrl && event.imageUrl !== '') {
         <img 
             [src]="event.imageUrl" 
             alt="{{ event.title }}"

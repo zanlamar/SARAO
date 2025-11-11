@@ -27,12 +27,10 @@ export class EventService {
     async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
         //buscamos el userId
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
-
-        let imageUrl = null; 
         if (imageFile) {
-            imageUrl = await this.storageService.uploadImage(imageFile);
+            const imageUrl = await this.storageService.uploadImage(imageFile);
+            eventData.imageUrl = imageUrl;
         }
-        eventData.imageUrl = imageUrl || '';
 
         // preparamos los datos
         const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);

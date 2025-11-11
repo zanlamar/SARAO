@@ -14,6 +14,7 @@ import { Footer } from '../../shared/components/footer/footer';
 })
 export class EventPreview implements OnInit {
   event: EventFormDTO | null = null;
+  imagePreviewUrl: string | null = null;
   
   constructor(
     private eventService: EventService,
@@ -22,6 +23,7 @@ export class EventPreview implements OnInit {
 
   ngOnInit(): void {
     this.event = this.eventService.eventPreview();
+
     console.log('Event preview:', this.event);
     console.log('Event time:', this.event?.eventTime);
   }
@@ -32,9 +34,9 @@ export class EventPreview implements OnInit {
 
   async onConfirm(): Promise<void> {
     if (!this.event) return;
+    console.log('📸 Event.imageUrl antes de createEvent:', this.event.imageUrl);
       try {
-        const imageFile = this.eventService.imageFilePreview;
-        await this.eventService.createEvent(this.event, imageFile);
+        await this.eventService.createEvent(this.event, null);
         console.log('Event confirmed and saved:', this.event);
 
         this.eventService.eventPreview.set(null);

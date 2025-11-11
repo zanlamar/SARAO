@@ -40,6 +40,7 @@ export function mapEventFormDTOToSupabase(
     eventData: EventFormDTO,
     userId: string
 ): any {
+    console.log('🔍 mapEventFormDTOToSupabase recibe imageUrl:', eventData.imageUrl);
     return {
         creator_id: userId,
         title: eventData.title,

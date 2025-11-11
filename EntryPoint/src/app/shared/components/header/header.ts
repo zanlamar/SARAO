@@ -19,6 +19,7 @@ export class Header implements OnInit {
   isHome = false;
   isCreateEvent = false;
   isCalendarView = false;
+  isEventPreview = false;
   username = 'Pendón';
 
   constructor() {
@@ -37,7 +38,9 @@ export class Header implements OnInit {
 
     private checkRoute() {
       this.isHome = this.router.url === '/home';
-      this.isCreateEvent = this.router.url === '/create' || this.router.url === '/calendar-view';
+      this.isCreateEvent = this.router.url === '/create';
+      this.isCalendarView = this.router.url === '/calendar-view';
+      this.isEventPreview = this.router.url === '/event-preview';
     }
 
     onLogout() {
