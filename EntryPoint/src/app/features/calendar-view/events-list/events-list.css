@@ -163,6 +163,16 @@
   color: var(--color-azul);
 }
 
+.icon-share {
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
+.icon-share:hover {
+  color: var(--color-azul);
+}
+
 @media (max-width: 640px) {
   .event-title-container {
     flex-direction: column;

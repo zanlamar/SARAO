@@ -21,4 +21,4 @@ export const routes: Routes = [
     { path: 'event-preview/:id', component: EventPreview, canActivate: [authGuard] },
     { path: 'shareable-url/:id', component: ShareableUrlComponent, canActivate: [authGuard] },
     { path: '**', redirectTo: '' } 
-];      
+]; 

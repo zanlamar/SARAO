@@ -42,8 +42,12 @@
                         <span 
                             class="material-symbols-outlined icon-see"
                             routerLink="/event-preview"
-                            (click)="onSee(event)"
+                            (click)="onSee(event)"  
                             >visibility</span>
+                        <span class="material-symbols-outlined icon-share" 
+                            routerLink="/shareable-url"
+                            (click)="onShareEvent(event.id)"
+                            >share</span>
                     </div>
                 </div>
                 <p class="event-location">📍 {{ event.location.alias || 'No location' }}</p>

@@ -8,19 +8,9 @@
                 <h1 class="share-title">You are good to go!</h1>
                 <p class="share-subtitle">Share this URL with your guests</p>
             </div>
-
+            
             <!-- TÍTULO DEL EVENTO -->
             <h2 class="event-title">{{ event()?.title }}</h2>
-            
-            <!-- IMAGEN -->
-            <div class="preview-image">
-                @if (event()?.imageUrl && event()?.imageUrl !== '') {
-                    <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
-                } @else {
-                    <div class="image-placeholder">📅</div>
-                }
-            </div>
-
             <!-- URL SHAREABLE -->
             <div class="share-url-container">
                 <div class="share-url-wrapper">
@@ -44,6 +34,17 @@
                     </button>
                 </div>
             </div>
+
+            
+            <!-- IMAGEN -->
+            <div class="preview-image">
+                @if (event()?.imageUrl && event()?.imageUrl !== '') {
+                    <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
+                } @else {
+                    <div class="image-placeholder">📅</div>
+                }
+            </div>
+
 
             <!-- INFO -->
             <div class="share-info">

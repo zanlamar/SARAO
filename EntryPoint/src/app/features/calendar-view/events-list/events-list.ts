@@ -35,4 +35,9 @@ export class EventsList {
     this.eventClicked.emit(event);
     this.router.navigate(['/event-preview', event.id]);
   }
+
+  onShareEvent(eventId: string): void {
+    console.log('🔍 Compartiendo evento:', eventId);
+    this.router.navigate(['/shareable-url', eventId]);
+  }
 }
