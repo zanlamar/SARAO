@@ -5,9 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ShareUrlService {
     generateShareUrl(eventId: string): string {
-        return `${window.location.origin}/shareable-url/${eventId}`;
+        return `${window.location.origin}/event-preview/${eventId}`;
     }
-
     async copyToClipboard(text: string): Promise<boolean> {
         try {
             await navigator.clipboard.writeText(text);
