@@ -119,7 +119,7 @@ export class EventForm implements OnInit {
     try {
       // preview temporal antes de guardar
       this.eventService.eventPreview.set(eventData);
-      // this.eventService.imageFilePreview = imageFile;
+      console.log('📋 EventFormDTO guardado:', JSON.stringify(eventData, null, 2));  // ✅ NUEVO
       
       console.log('Evento guardado en preview:', eventData);
       this.router.navigate(['/event-preview']);

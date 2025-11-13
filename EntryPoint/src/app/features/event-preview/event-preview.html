@@ -23,7 +23,6 @@
 
             <!-- IMAGEN -->
             <div class="preview-image">
-                <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
                 @if (event()?.imageUrl && event()?.imageUrl !== '') {
                     <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
                 } @else {
@@ -40,7 +39,7 @@
 
                 <div class="main-detail">
                     <span class="main-label">⏰ TIME</span>
-                    <span class="main-value">{{ event()?.eventTime | date: 'shortTime' }}h</span>
+                    <span class="main-value">{{ event()?.eventTime | timeFormat }}h</span>
                 </div>
             </div>
 

@@ -2,7 +2,7 @@ export interface EventFormDTO {
     title: string;
     description: string;
     eventDate: Date;
-    eventTime: string
+    eventTime: string;
     imageUrl: string;
     location: {
         alias: string;
