@@ -1,82 +1,111 @@
 <div class="event-form-section">
     <div class="event-form-container">
         <mat-stepper linear #stepper>
+
         <!-- PASO 1: Detalles Básicos -->
         <mat-step [stepControl]="step1FormGroup">
         <ng-template matStepLabel>Event Details</ng-template>
 
         <form [formGroup]="step1FormGroup">
-            <!-- Nombre del evento (ancho completo) -->
+            <!-- Nombre del evento -->
             <div class="form-row full">
                 <mat-form-field>
-                    <mat-label>Event Name</mat-label>
+                    <label>Event Name</label>
                     <input matInput formControlName="eventTitle" placeholder="Enter event name" />
                 </mat-form-field>
             </div>
 
-            <!-- Fecha y Hora (dos columnas) -->
-            <div class="form-row">
-                <mat-form-field>
-                <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="startDate" />
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker startView="month"></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field>
-                <mat-label>Start Time</mat-label>
-                <input matInput [matTimepicker]="timePicker" formControlName="startTime" />
-                <mat-timepicker-toggle matSuffix [for]="timePicker"></mat-timepicker-toggle>
-                <mat-timepicker #timePicker></mat-timepicker>
-                </mat-form-field>
-            </div>
-
-            <!-- Ubicación (ancho completo) -->
             <div class="form-row full">
                 <mat-form-field>
-                <mat-label>Location (Alias)</mat-label>
-                <input matInput formControlName="location" placeholder="Enter location name" />
+                    <label>Event Description</label>
+                    <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
 
             <!-- Botones -->
             <div class="button-container">
-                <button mat-button matStepperNext>Next </button>
+                <button mat-button matStepperNext>Next</button>
             </div>
+        </form>
+        </mat-step>
+
+
+        <!-- PASO 2: Fecha y Hora -->
+        <mat-step [stepControl]="step2FormGroup">
+            <ng-template matStepLabel>Date & Time</ng-template>
+
+            <form [formGroup]="step2FormGroup">
+
+            <!-- Fecha y Hora (un campo único) -->
+                <div class="form-row full">
+                    <label>Event Date & Time</label>
+                        <p-datepicker 
+                            formControlName="eventDateTime"
+                            dateFormat="dd/mm/yy"
+                            [showTime]="true"
+                            yearRange="2025:2030"
+                            hourFormat="24"
+                            placeholder="When? What time?"
+                            appendTo="body"
+                            >
+                            <ng-template pTemplate="date" let-date>
+                                    {{ date.day }}
+                            </ng-template>
+                        </p-datepicker>
+                </div>
+                <!-- Botones -->
+                <div class="button-container">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+    <!-- PASO 3: Location and map -->
+    <mat-step [stepControl]="step3FormGroup">
+        <ng-template matStepLabel>Location</ng-template>
+
+        <form [formGroup]="step3FormGroup">
+            <!-- Ubicación (Alias) -->
+            <div class="form-row full">
+                <mat-form-field>
+                    <label>Location (Alias)</label>
+                    <input matInput formControlName="location" placeholder="Enter location name" />
+                </mat-form-field>
+            </div>
+
+            <!-- Botones -->
+            <div class="button-container">
+                <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
         </form>
     </mat-step>
 
-    <!-- PASO 2: Detalles y Multimedia -->
-    <mat-step [stepControl]="step2FormGroup">
-        <ng-template matStepLabel>Description & Media</ng-template>
+    <!-- PASO 4: Extra Details -->
+    <mat-step [stepControl]="step4FormGroup">
+        <ng-template matStepLabel>Extra Details</ng-template>
 
-        <form [formGroup]="step2FormGroup">
-            <!-- Descripción del evento (ancho completo) -->
+        <form [formGroup]="step4FormGroup">
+            <!-- Upload de imagen -->
             <div class="form-row full">
                 <mat-form-field>
-                <mat-label>Event Description</mat-label>
-                <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
-                </mat-form-field>
-            </div>
+                    <label>Upload Cover Image</label>
+                    <input matInput [value]="selectedFileName || ''" readonly />
+                    <input
+                            type="file"
+                            id="fileInput"
+                            name="fileInput"
+                            accept="image/*"
+                            (change)="onFileSelected($event)"
+                            style="display: none"
+                        />
+                        <button mat-button (click)="triggerFileInput()">Choose Image</button>
+                    </mat-form-field>
+                </div>
 
-            <!-- Upload de imagen (ancho completo) -->
-            <div class="form-row full">
-                <mat-form-field>
-                <mat-label>Upload Cover Image</mat-label>
-                <input matInput [value]="selectedFileName || 'Select an image'" readonly />
-                <input
-                    type="file"
-                    id="fileInput"
-                    name="fileInput"
-                    accept="image/*"
-                    (change)="onFileSelected($event)"
-                    style="display: none"
-                />
-                <button mat-button (click)="triggerFileInput()">Choose Image</button>
-                </mat-form-field>
-            </div>
 
-            <!-- Radio: +1 allowed (ancho completo) -->
+            <!-- Radio: Are +1 people allowed? -->
             <div class="form-row">
                 <label>Are +1 people allowed?</label>
                 <mat-radio-group formControlName="allowedPlusOne">
@@ -84,20 +113,7 @@
                 <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
-
-            <!-- Botones -->
-            <div class="button-container">
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-
-    <!-- PASO 3: Bring List -->
-    <mat-step [stepControl]="step3FormGroup">
-        <ng-template matStepLabel>Bring List</ng-template>
-
-        <form [formGroup]="step3FormGroup">
+            
             <!-- Radio: Bring List -->
             <div class="form-row">
                 <label>Do you want a bring list?</label>
@@ -113,8 +129,8 @@
                 <button mat-button (click)="onSubmit()">Create Event</button>
             </div>
         </form>
-        </mat-step>
-    </mat-stepper>
+    </mat-step>
+    </mat-stepper>  
     </div>
 
     <app-footer></app-footer>

@@ -4,12 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
 import { Footer } from '../../shared/components/footer/footer';
-import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
+// import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
 
 
 @Component({
   selector: 'app-event-preview',
-  imports: [CommonModule, Footer, TimeFormatPipe],
+  imports: [CommonModule, Footer],
   templateUrl: './event-preview.html',
   styleUrl: './event-preview.css',
   standalone: true,
@@ -50,9 +50,9 @@ export class EventPreview implements OnInit {
   private async loadEventFromDatabase(eventId: string): Promise<void> {
     try {
       const loadedEvent = await this.eventService.getEventById(eventId);
-      console.log('📸 Evento cargado:', loadedEvent);
-      console.log('📸 imageUrl específicamente:', loadedEvent.imageUrl);
-      console.log('Evento cargado desde BD:',  this.event());
+        console.log('📸 Evento cargado:', loadedEvent);
+        console.log('📸 imageUrl específicamente:', loadedEvent.imageUrl);
+        console.log('Evento cargado desde BD:',  this.event());
 
       this.event.set(loadedEvent);
 
@@ -60,7 +60,8 @@ export class EventPreview implements OnInit {
       console.log('✅ imageUrl en signal:', this.event()?.imageUrl);
       
     } catch (error) {
-      console.error('Error loading event from database:', error);
+      console.error('❌ Error loading event from database:', error);
+      console.error('❌ Error completo:', JSON.stringify(error, null, 2));
       this.router.navigate(['/calendar-view']);
     }
   }

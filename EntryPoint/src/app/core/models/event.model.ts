@@ -1,8 +1,9 @@
 export interface EventFormDTO {
     title: string;
     description: string;
-    eventDate: Date;
-    eventTime: string;
+    // eventDate: Date;
+    // eventTime: string;
+    eventDateTime: Date;
     imageUrl: string;
     location: {
         alias: string;

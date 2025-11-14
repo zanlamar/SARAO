@@ -11,18 +11,21 @@ export class EventDataService {
     constructor(private supabaseService: SupabaseService) { }
 
     async insertEvent(eventToInsert: any): Promise<Event> {
-        console.log('🔍 Datos que van a Supabase:', {
-            title: eventToInsert.title,
-            image_url: eventToInsert.image_url,
-            image_url_length: eventToInsert.image_url?.length,
-        });
+        console.log('🔍 eventToInsert COMPLETO:', JSON.stringify(eventToInsert, null, 2));
+        console.log('🔍 Campos:', Object.keys(eventToInsert));
         
         const { data, error } = await this.supabaseService.getClient()
             .from('events')
             .insert([eventToInsert])
             .select();
+
+        console.log('📤 Respuesta de Supabase - data:', data);
+        console.log('📤 Respuesta de Supabase - error:', error);
         
-        if (error) throw new Error(error.message);
+        if (error) {
+            console.error('❌ ERROR EN INSERT:', error);
+            throw new Error(error.message);
+        }
         return mapSupabaseResponseToEvent(data[0]);
     }
 
