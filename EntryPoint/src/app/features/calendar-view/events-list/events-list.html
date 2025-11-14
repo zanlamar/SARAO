@@ -37,7 +37,7 @@
                         <span 
                             class="material-symbols-outlined icon-delete"
                             routerLink="/event-preview"
-                            (click)="onDelete(event)"
+                            (click)="onDeleteClick(event)"
                             >delete</span>
                         <span 
                             class="material-symbols-outlined icon-see"
@@ -58,4 +58,12 @@
             </div>
         </div>
     }
+
+    @if (eventToDelete) { 
+        <app-delete-modal
+            [event]="eventToDelete"
+            (onConfirmDelete)="onConfirmDelete($event)"
+        ></app-delete-modal>
+    }
+
 </div>

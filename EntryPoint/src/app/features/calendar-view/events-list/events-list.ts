@@ -1,23 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Signal, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular/core';
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { EventService } from '../../../core/services/event.service';
+import { DeleteModal } from "../../../shared/components/delete-modal/delete-modal";
 
 @Component({
   selector: 'app-events-list',
-  imports: [CommonModule],
+  imports: [CommonModule, DeleteModal],
   templateUrl: './events-list.html',
   styleUrl: './events-list.css',
-  standalone: true
+  standalone: true,
 })
 export class EventsList {
   router = inject(Router);
+  eventService = inject(EventService);
+  
   @Input() events$!: Signal<Event[]>;
   @Input() selectedDate$!: Signal<string>;
-
   @Output() eventClicked = new EventEmitter<Event>();
+  @Output() onEventDeleted = new EventEmitter<void>();
 
+  eventToDelete: Event | null = null;
 
   onEventClick(event: Event): void {
     this.eventClicked.emit(event);
@@ -27,8 +31,15 @@ export class EventsList {
     this.eventClicked.emit(event);
   }
 
-  onDelete(event: Event): void {
-    this.eventClicked.emit(event);
+  onDeleteClick(event: Event): void {
+    this.eventToDelete = event;
+  }
+
+  onConfirmDelete(event: Event): void {
+    this.eventService.deleteEvent(event.id);
+    this.eventToDelete = null;
+    console.log('✅ Emitiendo onEventDeleted');
+    this.onEventDeleted.emit();
   }
 
   onSee(event: Event): void {
@@ -40,4 +51,8 @@ export class EventsList {
     console.log('🔍 Compartiendo evento:', eventId);
     this.router.navigate(['/shareable-url', eventId]);
   }
+
 }
+
+
+

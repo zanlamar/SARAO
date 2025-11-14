@@ -30,36 +30,36 @@
         </mat-step>
 
 
-        <!-- PASO 2: Fecha y Hora -->
-        <mat-step [stepControl]="step2FormGroup">
-            <ng-template matStepLabel>Date & Time</ng-template>
+    <!-- PASO 2: Fecha y Hora -->
+    <mat-step [stepControl]="step2FormGroup">
+        <ng-template matStepLabel>Date & Time</ng-template>
 
-            <form [formGroup]="step2FormGroup">
+        <form [formGroup]="step2FormGroup">
 
-            <!-- Fecha y Hora (un campo único) -->
-                <div class="form-row full">
-                    <label>Event Date & Time</label>
-                        <p-datepicker 
-                            formControlName="eventDateTime"
-                            dateFormat="dd/mm/yy"
-                            [showTime]="true"
-                            yearRange="2025:2030"
-                            hourFormat="24"
-                            placeholder="When? What time?"
-                            appendTo="body"
-                            >
-                            <ng-template pTemplate="date" let-date>
-                                    {{ date.day }}
-                            </ng-template>
-                        </p-datepicker>
-                </div>
-                <!-- Botones -->
-                <div class="button-container">
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
+        <!-- Fecha y Hora (un campo único) -->
+            <div class="form-row full">
+                <label>Event Date & Time</label>
+                    <p-datepicker 
+                        formControlName="eventDateTime"
+                        dateFormat="dd/mm/yy"
+                        [showTime]="true"
+                        yearRange="2025:2030"
+                        hourFormat="24"
+                        placeholder="When? What time?"
+                        appendTo="body"
+                        >
+                        <ng-template pTemplate="date" let-date>
+                                {{ date.day }}
+                        </ng-template>
+                    </p-datepicker>
+            </div>
+            <!-- Botones -->
+            <div class="button-container">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
 
     <!-- PASO 3: Location and map -->
     <mat-step [stepControl]="step3FormGroup">
