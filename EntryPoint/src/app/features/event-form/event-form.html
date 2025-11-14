@@ -10,14 +10,14 @@
             <!-- Nombre del evento -->
             <div class="form-row full">
                 <mat-form-field>
-                    <mat-label>Event Name</mat-label>
+                    <label>Event Name</label>
                     <input matInput formControlName="eventTitle" placeholder="Enter event name" />
                 </mat-form-field>
             </div>
 
             <div class="form-row full">
                 <mat-form-field>
-                    <mat-label>Event Description</mat-label>
+                    <label>Event Description</label>
                     <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
@@ -38,7 +38,7 @@
 
             <!-- Fecha y Hora (un campo único) -->
                 <div class="form-row full">
-                    <mat-label>Event Date & Time</mat-label>
+                    <label>Event Date & Time</label>
                         <p-datepicker 
                             formControlName="eventDateTime"
                             dateFormat="dd/mm/yy"
@@ -69,7 +69,7 @@
             <!-- Ubicación (Alias) -->
             <div class="form-row full">
                 <mat-form-field>
-                    <mat-label>Location (Alias)</mat-label>
+                    <label>Location (Alias)</label>
                     <input matInput formControlName="location" placeholder="Enter location name" />
                 </mat-form-field>
             </div>
@@ -90,8 +90,8 @@
             <!-- Upload de imagen -->
             <div class="form-row full">
                 <mat-form-field>
-                    <mat-label>Upload Cover Image</mat-label>
-                    <input matInput [value]="selectedFileName || 'Select an image'" readonly />
+                    <label>Upload Cover Image</label>
+                    <input matInput [value]="selectedFileName || ''" readonly />
                     <input
                             type="file"
                             id="fileInput"
@@ -106,7 +106,7 @@
 
 
             <!-- Radio: Are +1 people allowed? -->
-            <div class="form-row full">
+            <div class="form-row">
                 <label>Are +1 people allowed?</label>
                 <mat-radio-group formControlName="allowedPlusOne">
                 <mat-radio-button [value]="true">Yes</mat-radio-button>
@@ -115,7 +115,7 @@
             </div>
             
             <!-- Radio: Bring List -->
-            <div class="form-row full">
+            <div class="form-row">
                 <label>Do you want a bring list?</label>
                 <mat-radio-group formControlName="bringList">
                     <mat-radio-button [value]="true">Yes</mat-radio-button>
