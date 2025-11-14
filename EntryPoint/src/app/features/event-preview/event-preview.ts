@@ -4,12 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
 import { Footer } from '../../shared/components/footer/footer';
-import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
+// import { TimeFormatPipe } from '../../shared/pipes/time-format.pipe';
 
 
 @Component({
   selector: 'app-event-preview',
-  imports: [CommonModule, Footer, TimeFormatPipe],
+  imports: [CommonModule, Footer],
   templateUrl: './event-preview.html',
   styleUrl: './event-preview.css',
   standalone: true,

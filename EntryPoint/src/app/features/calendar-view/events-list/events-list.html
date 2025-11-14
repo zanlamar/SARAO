@@ -52,10 +52,7 @@
                 </div>
                 <p class="event-location">📍 {{ event.location.alias || 'No location' }}</p>
                 <p class="event-datetime">
-                    {{ event.eventDate.toLocaleDateString() || 'No date' }}
-                    @if (event.eventTime) {
-                        • Time: {{ event.eventTime.slice(0, 5) }}h
-                    }
+                    {{ event.eventDateTime || 'No date' }}
                 </p>
             </div>
         </div>

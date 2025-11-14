@@ -45,9 +45,7 @@ export function mapEventFormDTOToSupabase(
         creator_id: userId,
         title: eventData.title,
         description: eventData.description,
-        event_date: eventData.eventDate.toISOString().split('T')[0],
-        // event_date: eventData.eventDate,
-        event_time: new Date(eventData.eventTime).toTimeString().slice(0, 5), 
+        eventDateTime: eventData.eventDateTime,
         image_url: eventData.imageUrl || null,
         location_alias: eventData.location.alias,
         allow_companion: eventData.allowPlusOne, 
@@ -62,9 +60,7 @@ export function mapSupabaseResponseToEvent(data: any): Event {
     return {
         title: data.title,
         description: data.description,
-        eventDate: new Date(data.event_date),
-        // eventDate: data.event_date,
-        eventTime: data.event_time,
+        eventDateTime: data.real_date, 
         imageUrl: data.image_url,
         location: {
             alias: data.location_alias,

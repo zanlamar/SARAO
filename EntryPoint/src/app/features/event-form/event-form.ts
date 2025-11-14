@@ -15,10 +15,26 @@ import { AuthService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';   
 import { StorageService } from '../../core/services/storage.service';
 import { EventFormDTO } from '../../core/models/event.model';
+import { FormsModule } from '@angular/forms';
+import { DatePicker } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-event-form',
-  imports: [CommonModule, ReactiveFormsModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatRadioModule, MatTimepickerModule, Footer],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    MatStepperModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    MatButtonModule, 
+    MatRadioModule, 
+    MatTimepickerModule, 
+    Footer, 
+    FormsModule, 
+    DatePicker,
+  ],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
   standalone: true
@@ -28,7 +44,6 @@ export class EventForm implements OnInit {
   step1FormGroup: FormGroup;
   step2FormGroup: FormGroup;
   step3FormGroup: FormGroup;
-
   selectedFileName = '';
 
   constructor(
@@ -40,9 +55,9 @@ export class EventForm implements OnInit {
   ) {
     this.step1FormGroup = this.formBuilder.group({
       eventTitle: ['', Validators.required],
-      startDate: ['', Validators.required],
-      startTime: ['', Validators.required],
-      location: ['', Validators.required]
+      location: ['', Validators.required],
+      eventDateTime: ['', Validators.required]
+
     });
 
     this.step2FormGroup = this.formBuilder.group({
@@ -102,8 +117,9 @@ export class EventForm implements OnInit {
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
       description: this.step2FormGroup.value.description,
-      eventDate: this.adjustDateForTimezone(this.step1FormGroup.value.startDate),
-      eventTime: this.step1FormGroup.value.startTime,
+      // eventDate: this.adjustDateForTimezone(this.step1FormGroup.value.startDate),
+      // eventTime: this.step1FormGroup.value.startTime,
+      eventDateTime: this.step1FormGroup.value.eventDateTime,
       location: {
         alias: this.step1FormGroup.value.location,
         address: '',
@@ -133,12 +149,12 @@ export class EventForm implements OnInit {
     };
   }
 
-  private adjustDateForTimezone(date: Date): Date {
-    if (!date) return new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
+  // private adjustDateForTimezone(date: Date): Date {
+  //   if (!date) return new Date();
+  //   const year = date.getFullYear();
+  //   const month = date.getMonth();
+  //   const day = date.getDate();
     
-    return new Date(year, month, day, 0, 0, 0, 0);
-  }
+  //   return new Date(year, month, day, 0, 0, 0, 0);
+  // }
 }

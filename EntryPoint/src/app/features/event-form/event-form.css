@@ -234,17 +234,6 @@ button[matStepperPrevious]:hover {
   display: none;
 }
 
-/* ===== DATEPICKER Y TIMEPICKER - ICONOS ===== */
-::ng-deep .mat-mdc-datepicker-toggle-default-icon,
-::ng-deep .mat-timepicker-toggle-default-icon {
-  color: var(--color-azul);
-}
-
-::ng-deep .mat-datepicker-toggle,
-::ng-deep .mat-timepicker-toggle {
-  cursor: pointer;
-}
-
 /* ===== OVERLAY BACKDROP ===== */
 ::ng-deep .cdk-overlay-pane {
   z-index: 1000 !important;
@@ -260,64 +249,7 @@ button[matStepperPrevious]:hover {
   height: 100vh !important;
 }
 
-/* ===== DATEPICKER (CALENDARIO) ===== */
-::ng-deep .mat-datepicker-content {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  padding: 20px !important;
-  z-index: 1001 !important;
-}
 
-::ng-deep .mat-calendar {
-  width: 350px !important;
-  max-width: 100% !important;
-}
-
-::ng-deep .mat-calendar-body-label {
-  visibility: hidden !important;
-}
-
-::ng-deep .mat-calendar-body-cell-content:hover {
-  background-color: var(--color-banana) !important;
-  cursor: pointer !important;
-}
-
-::ng-deep .mat-tooltip {
-  visibility: hidden !important;
-}
-
-/* ===== TIMEPICKER ===== */
-::ng-deep .mat-timepicker-container {
-  width: 300px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  background-color: white !important;
-  border-radius: 8px !important;
-}
-
-::ng-deep .mat-mdc-form-field-mat-timepicker {
-  font-size: 1.2rem !important;
-}
-
-::ng-deep .mat-timepicker-toggle-button,
-::ng-deep .mat-timepicker-content button {
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  z-index: 1002 !important;
-}
-
-/* ===== TIMEPICKER HOVER ===== */
-::ng-deep .mat-mdc-option:hover {
-  background-color: var(--color-banana) !important;
-  color: var(--color-dark) !important;
-  cursor: pointer !important;
-}
 
 /* ===== RESPONSIVE (MOBILE) ===== */
 @media (max-width: 640px) {

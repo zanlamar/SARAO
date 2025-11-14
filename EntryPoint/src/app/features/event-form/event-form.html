@@ -1,6 +1,7 @@
 <div class="event-form-section">
     <div class="event-form-container">
         <mat-stepper linear #stepper>
+
         <!-- PASO 1: Detalles Básicos -->
         <mat-step [stepControl]="step1FormGroup">
         <ng-template matStepLabel>Event Details</ng-template>
@@ -14,22 +15,23 @@
                 </mat-form-field>
             </div>
 
-            <!-- Fecha y Hora (dos columnas) -->
-            <div class="form-row">
-                <mat-form-field>
-                <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="startDate" />
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker startView="month"></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field>
-                <mat-label>Start Time</mat-label>
-                <input matInput [matTimepicker]="timePicker" formControlName="startTime" />
-                <mat-timepicker-toggle matSuffix [for]="timePicker"></mat-timepicker-toggle>
-                <mat-timepicker #timePicker></mat-timepicker>
-                </mat-form-field>
+            <!-- Fecha y Hora (un campo único) -->
+            <div class="form-row full">
+                <mat-label>Event Date & Time</mat-label>
+                    <p-datepicker 
+                        formControlName="eventDateTime"
+                        dateFormat="dd/mm/yy"
+                        [showTime]="true"
+                        yearRange="2025:2030"
+                        hourFormat="24"
+                        placeholder="When? What time?"
+                        >
+                        <ng-template pTemplate="date" let-date>
+                                {{ date.day }}
+                        </ng-template>
+                    </p-datepicker>
             </div>
+
 
             <!-- Ubicación (ancho completo) -->
             <div class="form-row full">
@@ -44,7 +46,7 @@
                 <button mat-button matStepperNext>Next </button>
             </div>
         </form>
-    </mat-step>
+        </mat-step>
 
     <!-- PASO 2: Detalles y Multimedia -->
     <mat-step [stepControl]="step2FormGroup">

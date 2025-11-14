@@ -53,7 +53,7 @@ export class CalendarView implements OnInit {
     this.selectedDate$.set(dateString);
 
     const filtered = this.userEvents$().filter(event => {
-      const eventDateString = this.calendarService.formatDateToString(event.eventDate);
+      const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);
       return eventDateString === dateString;
     });
     this.selectedDateEvents$.set(filtered);

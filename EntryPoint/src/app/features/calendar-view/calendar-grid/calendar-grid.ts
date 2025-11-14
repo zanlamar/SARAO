@@ -34,7 +34,7 @@ export class CalendarGrid {
 
     getEventsForDay(dateString: string, allEvents: Event[]): Event[] {
       return allEvents.filter(event => {
-        const eventDateString = this.calendarService.formatDateToString(event.eventDate);
+        const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);
         return eventDateString === dateString;
       });
     }
