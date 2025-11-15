@@ -93,7 +93,6 @@ export class CalendarView implements OnInit {
 
   onEventClicked(event: Event): void {
     console.log('Event clicked:', event);
-    // Aquí irá la lógica de qué hacer cuando clickeas un evento
   }
 
 

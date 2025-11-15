@@ -39,10 +39,10 @@ export class Header implements OnInit {
 
     private checkRoute() {
       this.isHome = this.router.url === '/home';
-      this.isCreateEvent = this.router.url === '/create';
+      this.isCreateEvent = this.router.url.startsWith('/create');
       this.isCalendarView = this.router.url === '/calendar-view';
-      this.isEventPreview = this.router.url === '/event-preview';
-      this.isShareableUrl = this.router.url === '/shareable-url';
+      this.isEventPreview = this.router.url.startsWith('/event-preview');
+      this.isShareableUrl = this.router.url.startsWith('/shareable-url');
     }
 
     onLogout() {

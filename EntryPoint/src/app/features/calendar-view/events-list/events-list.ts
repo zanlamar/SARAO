@@ -28,7 +28,7 @@ export class EventsList {
   }
 
   onEditEvent(event: Event): void {
-    this.eventClicked.emit(event);
+    this.router.navigate(['/create'], { queryParams: { id: event.id } });
   }
 
   onDeleteClick(event: Event): void {

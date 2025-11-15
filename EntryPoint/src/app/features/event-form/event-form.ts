@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,15 +40,18 @@ import { DatePicker } from 'primeng/datepicker';
   standalone: true
 })
 export class EventForm implements OnInit {
-
   step1FormGroup: FormGroup;
   step2FormGroup: FormGroup;
   step3FormGroup: FormGroup;
   step4FormGroup: FormGroup;
   selectedFileName = '';
 
+  isEditMode = signal(false);
+  currentEventId = signal<string | null>(null);
+
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private eventService: EventService,
@@ -75,6 +78,18 @@ export class EventForm implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const id = params['id'];
+
+      if (id) {
+        this.isEditMode.set(true);
+        this.currentEventId.set(id);
+        this.loadEventForEdit(id);
+      } else {
+        this.isEditMode.set(false);
+        this.currentEventId.set(null);
+      }
+    })
   }
 
   async onFileSelected(event: any) {
@@ -133,28 +148,49 @@ export class EventForm implements OnInit {
 
     // se llama al servicio para crear el evento de una vez
     try {
-      // preview temporal antes de guardar
-      this.eventService.eventPreview.set(eventData);
-      console.log('📋 EventFormDTO guardado:', JSON.stringify(eventData, null, 2));  // ✅ NUEVO
-      
-      console.log('Evento guardado en preview:', eventData);
-      this.router.navigate(['/event-preview']);
-      
-    // TODO: Limpiar formulario y redirigir a la página de eventos
+      if (this.isEditMode()) {
+        console.log('📝 Actualizando evento...');
+        const eventId = this.currentEventId();
+        await this.eventService.updateEvent(eventId!, eventData);
+        console.log('✅ Evento actualizado en BD');
+        this.router.navigate(['/event-preview', eventId]);
+      } else {
+        console.log('✨ Creando evento nuevo...');
+        // preview temporal antes de guardar
+        this.eventService.eventPreview.set(eventData);
+        console.log('📋 EventFormDTO guardado:', JSON.stringify(eventData, null, 2));
+        console.log('Evento guardado en preview:', eventData);
+        this.router.navigate(['/event-preview']);
+      }   
+      // TODO: Limpiar formulario y redirigir a la página de eventos
     } catch (error:any) {
       console.error('Error al crear el evento:', error);
       console.error('❌ ERROR COMPLETO:', error);
       console.error('❌ Mensaje:', error.message);
       console.error('❌ Stack:', error.stack);
     };
-  }
+  };
 
-  // private adjustDateForTimezone(date: Date): Date {
-  //   if (!date) return new Date();
-  //   const year = date.getFullYear();
-  //   const month = date.getMonth();
-  //   const day = date.getDate();
-    
-  //   return new Date(year, month, day, 0, 0, 0, 0);
-  // }
+  async loadEventForEdit(id: string) {
+    try {
+      const event = await this.eventService.getEventById(id);
+      this.step1FormGroup.patchValue({
+        eventTitle: event.title,
+        description: event.description,
+      });
+      this.step2FormGroup.patchValue({
+        eventDateTime: event.eventDateTime,
+      });
+      this.step3FormGroup.patchValue({
+        location: event.location.alias,
+      });
+      this.step4FormGroup.patchValue({
+        image: event.imageUrl,
+        allowedPlusOne: event.allowPlusOne,
+        bringList: event.bringList,
+      });
+    } catch (error) {
+      console.error('Error al cargar el evento:', error);
+    }
+  }
 }

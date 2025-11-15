@@ -1,5 +1,14 @@
 <div class="event-form-section">
     <div class="event-form-container">
+        <div class="form-title">
+            @if (isEditMode()) {
+                <h2>Edit sarao</h2>
+            } @else {
+                <h2>Create New sarao</h2>
+            }
+        </div>
+
+    
         <mat-stepper linear #stepper>
 
         <!-- PASO 1: Detalles Básicos -->
@@ -126,7 +135,11 @@
             <!-- Botones -->
             <div class="button-container">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="onSubmit()">Create Event</button>
+                @if (isEditMode()) {
+                    <button mat-button (click)="onSubmit()">Save Changes</button>
+                } @else {
+                    <button mat-button (click)="onSubmit()">Create Event</button>
+                }
             </div>
         </form>
     </mat-step>
