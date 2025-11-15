@@ -33,10 +33,12 @@
 .event-form-container {
   width: 100%;
   max-width: 900px;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  height: 600px;
+  flex-direction: column;
 }
 
 @media (min-width: 640px) {
@@ -55,26 +57,35 @@
 
 /* ===== FORM LAYOUT (2 COLUMNAS) ===== */
 .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: center;
   gap: 1.5rem;
   width: 100%;
+  max-width: 500px;  /* ✅ Ancho máximo del contenido */
+  margin: 0 auto; 
 }
 
 @media (max-width: 640px) {
   .form-row {
-    grid-template-columns: 1fr;
     gap: 1rem;
+    max-width: 100%;
   }
 }
 
 .form-row.full {
-  grid-template-columns: 1fr;
+  width: 100%;
+  flex-direction: column; 
 }
 
 /* ===== STEPPER ===== */
 ::ng-deep .mat-mdc-stepper {
   background-color: transparent;
+  box-shadow: none;
+  flex: 1;  
+  display: flex;
+  flex-direction: column;
   box-shadow: none;
 }
 
@@ -90,6 +101,11 @@
 ::ng-deep .mat-mdc-step-header.mat-mdc-active .mat-mdc-step-header-label-state {
   color: var(--color-azul);
 }
+
+::ng-deep .mat-step-content {
+  overflow-y: auto; 
+  flex: 1;
+} 
 
 /* Stepper responsive en mobile */
 @media (max-width: 640px) {
@@ -110,10 +126,11 @@
 /* ===== FORM FIELDS ===== */
 mat-form-field {
   width: 100%;
+  max-width: 400px;
 }
 
 ::ng-deep .mat-mdc-form-field-label {
-  color: var(--color-dark);
+  color: var(--color-light);
   font-weight: 600;
 }
 
@@ -234,17 +251,6 @@ button[matStepperPrevious]:hover {
   display: none;
 }
 
-/* ===== DATEPICKER Y TIMEPICKER - ICONOS ===== */
-::ng-deep .mat-mdc-datepicker-toggle-default-icon,
-::ng-deep .mat-timepicker-toggle-default-icon {
-  color: var(--color-azul);
-}
-
-::ng-deep .mat-datepicker-toggle,
-::ng-deep .mat-timepicker-toggle {
-  cursor: pointer;
-}
-
 /* ===== OVERLAY BACKDROP ===== */
 ::ng-deep .cdk-overlay-pane {
   z-index: 1000 !important;
@@ -260,64 +266,7 @@ button[matStepperPrevious]:hover {
   height: 100vh !important;
 }
 
-/* ===== DATEPICKER (CALENDARIO) ===== */
-::ng-deep .mat-datepicker-content {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  padding: 20px !important;
-  z-index: 1001 !important;
-}
 
-::ng-deep .mat-calendar {
-  width: 350px !important;
-  max-width: 100% !important;
-}
-
-::ng-deep .mat-calendar-body-label {
-  visibility: hidden !important;
-}
-
-::ng-deep .mat-calendar-body-cell-content:hover {
-  background-color: var(--color-banana) !important;
-  cursor: pointer !important;
-}
-
-::ng-deep .mat-tooltip {
-  visibility: hidden !important;
-}
-
-/* ===== TIMEPICKER ===== */
-::ng-deep .mat-timepicker-container {
-  width: 300px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  background-color: white !important;
-  border-radius: 8px !important;
-}
-
-::ng-deep .mat-mdc-form-field-mat-timepicker {
-  font-size: 1.2rem !important;
-}
-
-::ng-deep .mat-timepicker-toggle-button,
-::ng-deep .mat-timepicker-content button {
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  z-index: 1002 !important;
-}
-
-/* ===== TIMEPICKER HOVER ===== */
-::ng-deep .mat-mdc-option:hover {
-  background-color: var(--color-banana) !important;
-  color: var(--color-dark) !important;
-  cursor: pointer !important;
-}
 
 /* ===== RESPONSIVE (MOBILE) ===== */
 @media (max-width: 640px) {
@@ -339,3 +288,23 @@ button[matStepperPrevious]:hover {
     font-size: 0.9rem;
   }
 }
+
+/* ===== PRIMENG DATEPICKER ===== */
+::ng-deep .p-datepicker {
+  z-index: 1050 !important;
+}
+
+::ng-deep .p-datepicker .p-datepicker-group {
+  width: 100% !important;
+}
+
+/* Permitir que el popup se desborde del contenedor */
+.event-form-container {
+  overflow: visible !important;
+}
+
+::ng-deep .p-calendar-container {
+  min-width: 320px !important;
+  width: auto !important;
+}
+

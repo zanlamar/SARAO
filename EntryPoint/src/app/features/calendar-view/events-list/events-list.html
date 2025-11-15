@@ -37,7 +37,7 @@
                         <span 
                             class="material-symbols-outlined icon-delete"
                             routerLink="/event-preview"
-                            (click)="onDelete(event)"
+                            (click)="onDeleteClick(event)"
                             >delete</span>
                         <span 
                             class="material-symbols-outlined icon-see"
@@ -52,12 +52,18 @@
                 </div>
                 <p class="event-location">📍 {{ event.location.alias || 'No location' }}</p>
                 <p class="event-datetime">
-                    {{ event.eventDate.toLocaleDateString() || 'No date' }}
-                    @if (event.eventTime) {
-                        • Time: {{ event.eventTime.slice(0, 5) }}h
-                    }
+                    {{ event.eventDateTime | date: 'mediumDate' }} 
+                    • {{ event.eventDateTime | date: 'shortTime' }}
                 </p>
             </div>
         </div>
     }
+
+    @if (eventToDelete) { 
+        <app-delete-modal
+            [event]="eventToDelete"
+            (onConfirmDelete)="onConfirmDelete($event)"
+        ></app-delete-modal>
+    }
+
 </div>

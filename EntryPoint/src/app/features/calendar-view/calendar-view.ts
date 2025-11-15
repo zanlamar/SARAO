@@ -43,17 +43,23 @@ export class CalendarView implements OnInit {
     this.calendarDays$.set(days);
   }
 
-  private async loadUserEvents(): Promise<void> { 
+  async loadUserEvents(): Promise<void> { 
+    console.log('🔄 loadUserEvents ejecutándose...'); 
     const events = await this.eventService.getLoggedUserEvents();
+    console.log('📊 Eventos cargados:', events.length);
     this.userEvents$.set(events);
+    
+    if (this.selectedDate$()) {
+    console.log('📅 Actualizando día seleccionado:', this.selectedDate$());
+    this.selectDay(this.selectedDate$());
+    }
   }
-
 
   selectDay(dateString: string): void {
     this.selectedDate$.set(dateString);
 
     const filtered = this.userEvents$().filter(event => {
-      const eventDateString = this.calendarService.formatDateToString(event.eventDate);
+      const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);
       return eventDateString === dateString;
     });
     this.selectedDateEvents$.set(filtered);

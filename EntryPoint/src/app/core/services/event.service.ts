@@ -1,5 +1,4 @@
 import { Injectable, signal } from "@angular/core";
-import { from, Observable } from "rxjs";
 import { Event, EventFormDTO } from "../models/event.model";
 import { AuthService } from "./auth.service";
 import { mapEventFormDTOToSupabase, getSupabaseUserId } from "../helpers-supabase/event.mapper";

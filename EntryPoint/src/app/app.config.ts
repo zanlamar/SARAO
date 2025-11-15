@@ -8,6 +8,10 @@ import { provideAuth } from '@angular/fire/auth';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { getAuth } from 'firebase/auth';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -15,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideFirebaseApp(() => initializeApp(firebaseConfig.firebaseConfig)),
     provideAuth(() => getAuth()),
-
+    provideAnimationsAsync(),
+    providePrimeNG({ theme: { preset: Aura } }),
   ]
 };

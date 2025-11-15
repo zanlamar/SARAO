@@ -34,12 +34,11 @@
             <div class="preview-main-details">
                 <div class="main-detail">
                     <span class="main-label">📅 DATE</span>
-                    <span class="main-value">{{ event()?.eventDate | date: 'fullDate' }}</span>
+                    <span class="main-value">{{ event()?.eventDateTime | date: 'fullDate' }}</span>
                 </div>
-
                 <div class="main-detail">
                     <span class="main-label">⏰ TIME</span>
-                    <span class="main-value">{{ event()?.eventTime | timeFormat }}h</span>
+                    <span class="main-value">{{ event()?.eventDateTime | date: 'shortTime' }}</span>
                 </div>
             </div>
 
