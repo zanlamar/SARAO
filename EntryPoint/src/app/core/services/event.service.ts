@@ -62,4 +62,12 @@ export class EventService {
     generateShareUrl(eventId: string): string {
         return `/event/${eventId}`;
     }
+
+    async saveInvitation(eventId: string, guestId: string, email: string): Promise<void> {
+        return this.eventDataService.saveInvitation(eventId, guestId, email);
+    }
+
+    async updateRSVP(eventId: string, guestId: string, response: 'yes' | 'maybe' | 'no'): Promise<void> {
+        return this.eventDataService.updateRSVP(eventId, guestId, response);
+    }
 }

@@ -71,25 +71,39 @@
                 }
             </div>
 
+
             <!-- RSVP SECTION -->
-            <div class="rsvp-section">
-                <h3 class="rsvp-title">RSVP</h3>
-                <div class="rsvp-buttons">
-                    <button class="rsvp-btn rsvp-yes">
-                        <span class="rsvp-icon">✅</span>
-                        <span class="rsvp-label">YES</span>
-                    </button>
-                    <button class="rsvp-btn rsvp-maybe">
-                        <span class="rsvp-icon">🤔</span>
-                        <span class="rsvp-label">MAYBE</span>
-                    </button>
-                    <button class="rsvp-btn rsvp-no">
-                        <span class="rsvp-icon">❌</span>
-                        <span class="rsvp-label">NO</span>
-                    </button>
+            @if (!isCreating()) {
+                <div class="rsvp-section">
+                    <h3 class="rsvp-title">RSVP</h3>
+                    <div class="rsvp-buttons">
+                        <button 
+                            class="rsvp-btn rsvp-yes"
+                            (click)="onRSVP('yes')"
+                            [disabled]="rsvpResponse() === 'yes'"
+                        >
+                            <span class="rsvp-icon">✅</span>
+                            <span class="rsvp-label">YES</span>
+                        </button>
+                        <button 
+                            class="rsvp-btn rsvp-maybe"
+                            (click)="onRSVP('maybe')"
+                            [disabled]="rsvpResponse() === 'maybe'"
+                        >
+                            <span class="rsvp-icon">🤔</span>
+                            <span class="rsvp-label">MAYBE</span>
+                        </button>
+                        <button 
+                            class="rsvp-btn rsvp-no"
+                            (click)="onRSVP('no')"
+                            [disabled]="rsvpResponse() === 'no'"
+                        >
+                            <span class="rsvp-icon">❌</span>
+                            <span class="rsvp-label">NO</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
+            }
         </div>
         } @else {
         <div class="no-event">

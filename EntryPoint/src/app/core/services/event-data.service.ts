@@ -64,11 +64,34 @@ export class EventDataService {
 
 
     async deleteEvent(eventId: string, userId: string): Promise<void> {
-            const { error } = await this.supabaseService.getClient()
-                .from('events')
-                .delete()
-                .eq('id', eventId)
-                .eq('creator_id', userId);            
-            if (error) throw new Error(error.message);  
+        const { error } = await this.supabaseService.getClient()
+            .from('events')
+            .delete()
+            .eq('id', eventId)
+            .eq('creator_id', userId);            
+        if (error) throw new Error(error.message);  
         }
+
+    async saveInvitation(eventId: string, guestId: string, email: string): Promise<void> {
+        const { error } = await this.supabaseService.getClient()
+            .from('invitations')
+            .upsert({ 
+                event_id: eventId,
+                guest_id: guestId,
+                email: email,
+                rsvp_status: 'not_responded' 
+            }, {
+                onConflict: 'guest_id,event_id'
+            });
+        if (error) throw new Error(error.message);
+    }
+
+    async updateRSVP(eventId: string, guestId: string, response: 'yes' | 'no' | 'maybe'): Promise<void> {
+        const { data, error } = await this.supabaseService.getClient()
+            .from('invitations')
+            .update({ rsvp_status: response })
+            .eq('event_id', eventId)
+            .eq('guest_id', guestId);
+        if (error) throw new Error(error.message);
+    }
 }
