@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed} from '@angular/core';
 import { EventService } from '../../core/services/event.service';
 import { Event } from '../../core/models/event.model';
 import { Footer } from "../../shared/components/footer/footer";
@@ -27,6 +27,14 @@ export class CalendarView implements OnInit {
   currentYear$ = signal<number>(new Date().getFullYear());
   activeFilter = signal<'hosting' | 'upcoming' | 'all'>('all');
   filteredEvents$ = signal<Event[]>([]);
+
+    displayedEvents$ = computed(() => {
+      if (this.selectedDate$()) {
+      return this.selectedDateEvents$();
+    }
+    return this.filteredEvents$();
+    });
+
 
   constructor(
     private eventService: EventService,
@@ -56,6 +64,8 @@ export class CalendarView implements OnInit {
     const guestEvents = await this.eventService.getGuestEvents();
     console.log('✅ getGuestEvents OK:', guestEvents.length); 
     const allEvents = [...createdEvents, ...guestEvents];
+    allEvents.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
+
       
       console.log('📊 Eventos creados:', createdEvents.length);
       console.log('📊 Eventos como guest:', guestEvents.length);
@@ -109,9 +119,12 @@ export class CalendarView implements OnInit {
   }
 
   setFilter(filter: 'hosting' | 'upcoming' | 'all'): void {
-    this.activeFilter.set(filter);
-    this.updateFilteredEvents();
-  }
+  this.selectedDate$.set('');
+  this.selectedDateEvents$.set([]);
+  
+  this.activeFilter.set(filter);
+  this.updateFilteredEvents();
+}
 
   private updateFilteredEvents(): void {
     const user = this.authService.currentUser();
@@ -137,3 +150,4 @@ export class CalendarView implements OnInit {
     }
   }
 }
+

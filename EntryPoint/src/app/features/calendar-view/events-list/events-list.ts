@@ -4,8 +4,6 @@ import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { DeleteModal } from "../../../shared/components/delete-modal/delete-modal";
-import { AuthService } from '../../../core/services/auth.service';
-import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-events-list',
