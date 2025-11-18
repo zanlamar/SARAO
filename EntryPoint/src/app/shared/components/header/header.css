@@ -89,6 +89,7 @@
 .navbar.navbar-create-event .navbar-inner,
 .navbar.navbar-event-preview .navbar-inner,
 .navbar.navbar-calendar-view .navbar-inner,
+.navbar.navbar-user-area .navbar-inner,
 .navbar.navbar-shareable-url .navbar-inner {
   height: 4rem !important;
   justify-content: space-between;
@@ -97,6 +98,7 @@
 .navbar.navbar-create-event .logo-img,
 .navbar.navbar-event-preview .logo-img,
 .navbar.navbar-calendar-view .logo-img,
+.navbar.navbar-user-area .logo-img,
 .navbar.navbar-shareable-url .logo-img {
   max-width: 6rem !important;
 }
@@ -105,6 +107,7 @@
   .navbar-create-event .logo-img,
   .navbar-event-preview .logo-img,
   .navbar-calendar-view .logo-img,
+  .navbar-user-area .logo-img,
   .navbar-shareable-url .logo-img {
     max-width: 6rem;
   }

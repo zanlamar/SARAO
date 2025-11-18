@@ -5,7 +5,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';
 import { Event, EventWithStats } from '../../core/models/event.model';
 
-
 @Component({
   selector: 'app-user-area',
   imports: [CommonModule, TableView],
@@ -23,7 +22,7 @@ export class UserArea implements OnInit {
   dateFrom$ = signal<Date | null>(null);
   dateTo$ = signal<Date | null>(null);
   sortField$ = signal<string>('eventDateTime');
-  sortOrder$ = signal<1|-1>(1); 
+  sortOrder$ = signal<1 | -1>(1); 
 
   
   filteredEvents$ = computed(() => {
@@ -80,6 +79,35 @@ export class UserArea implements OnInit {
       this.sortOrder$.set(1);
     }
   }
+
+  onDateFromChange(dateString: string): void {
+    if (dateString) {
+      const date = new Date(dateString);  // ◄─── Convierte string a Date
+      this.dateFrom$.set(date);
+    } else {
+      this.dateFrom$.set(null);
+    }
+}
+
+onDateToChange(dateString: string): void {
+    if (dateString) {
+      const date = new Date(dateString);  // ◄─── Convierte string a Date
+      this.dateTo$.set(date);
+    } else {
+      this.dateTo$.set(null);
+    }
+}
+
+  onThisMonth(): void {
+    const now = new Date();
+    const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    
+    this.dateFrom$.set(firstDay);
+    this.dateTo$.set(lastDay);
+  }
+
+  
 }
 
 

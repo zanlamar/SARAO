@@ -13,15 +13,15 @@
             <th pSortableColumn="RSVPstatus.maybe">Pending answer</th>
         </tr>
     </ng-template>
-    <ng-template #body let-product>
+    <ng-template #body let-event>
         <tr>
-            <td>{{ product.title }}</td>
-            <td>{{ product.eventDateTime }}</td>
-            <td>{{ product.location.alias }}</td>
-            <td>{{ product.confirmed }}</td>
-            <td>{{ product.notComing }}</td>
-            <td>{{ product.undecided }}</td>
-            <td>{{ product.pending }}</td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.eventDateTime | date:'short' }}</td>
+            <td>{{ event.location?.alias }}</td>
+            <td>{{ event.RSVPstatus.yes }}</td>
+            <td>{{ event.RSVPstatus.no }}</td>
+            <td>{{ event.RSVPstatus.maybe }}</td>
+            <td>{{ event.RSVPstatus.pending }}</td>
         </tr>
     </ng-template>
 </p-table>

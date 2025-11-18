@@ -1,7 +1,23 @@
-<div>
-    <input (input)="onSearch($event.target.value)" 
-        placeholder="Search...">
-    <app-table-view 
-        [events]="filteredEvents$">
-    </app-table-view>
+<div class="user-area-wrapper">    
+    <div class="user-area-container">
+        <div class="filters-section">
+            <input (input)="onSearch($event.target.value)" 
+                placeholder="Search...">
+            <input type="date"
+                (change)="onDateFromChange($event.target.value)" 
+                p>
+            <input type="date"
+                (change)="onDateToChange($event.target.value)" 
+                >
+            <button (click)="onThisMonth()">
+                This Month
+            </button>
+        </div>  
+    
+        <div class="table-section">
+            <app-table-view 
+                [events]="filteredEvents$">
+            </app-table-view>
+        </div>
+    </div>  
 </div>  
