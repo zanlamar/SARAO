@@ -1,32 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '@/domain/product';
-import { ProductService } from '@/service/productservice';
-import { TableModule } from 'primeng/table';
-import { SelectButton } from 'primeng/selectbutton';
+import { Component, OnInit, Input, Signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { EventService } from '../../core/services/event.service';
+import { Event } from '../../core/models/event.model';
 
 @Component({
   selector: 'app-table-view',
-  imports: [CommonModule, TableModule, SelectButton],
+  imports: [CommonModule, TableModule],
   templateUrl: './table-view.html',
   styleUrl: './table-view.css',
   standalone: true
 })
-export class TableView implements OnInit {
-  products: Product[] = [];
-  sizes: any[] = [];
-  selectedSize: any = undefined;
 
-constructor(private productService: ProductService) {}
+export class TableView {
+  @Input() events!: Signal<Event[]>;
 
-ngOnInit() {
-  this.productService.getProductsMini().then((data) => {
-      this.products = data;
-  });
+constructor(
+) {}
 
-  this.sizes = [
-      { name: 'Small', value: 'small' },
-      { name: 'Normal', value: undefined },
-      { name: 'Large', value: 'large' }
-  ];}
 }

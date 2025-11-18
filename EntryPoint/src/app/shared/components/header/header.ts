@@ -21,6 +21,7 @@ export class Header implements OnInit {
   isCalendarView = false;
   isEventPreview = false;
   isShareableUrl = false;
+  isUserArea = false;
   username = 'Pendón';
 
   constructor() {
@@ -43,6 +44,7 @@ export class Header implements OnInit {
       this.isCalendarView = this.router.url === '/calendar-view';
       this.isEventPreview = this.router.url.startsWith('/event-preview');
       this.isShareableUrl = this.router.url.startsWith('/shareable-url');
+      this.isUserArea = this.router.url.startsWith('/user-area');
     }
 
     onLogout() {

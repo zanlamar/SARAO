@@ -35,3 +35,12 @@ export interface Event extends EventFormDTO, EventFromDB {
     };
 }
 
+export interface EventWithStats extends Event {
+    confirmed: number;
+    notComing: number;
+    undecided: number;
+    pending: number;
+    totalInvites: number;
+    percentageConfirmed: number;
+}
+

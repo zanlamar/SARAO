@@ -1,1 +1,7 @@
-<p>user-area works!</p>
+<div>
+    <input (input)="onSearch($event.target.value)" 
+        placeholder="Search...">
+    <app-table-view 
+        [events]="filteredEvents$">
+    </app-table-view>
+</div>  

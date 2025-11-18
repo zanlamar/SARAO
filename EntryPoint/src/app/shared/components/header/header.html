@@ -3,7 +3,8 @@
     'navbar-create-event': isCreateEvent,
     'navbar-event-preview': isEventPreview,
     'navbar-calendar-view': isCalendarView,
-    'navbar-shareable-url': isShareableUrl  }">
+    'navbar-shareable-url': isShareableUrl,
+    'navbar-user-area': isUserArea}">
     
     <div class="navbar-content">
         <div class="navbar-inner">
@@ -28,7 +29,7 @@
         </div>
     }
 
-    @if ((isCreateEvent || isEventPreview || isShareableUrl || isCalendarView) && authService.currentUser()) {
+    @if ((isCreateEvent || isEventPreview || isShareableUrl || isCalendarView || isUserArea) && authService.currentUser()) {
         <div class="navbar-buttons-create">
             <button (click)="onLogout()" class="btn-logout">
                 <span class="material-symbols-outlined">logout</span>

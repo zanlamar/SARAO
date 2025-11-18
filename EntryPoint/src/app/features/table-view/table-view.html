@@ -1,9 +1,6 @@
 <p-table 
-    [value]="filteredEvents()"          
+    [value]="events()"          
     [tableStyle]="{ 'min-width': '50rem' }"
-    [sortField]="sortField()"             
-    [sortOrder]="sortOrder()"
-    (onSort)="handleSort($event)"
     >
     <ng-template #header>
         <tr>

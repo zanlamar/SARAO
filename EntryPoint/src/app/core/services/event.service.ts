@@ -21,8 +21,6 @@ export class EventService {
         private supabaseService: SupabaseService
     ) { }   
 
-
-    // PARA CREAR UN EVENTO
     async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
         //buscamos el userId
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
@@ -35,25 +33,21 @@ export class EventService {
         return this.eventDataService.insertEvent(eventToInsert);
     }
 
-    // OBTENER EVENTO POR ID
     async getEventById(eventId: string): Promise<Event> {
         return this.eventDataService.getEventById(eventId);
     }
 
-    // PARA TENER LOS EVENTOS DE UN USUARIO LOGGED
     async getLoggedUserEvents(): Promise<Event[]> {
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         return this.eventDataService.getEventsByUserId(userId);
     }
 
-    // PARA MODIFICAR
     async updateEvent(eventId: string, eventData: EventFormDTO): Promise<Event> {
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         const eventToUpdate = mapEventFormDTOToSupabase(eventData, userId);
         return this.eventDataService.updateEvent(eventId, userId, eventToUpdate);
     }
     
-    // PARA BORRAR
     async deleteEvent(eventId: string): Promise<void> {
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         return this.eventDataService.deleteEvent(eventId, userId);
