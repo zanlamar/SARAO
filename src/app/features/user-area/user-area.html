@@ -1,0 +1,54 @@
+<div class="user-area-wrapper">    
+    <div class="user-area-container">
+        <div class="filters-section">
+            <!-- BÚSQUEDA -->
+            <div class="search-wrapper">
+                <p-iconfield>
+                    <p-inputicon class="pi pi-search"></p-inputicon>
+                    <input 
+                        #searchInput
+                        type="text" 
+                        pInputText 
+                        placeholder="Search text" 
+                        (input)="onSearch($event.target.value)"
+                    />
+                </p-iconfield>
+                <button 
+                    class="search-btn"
+                    (click)="onSearch(searchInput.value)"
+                >
+                    Search
+                </button>
+            </div>  
+
+            <!-- FECHA + CLEAR DATE juntos -->
+            <div class="date-wrapper">
+                <input 
+                    #dateInput
+                    type="date"
+                    class="date-input"
+                    (change)="onDateChange($event.target.value)" 
+                >
+                <button class="clear-btn" (click)="onClearDate(dateInput)">
+                    Clear
+                </button>
+            </div>
+
+            <!-- BOTONES FILTRO -->
+            <button class="month-btn" (click)="onThisMonth()">
+                This Month
+            </button>
+
+            <button class="month-btn" (click)="onNextMonth()">
+                Next Month
+            </button>
+        </div>  
+    
+        <div class="table-section">
+            <app-table-view 
+                [events]="filteredEvents$">
+            </app-table-view>
+        </div>
+    </div>  
+</div>
+<app-footer></app-footer>

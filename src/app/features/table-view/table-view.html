@@ -1,0 +1,27 @@
+<p-table 
+    [value]="events()"          
+    [tableStyle]="{ 'min-width': '50rem' }"
+    >
+    <ng-template #header>
+        <tr>
+            <th pSortableColumn="title">Sarao title</th>
+            <th pSortableColumn="eventDateTime">Date</th>
+            <th pSortableColumn="location.alias">Location alias</th>
+            <!-- <th pSortableColumn="RSVPstatus.yes">Confirmed</th>
+            <th pSortableColumn="RSVPstatus.no">Not coming</th>
+            <th pSortableColumn="RSVPstatus.maybe">Maybe</th>
+            <th pSortableColumn="RSVPstatus.maybe">Pending answer</th> -->
+        </tr>
+    </ng-template>
+    <ng-template #body let-event>
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ event.eventDateTime | date:'short' }}</td>
+            <td>{{ event.location?.alias }}</td>
+            <!-- <td>{{ event.RSVPstatus.yes }}</td>
+            <td>{{ event.RSVPstatus.no }}</td>
+            <td>{{ event.RSVPstatus.maybe }}</td>
+            <td>{{ event.RSVPstatus.pending }}</td>
+        </tr> -->
+    </ng-template>
+</p-table>

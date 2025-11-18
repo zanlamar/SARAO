@@ -1,0 +1,62 @@
+<div class="preview-wrapper">
+    <main class="preview-container">
+        @if (event()) {
+        <div class="preview-content">
+            
+            <!-- HEADER -->
+            <div class="share-header">
+                <h1 class="share-title">You are good to go!</h1>
+                <p class="share-subtitle">Share this URL with your guests</p>
+            </div>
+            
+            <!-- TÍTULO DEL EVENTO -->
+            <h2 class="event-title">{{ event()?.title }}</h2>
+            <!-- URL SHAREABLE -->
+            <div class="share-url-container">
+                <div class="share-url-wrapper">
+                    <input 
+                        type="text" 
+                        class="share-url-input"
+                        [value]="shareUrl()" 
+                        readonly
+                    />
+                    <button 
+                        class="share-copy-btn"
+                        (click)="copyToClipboard()"
+                        [class.copied]="copied()"
+                    >
+                        <span class="material-symbols-outlined copy-icon">
+                            {{ copied() ? 'check' : 'content_copy' }}
+                        </span>
+                        <span class="copy-text">
+                            {{ copied() ? 'Copied!' : 'Copy' }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            
+            <!-- IMAGEN -->
+            <div class="preview-image">
+                @if (event()?.imageUrl && event()?.imageUrl !== '') {
+                    <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
+                } @else {
+                    <div class="image-placeholder">📅</div>
+                }
+            </div>
+
+
+            <!-- INFO -->
+            <div class="share-info">
+                <p>✨ Your guests can now see all the details and RSVP!</p>
+            </div>
+
+        </div>
+        } @else {
+        <div class="no-event">
+            <p>No event to share</p>
+        </div>
+        }
+    </main>
+    <app-footer></app-footer>
+</div>
