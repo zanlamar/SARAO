@@ -34,7 +34,6 @@ export class Login {
         await this.authService.waitForAuthentication();
 
         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-        console.log('🔍 ReturnUrl:', returnUrl);
 
         if (returnUrl === '/login' || returnUrl === '/register') {
           this.router.navigate(['/home']);

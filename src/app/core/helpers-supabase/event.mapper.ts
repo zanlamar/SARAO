@@ -2,24 +2,17 @@ import { SupabaseService } from "../services/supabase.service";
 import { AuthService } from "../services/auth.service";
 import { EventFormDTO, Event } from "../models/event.model";
 
-// funcion para obtener el ID del usuario en supabase 
-
 export async function getSupabaseUserId(
     authService: AuthService,
     supabaseService: SupabaseService
 ): Promise<string> {
     const firebaseUid = authService.currentUser().uid;
-    console.log('🔍 Buscando usuario con firebase_uid:', firebaseUid);
-
 
     const { data, error } = await supabaseService.getClient()
         .from('users')
         .select('id')
         .eq('firebase_uid', firebaseUid)
         .maybeSingle();
-
-        console.log('📊 Resultado de la query:', { data, error });
-
 
     if (error) {
         console.error('Error al buscar el usuario:', error);
@@ -29,19 +22,13 @@ export async function getSupabaseUserId(
         console.error('User not found in the database');
         throw new Error('User not found in the database');
     }
-    console.log('✅ Usuario encontrado con ID:', data.id);
     return data.id;
 }
-
-
-// funcion para mapear el evento, de EventFormDTO a formato Supabase
 
 export function mapEventFormDTOToSupabase(
     eventData: EventFormDTO,
     userId: string
 ): any {
-    console.log('🔍 mapEventFormDTOToSupabase recibe imageUrl:', eventData.imageUrl);
-
     const realDate = eventData.eventDateTime instanceof Date 
         ? eventData.eventDateTime.toISOString()
         : eventData.eventDateTime;
@@ -59,8 +46,6 @@ export function mapEventFormDTOToSupabase(
     };
 }
 
-
-// funcion para mapear la respuesta de Supabase a tipo Event
 export function mapSupabaseResponseToEvent(data: any): Event {
     return {
         title: data.title,

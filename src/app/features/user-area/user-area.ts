@@ -105,15 +105,6 @@ export class UserArea implements OnInit {
     const now = new Date();
     const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
     const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-
-    console.log('First day:', firstDay);
-    console.log('Last day:', lastDay);
-    console.log('All events:', this.userEvents$());
-    console.log('Events in range:', this.userEvents$().filter(event => {
-      const eventDate = new Date(event.eventDateTime);
-      console.log('Event date:', eventDate, 'eventDateTime raw:', event.eventDateTime);
-      return eventDate >= firstDay && eventDate <= lastDay;
-    }));
     
     this.selectedDate$.set(null);
     this.dateFrom$.set(firstDay);

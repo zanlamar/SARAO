@@ -39,7 +39,6 @@ export class EventsList {
   onConfirmDelete(event: Event): void {
     this.eventService.deleteEvent(event.id);
     this.eventToDelete = null;
-    console.log('✅ Emitiendo onEventDeleted');
     this.onEventDeleted.emit();
   }
 
@@ -49,7 +48,6 @@ export class EventsList {
   }
 
   onShareEvent(eventId: string): void {
-    console.log('🔍 Compartiendo evento:', eventId);
     this.router.navigate(['/shareable-url', eventId]);
   }
 

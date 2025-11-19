@@ -15,16 +15,12 @@ export class EventDataService {
     ) { }
 
     async insertEvent(eventToInsert: any): Promise<Event> {
-        console.log('🔍 eventToInsert COMPLETO:', JSON.stringify(eventToInsert, null, 2));
-        console.log('🔍 Campos:', Object.keys(eventToInsert));
         
         const { data, error } = await this.supabaseService.getClient()
             .from('events')
             .insert([eventToInsert])
             .select();
 
-        console.log('📤 Respuesta de Supabase - data:', data);
-        console.log('📤 Respuesta de Supabase - error:', error);
         
         if (error) {
             console.error('❌ ERROR EN INSERT:', error);
@@ -85,7 +81,6 @@ export class EventDataService {
         .single();
     
     if (existing) {
-        console.log('✅ Invitation ya existe, skipping');
         return;
     }
     
@@ -112,7 +107,6 @@ export class EventDataService {
 
     async getGuestEvents(): Promise<Event[]> {
         const user = this.authService.currentUser();
-        console.log('👤 getGuestEvents - User:', user?.uid);
         
         if (!user) return [];
 
@@ -123,24 +117,20 @@ export class EventDataService {
                 .eq('guest_id', user.uid)
                 .in('rsvp_status', ['yes', 'maybe']);
 
-            console.log('🔍 Query invitations - data:', data);
-            console.log('🔍 Query invitations - error:', error);
+            
 
             if (error || !data?.length) {
-                console.log('❌ No hay data o hay error');
                 return [];
             }
 
             const eventIds = data.map((inv: any) => inv.event_id);
-            console.log('📋 Event IDs encontrados:', eventIds);
 
             const { data: events, error: eventsError } = await this.supabaseService.getClient()
                 .from('events')
                 .select()
                 .in('id', eventIds);
 
-            console.log('📊 Eventos traídos:', events?.length);
-            console.log('📊 Error eventos:', eventsError);
+            
 
             if (eventsError) throw new Error(eventsError.message);
     
@@ -150,7 +140,6 @@ export class EventDataService {
                 return mapped;
             });
 
-            console.log('✅ Retornando guest events:', result.length);
             return result;
         } catch (error) {
             console.error('❌ Error cargando guest events:', error);

@@ -25,7 +25,6 @@ export class Header implements OnInit {
   username = 'Pendón';
 
   constructor() {
-    console.log('Header component initialized'); 
   }
 
   ngOnInit(): void {

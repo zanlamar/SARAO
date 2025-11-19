@@ -15,27 +15,21 @@ export class StorageService {
         const fileName = `${Date.now()}_${file.name}`;
         const filePath = fileName;
 
-        console.log('📤 Subiendo imagen:', filePath);
-
         try {
         const { data, error } = await this.supabaseService.getClient()
             .storage
             .from('event-images')
             .upload(filePath, file);
 
-        console.log('📊 Respuesta de upload:', { data, error });
-
         if (error) {
             console.error('Error al subir la imagen:', error);
             throw new Error(`Error al subir la imagen: ${error.message}`);
         }
-        
+    
         const imageUrl = `${storage.supabaseUrl}/storage/v1/object/public/event-images/${fileName}`;
-        console.log('✅ URL construida:', imageUrl);
         return imageUrl;
         
         } catch (err: any) {
-            console.error('❌ Error en catch:', err);
             throw err;
         }
     }
