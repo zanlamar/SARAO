@@ -1,9 +1,25 @@
+@media (max-width: 768px) {
+  :host {
+    max-height: unset !important;
+    overflow: visible !important;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    :host {
+        max-height: auto; 
+        overflow: visible;
+    }
+
+}
+
 /* ===== HEADER CALENDARIO ===== */
 .calendar-header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -68,6 +84,8 @@
   border-radius: 0.75rem;
   overflow: hidden;
   background-color: white;
+  flex: 1;
+  max-height: 70vh;
 }
 
 /* ===== HEADER DÍAS DE LA SEMANA ===== */
@@ -97,10 +115,11 @@
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  height: 100%;
 }
 
 .calendar-day {
-  aspect-ratio: 1.2;
+  aspect-ratio: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -111,9 +130,10 @@
   background-color: white;
   transition: all 0.2s ease;
   cursor: pointer;
-  min-height: 2rem !important;
+  min-height: 4rem !important;
   min-width: 2rem !important;
   font-size: 0.875rem;
+  flex: 1; 
 }
 
 .calendar-day:nth-child(7n) {
@@ -125,11 +145,11 @@
 }
 
 .calendar-day:hover {
-  background-color: #f3f4f6;
+  background-color: #fafcff;
 }
 
 .calendar-day.other-month {
-  background-color: #fafafa;
+  background-color: #fff9eafc;
   color: #d1d5db;
 }
 
@@ -189,6 +209,11 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+
+  :host {
+    max-height: 60vh;
+  }
+  
   .calendar-day {
     min-height: 2rem;
     padding: 0.375rem;
