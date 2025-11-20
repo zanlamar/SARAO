@@ -15,7 +15,6 @@ export class EventDataService {
     ) { }
 
     async insertEvent(eventToInsert: any): Promise<Event> {
-        
         const { data, error } = await this.supabaseService.getClient()
             .from('events')
             .insert([eventToInsert])
@@ -61,7 +60,6 @@ export class EventDataService {
         if (error) throw new Error(error.message);  
         return mapSupabaseResponseToEvent(data[0]);
     }
-
 
     async deleteEvent(eventId: string, userId: string): Promise<void> {
         const { error } = await this.supabaseService.getClient()
@@ -145,5 +143,26 @@ export class EventDataService {
             console.error('❌ Error cargando guest events:', error);
             return [];
         }
+    }
+
+    async getEventStats(eventId: string): Promise<{ confirmed: number; notComing: number; undecided: number; pending: number }> {
+        const { data, error } = await this.supabaseService.getClient()
+            .from('invitations')
+            .select('rsvp_status')
+            .eq('event_id', eventId);
+        
+        if (error) throw new Error(error.message);
+        
+        const stats = data.reduce((acc: any, inv: any) => {
+            acc[inv.rsvp_status] = (acc[inv.rsvp_status] || 0) + 1;
+            return acc;
+        }, {});
+        
+        return {
+            confirmed: stats.yes || 0,
+            notComing: stats.no || 0,
+            undecided: stats.maybe || 0,
+            pending: stats.not_responded || 0
+        };
     }
 }

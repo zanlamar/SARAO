@@ -1,16 +1,40 @@
 <p-table 
     [value]="events()"          
+    [paginator]="true"
+    [rows]="5
+    "
     [tableStyle]="{ 'min-width': '50rem' }"
     >
     <ng-template #header>
         <tr>
-            <th pSortableColumn="title">Sarao title</th>
-            <th pSortableColumn="eventDateTime">Date</th>
-            <th pSortableColumn="location.alias">Location alias</th>
-            <!-- <th pSortableColumn="RSVPstatus.yes">Confirmed</th>
-            <th pSortableColumn="RSVPstatus.no">Not coming</th>
-            <th pSortableColumn="RSVPstatus.maybe">Maybe</th>
-            <th pSortableColumn="RSVPstatus.maybe">Pending answer</th> -->
+            <th pSortableColumn="title">
+                Title
+                <p-sortIcon field="title"></p-sortIcon>
+            </th>
+            <th pSortableColumn="eventDateTime">
+                Date
+                <p-sortIcon field="Date"></p-sortIcon>
+            </th>
+            <th pSortableColumn="location.alias">
+                Location alias
+                <p-sortIcon field="Location"></p-sortIcon>
+            </th>
+            <th pSortableColumn="confirmed">
+                Confirmed
+                <p-sortIcon field="Yes"></p-sortIcon>
+            </th>
+            <th pSortableColumn="no">
+                Not coming
+            <p-sortIcon field="No"></p-sortIcon>
+            </th>
+            <th pSortableColumn="maybe">
+                Maybe
+            <p-sortIcon field="Maybe"></p-sortIcon>
+            </th>
+            <th pSortableColumn="pending">
+                Pending answer
+                <p-sortIcon field="Pending"></p-sortIcon>
+            </th>
         </tr>
     </ng-template>
     <ng-template #body let-event>
@@ -18,10 +42,10 @@
             <td>{{ event.title }}</td>
             <td>{{ event.eventDateTime | date:'short' }}</td>
             <td>{{ event.location?.alias }}</td>
-            <!-- <td>{{ event.RSVPstatus.yes }}</td>
-            <td>{{ event.RSVPstatus.no }}</td>
-            <td>{{ event.RSVPstatus.maybe }}</td>
-            <td>{{ event.RSVPstatus.pending }}</td>
-        </tr> -->
+            <td>{{ event.confirmed }}</td>
+            <td>{{ event.notComing }}</td>
+            <td>{{ event.undecided }}</td>
+            <td>{{ event.pending}}</td>
+        </tr>
     </ng-template>
 </p-table>

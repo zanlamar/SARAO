@@ -1,5 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { Event, EventFormDTO } from "../models/event.model";
+import { Event, EventFormDTO, EventWithStats } from "../models/event.model";
 import { AuthService } from "./auth.service";
 import { mapEventFormDTOToSupabase, getSupabaseUserId, mapSupabaseResponseToEvent } from "../helpers-supabase/event.mapper";
 import { StorageService } from "./storage.service";
@@ -22,13 +22,11 @@ export class EventService {
     ) { }   
 
     async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
-        //buscamos el userId
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         if (imageFile) {
             const imageUrl = await this.storageService.uploadImage(imageFile);
             eventData.imageUrl = imageUrl;
         }
-        // preparamos los datos
         const eventToInsert = mapEventFormDTOToSupabase(eventData, userId);
         return this.eventDataService.insertEvent(eventToInsert);
     }
@@ -95,4 +93,33 @@ export class EventService {
             return [];
             }
         }
-    }
+
+    async getLoggedUserEventsWithStats(): Promise<EventWithStats[]> {
+        try {
+            const events = await this.getLoggedUserEvents();
+            const eventsWithStats: EventWithStats[] = [];
+
+            for (let event of events) {
+                try {
+                    const stats = await this.eventDataService.getEventStats(event.id);
+                    const eventWithStats: EventWithStats = {
+                        ...event,
+                        confirmed: stats.confirmed || 0,
+                        notComing: stats.notComing || 0,
+                        undecided: stats.undecided || 0,
+                        pending: stats.pending || 0,
+                        totalInvites: 0,
+                        percentageConfirmed: 0
+                    };
+                    eventsWithStats.push(eventWithStats);
+                } catch (error) {
+                    console.error(`Error cargando stats del evento ${event.id}:`, error);
+                }
+            }
+            return eventsWithStats;
+        } catch (error) {
+            console.error('Error obteniendo eventos con stats:', error);
+        return [];
+        }
+    };
+}
