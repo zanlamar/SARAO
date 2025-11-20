@@ -8,7 +8,6 @@ export const authGuard = (route: any, state: any) => {
         return true;
     } else {
         const returnUrl = state.url || '/home';
-        console.log('🔍 Guard bloqueando, URL actual:', returnUrl );
         router.navigate(['/login'], {
             queryParams: { returnUrl: returnUrl }
         });

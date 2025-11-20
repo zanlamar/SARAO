@@ -1,9 +1,9 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableView } from '../table-view/table-view';
 import { AuthService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';
-import { Event, EventWithStats } from '../../core/models/event.model';
+import { EventWithStats } from '../../core/models/event.model';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,14 +18,16 @@ import { Footer } from '../../shared/components/footer/footer';
 export class UserArea implements OnInit {
   authService = inject(AuthService);
   eventService = inject(EventService);  
-  userEvents$ = signal<Event[]>([]);
+  userEvents$ = signal<EventWithStats[]>([]);
+
   searchText$ = signal<string>(''); 
   dateFrom$ = signal<Date | null>(null); 
   dateTo$ = signal<Date | null>(null);
   selectedDate$ = signal<Date | null>(null);
   sortField$ = signal<string>('eventDateTime');
   sortOrder$ = signal<1 | -1>(1); 
-  filteredEvents$ = computed((): Event[] => {
+
+  filteredEvents$ = computed((): EventWithStats[] => {
     let events = [...this.userEvents$()];
     const search = this.searchText$().toLowerCase();
     if (search) {
@@ -65,13 +67,15 @@ export class UserArea implements OnInit {
     return events;
   });
   async ngOnInit(): Promise<void> {
-    const events = await this.eventService.getLoggedUserEvents();
+    const events = await this.eventService.getLoggedUserEventsWithStats();
     this.userEvents$.set(events);
   }
   onSearch(text: string): void {
     this.searchText$.set(text.trim());
   }
   onSort(field: string): void {
+    console.log('Sorting por:', field); 
+
     if (this.sortField$() === field) {
       this.sortOrder$.set(this.sortOrder$() === 1 ? -1 : 1);
     } else {
@@ -92,14 +96,7 @@ export class UserArea implements OnInit {
     const now = new Date();
     const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
     const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    console.log('First day:', firstDay);
-    console.log('Last day:', lastDay);
-    console.log('All events:', this.userEvents$());
-    console.log('Events in range:', this.userEvents$().filter(event => {
-      const eventDate = new Date(event.eventDateTime);
-      console.log('Event date:', eventDate, 'eventDateTime raw:', event.eventDateTime);
-      return eventDate >= firstDay && eventDate <= lastDay;
-    }));
+    
     this.selectedDate$.set(null);
     this.dateFrom$.set(firstDay);
     this.dateTo$.set(lastDay);
@@ -112,10 +109,16 @@ export class UserArea implements OnInit {
     this.dateFrom$.set(firstDay);
     this.dateTo$.set(lastDay);
   }
-  onClearDate(input: HTMLInputElement): void {
+
+  onClear(searchInput: HTMLInputElement, dateInput: HTMLInputElement): void {
     this.selectedDate$.set(null);
     this.dateFrom$.set(null);
     this.dateTo$.set(null);
-    input.value = '';
+    this.searchText$.set('');
+    searchInput.value = '';
+    dateInput.value = '';
+
+    this.ngOnInit;
   }
+
 }

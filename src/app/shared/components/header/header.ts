@@ -22,7 +22,6 @@ export class Header implements OnInit {
   isUserArea = false;
   username = 'Pendón';
   constructor() {
-    console.log('Header component initialized'); 
   }
   ngOnInit(): void {
     this.checkRoute();

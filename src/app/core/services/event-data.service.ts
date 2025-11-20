@@ -12,14 +12,12 @@ export class EventDataService {
         private authService: AuthService
     ) { }
     async insertEvent(eventToInsert: any): Promise<Event> {
-        console.log('🔍 eventToInsert COMPLETO:', JSON.stringify(eventToInsert, null, 2));
-        console.log('🔍 Campos:', Object.keys(eventToInsert));
         const { data, error } = await this.supabaseService.getClient()
             .from('events')
             .insert([eventToInsert])
             .select();
-        console.log('📤 Respuesta de Supabase - data:', data);
-        console.log('📤 Respuesta de Supabase - error:', error);
+
+        
         if (error) {
             console.error('❌ ERROR EN INSERT:', error);
             throw new Error(error.message);
@@ -69,7 +67,6 @@ export class EventDataService {
         .eq('guest_id', guestId)
         .single();
     if (existing) {
-        console.log('✅ Invitation ya existe, skipping');
         return;
     }
     const { error } = await this.supabaseService.getClient()
@@ -92,7 +89,7 @@ export class EventDataService {
     }
     async getGuestEvents(): Promise<Event[]> {
         const user = this.authService.currentUser();
-        console.log('👤 getGuestEvents - User:', user?.uid);
+        
         if (!user) return [];
         try {
             const { data, error } = await this.supabaseService.getClient()
@@ -100,31 +97,51 @@ export class EventDataService {
                 .select('event_id')
                 .eq('guest_id', user.uid)
                 .in('rsvp_status', ['yes', 'maybe']);
-            console.log('🔍 Query invitations - data:', data);
-            console.log('🔍 Query invitations - error:', error);
+
+            
+
             if (error || !data?.length) {
-                console.log('❌ No hay data o hay error');
                 return [];
             }
             const eventIds = data.map((inv: any) => inv.event_id);
-            console.log('📋 Event IDs encontrados:', eventIds);
             const { data: events, error: eventsError } = await this.supabaseService.getClient()
                 .from('events')
                 .select()
                 .in('id', eventIds);
-            console.log('📊 Eventos traídos:', events?.length);
-            console.log('📊 Error eventos:', eventsError);
+
+            
+
             if (eventsError) throw new Error(eventsError.message);
             const result = events.map((event: any) => {
                 const mapped = mapSupabaseResponseToEvent(event);
                 (mapped as any).isGuest = true;
                 return mapped;
             });
-            console.log('✅ Retornando guest events:', result.length);
             return result;
         } catch (error) {
             console.error('❌ Error cargando guest events:', error);
             return [];
         }
+    }
+
+    async getEventStats(eventId: string): Promise<{ confirmed: number; notComing: number; undecided: number; pending: number }> {
+        const { data, error } = await this.supabaseService.getClient()
+            .from('invitations')
+            .select('rsvp_status')
+            .eq('event_id', eventId);
+        
+        if (error) throw new Error(error.message);
+        
+        const stats = data.reduce((acc: any, inv: any) => {
+            acc[inv.rsvp_status] = (acc[inv.rsvp_status] || 0) + 1;
+            return acc;
+        }, {});
+        
+        return {
+            confirmed: stats.yes || 0,
+            notComing: stats.no || 0,
+            undecided: stats.maybe || 0,
+            pending: stats.not_responded || 0
+        };
     }
 }

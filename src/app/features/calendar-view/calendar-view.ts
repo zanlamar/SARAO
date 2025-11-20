@@ -47,15 +47,12 @@ export class CalendarView implements OnInit {
     this.calendarDays$.set(days);
   }
   async loadUserEvents(): Promise<void> { 
-    console.log('🔄 loadUserEvents ejecutándose...'); 
     const createdEvents = await this.eventService.getLoggedUserEvents();
-    console.log('✅ getLoggedUserEvents OK:', createdEvents.length);
     const guestEvents = await this.eventService.getGuestEvents();
-    console.log('✅ getGuestEvents OK:', guestEvents.length); 
     const allEvents = [...createdEvents, ...guestEvents];
     allEvents.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
-      console.log('📊 Eventos creados:', createdEvents.length);
-      console.log('📊 Eventos como guest:', guestEvents.length);
+
+      
       this.userEvents$.set(allEvents);
       this.updateFilteredEvents(); 
     if (this.selectedDate$()) {
@@ -87,13 +84,12 @@ export class CalendarView implements OnInit {
   }
   onNextMonth(): void {
     const { month, year } = this.calendarService.nextMonth(
-      this.currentMonth$(), this.currentYear$());
+    this.currentMonth$(), this.currentYear$());
     this.currentMonth$.set(month);
     this.currentYear$.set(year);
     this.generateCalendar();
   }
   onEventClicked(event: Event): void {
-    console.log('Event clicked:', event);
   }
   setFilter(filter: 'hosting' | 'upcoming' | 'all'): void {
   this.selectedDate$.set('');
@@ -104,21 +100,15 @@ export class CalendarView implements OnInit {
   private updateFilteredEvents(): void {
     const user = this.authService.currentUser();
     const allEvents = this.userEvents$();
-    console.log('🔍 updateFilteredEvents');
-    console.log('📊 Total eventos:', allEvents.length);
-    console.log('📊 Eventos con isGuest:', allEvents.filter(e => (e as any).isGuest).length);
-    console.log('📊 Eventos sin isGuest:', allEvents.filter(e => !(e as any).isGuest).length);
-    console.log('🎯 Filtro activo:', this.activeFilter());
+
+    
     if (this.activeFilter() === 'hosting') {
       const filtered = allEvents.filter(e => !(e as any).isGuest);
-      console.log('🏠 HOSTING filtrando, resultado:', filtered.length);
       this.filteredEvents$.set(filtered);
     } else if (this.activeFilter() === 'upcoming') {
       const filtered = allEvents.filter(e => (e as any).isGuest);
-      console.log('📅 UPCOMING filtrando, resultado:', filtered.length);
       this.filteredEvents$.set(filtered);
     } else {
-      console.log('✨ ALL mostrando todos');
       this.filteredEvents$.set(allEvents);
     }
   }

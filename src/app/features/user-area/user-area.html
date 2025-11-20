@@ -8,8 +8,7 @@
                         #searchInput
                         type="text" 
                         pInputText 
-                        placeholder="Search text" 
-                        (input)="onSearch($event.target.value)"
+                        placeholder="Search text"                    
                     />
                 </p-iconfield>
                 <button 
@@ -26,10 +25,12 @@
                     class="date-input"
                     (change)="onDateChange($event.target.value)" 
                 >
-                <button class="clear-btn" (click)="onClearDate(dateInput)">
-                    Clear
-                </button>
             </div>
+            <button class="clear-btn" (click)="onClear(searchInput, dateInput)">
+                Clear
+            </button>
+            
+            <!-- BOTONES FILTRO -->
             <button class="month-btn" (click)="onThisMonth()">
                 This Month
             </button>

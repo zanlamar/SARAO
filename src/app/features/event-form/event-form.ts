@@ -90,9 +90,7 @@ export class EventForm implements OnInit {
       try {
         const imageUrl = await this.storageService.uploadImage(file);
         this.step4FormGroup.patchValue({ image: imageUrl });
-        console.log('Imagen subida:', imageUrl);
       } catch (error) {
-        console.error('Error al subir la imagen:', error);
       }
     }
   }
@@ -101,4 +99,64 @@ export class EventForm implements OnInit {
     fileInput.click();
   }
   async onSubmit() {
+    if (!this.step1FormGroup.valid || !this.step2FormGroup.valid || !this.step3FormGroup.valid || !this.step4FormGroup.valid ) {
+      return;
+    }
 
+    const user = this.authService.currentUser();
+      if (!user) {
+        return;
+      };
+
+    const imageUrl = this.step4FormGroup.value.image;
+
+    const eventData: EventFormDTO = {
+      title: this.step1FormGroup.value.eventTitle,
+      description: this.step1FormGroup.value.description,
+      eventDateTime: this.step2FormGroup.value.eventDateTime,
+      location: {
+        alias: this.step3FormGroup.value.location,
+        address: '',
+      },
+      imageUrl: imageUrl  || '',
+      allowPlusOne: this.step4FormGroup.value.allowedPlusOne,
+      bringList: this.step4FormGroup.value.bringList || false,
+    };
+
+    try {
+      if (this.isEditMode()) {
+        const eventId = this.currentEventId();
+        await this.eventService.updateEvent(eventId!, eventData);
+        this.router.navigate(['/event-preview', eventId]);
+      } else {
+        this.eventService.eventPreview.set(eventData);
+        this.router.navigate(['/event-preview']);
+      }   
+    } catch (error:any) {
+      console.error('Error al crear el evento:', error);
+    };
+  };
+
+  async loadEventForEdit(id: string) {
+    try {
+      const event = await this.eventService.getEventById(id);
+      this.step1FormGroup.patchValue({
+        eventTitle: event.title,
+        description: event.description,
+      });
+      this.step2FormGroup.patchValue({
+        eventDateTime: event.eventDateTime,
+      });
+      this.step3FormGroup.patchValue({
+        location: event.location.alias,
+      });
+      this.step4FormGroup.patchValue({
+        image: event.imageUrl,
+        allowedPlusOne: event.allowPlusOne,
+        bringList: event.bringList,
+      });
+    } catch (error) {
+      console.error('Error al cargar el evento:', error);
+    }
+  }
+}
