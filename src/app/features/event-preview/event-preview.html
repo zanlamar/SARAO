@@ -29,11 +29,25 @@
                     <span class="main-label">⏰ TIME</span>
                     <span class="main-value">{{ event()?.eventDateTime | date: 'shortTime' }}</span>
                 </div>
+                <div class="main-detail">
+                    <span class="main-label">📍 WHERE</span>
+                    <span class="main-value">{{ event()?.location?.alias }}</span>
+                </div>
             </div>
             <div class="preview-where">
-                <span class="main-label">📍 WHERE</span>
-                <span class="main-value">{{ event()?.location?.alias }}</span>
-            </div>
+                    <span class="main-label">📍 ADRESS</span>
+                    <span class="main-value">{{ event()?.location?.address }}</span>
+                </div>
+
+            @if (event()?.location?.latitude && event()?.location?.longitude) {
+                <div class="map-section">
+                    <app-preview-map 
+                        [latitude]="event()?.location?.latitude"
+                        [longitude]="event()?.location?.longitude"
+                        [address]="event()?.location?.address || event()?.location?.alias || ''">
+                    </app-preview-map>
+                </div>
+            }
             <div class="preview-description">
                 <h3 class="description-title">LISTEN UP</h3>
                 <p>{{ event()?.description }}</p>

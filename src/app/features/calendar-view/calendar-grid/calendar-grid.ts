@@ -13,20 +13,35 @@ import { Event } from '../../../core/models/event.model';
 export class CalendarGrid {
   @Input() calendarDays$!: Signal<CalendarDay[]>;
   @Input() selectedDate$!: Signal<string>;
-  @Input() currentMonth: number = 0;
-  @Input() currentYear: number = new Date().getFullYear();
+  @Input() currentMonth!: Signal<number>;
+  @Input() currentYear!: Signal<number>;
   @Input() userEvents$!: Signal<Event[]>;
   @Output() daySelected = new EventEmitter<string>();
   @Output() nextMonthClicked = new EventEmitter<void>();
   @Output() previousMonthClicked = new EventEmitter<void>();
+  
   constructor(
     public calendarService: CalendarService) {}
+
     onDayClick(day: CalendarDay): void {
+      const currentMonth = this.currentMonth();
+      const clickedMonth = day.month;
+
       if (!day.isCurrentMonth) {
-        day.month < this.currentMonth ? this.previousMonthClicked.emit() : this.nextMonthClicked.emit();
+        const isPrevious =
+        clickedMonth === (currentMonth + 11) % 12; 
+        const isNext =
+        clickedMonth === (currentMonth + 1) % 12; 
+
+        if (isPrevious) {
+          this.previousMonthClicked.emit();
+        } else if (isNext) {
+          this.nextMonthClicked.emit();
+        }
       }
       this.daySelected.emit(day.dateString);
     }
+
     getEventsForDay(dateString: string, allEvents: Event[]): Event[] {
       return allEvents.filter(event => {
         const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);

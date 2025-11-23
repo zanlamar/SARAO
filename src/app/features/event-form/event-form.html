@@ -7,7 +7,7 @@
                 <h2>Create New sarao</h2>
             }
         </div>
-        <mat-stepper linear #stepper>
+        <mat-stepper linear #stepper (selectionChange)="onStepChange($event)">
         <mat-step [stepControl]="step1FormGroup">
         <ng-template matStepLabel>Event Details</ng-template>
         <form [formGroup]="step1FormGroup">
@@ -56,16 +56,37 @@
     <mat-step [stepControl]="step3FormGroup">
         <ng-template matStepLabel>Location</ng-template>
         <form [formGroup]="step3FormGroup">
-            <div class="form-row full">
+            <div class="form-row">
                 <mat-form-field>
-                    <label>Location (Alias)</label>
+                    <label>Location Alias</label>
                     <input matInput formControlName="location" placeholder="Enter location name" />
                 </mat-form-field>
             </div>
+            <div class="form-row full">
+                @if (isStep3Active()) {
+                    <app-location-search
+                        (locationSelected)="onLocationSelected($event)">
+                    </app-location-search>
+                }
+            </div>
+
+            @if (confirmedLocationAddress()) {
+                <div class="form-row full">
+                    <mat-form-field>
+                    <label>Confirmed Address</label>
+                    <input 
+                        matInput 
+                        [value]="confirmedLocationAddress()" 
+                        readonly 
+                        style="background-color: #f5f5f5;" />
+                    </mat-form-field>
+                </div>
+            }
+
             <div class="button-container">
                 <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="step4FormGroup">
