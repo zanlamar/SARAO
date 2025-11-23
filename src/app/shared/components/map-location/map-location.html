@@ -1,1 +1,46 @@
-<p>map-location works!</p>
+<div class="map-location-container">
+
+    <div class="search-section">
+        <label for="addressInput">Address</label>
+        <div class="search-input-wrapper">
+            <input 
+            id="addressInput"
+            type="text"
+            placeholder="Write the address here"
+            [formControl]="addressInput"
+            class="address-input"
+            />
+            @if (isLoading()) {
+                <span class="loading-indicator">Searching...</span>
+            }
+        </div>
+    </div>
+
+    <div class="map-wrapper">
+        <div id="map-container" class="map-container"></div>
+    </div>
+
+    @if (selectedLocation()) {
+    <div class="location-info">
+        <div class="info-header">
+            <h3>Selected location</h3>
+        </div>
+        <div class="info-content">
+            <p>
+                <strong>Address:</strong> 
+            <span>{{ selectedLocation()?.displayName }}</span>
+            </p>
+        </div>
+    </div>
+    }
+
+    @if (errorMessage()) {
+    <div class="error-message">
+        <div class="error-icon">❌</div>
+        <div class="error-text">
+            <strong>Error:</strong> {{ errorMessage() }}
+        </div>
+    </div>
+    }
+
+</div>

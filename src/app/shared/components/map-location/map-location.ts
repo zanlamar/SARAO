@@ -59,7 +59,7 @@ export class MapLocation implements AfterViewInit{
   }
 
   private initializeMap() {
-    this.map = L.map('map-cotainer').setView([51.505, -0.09], 13);
+    this.map = L.map('map-container').setView([42.4627, -2.4449], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 19
