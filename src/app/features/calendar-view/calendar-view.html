@@ -38,8 +38,8 @@
                     <app-calendar-grid
                         [calendarDays$]="calendarDays$"
                         [selectedDate$]="selectedDate$"
-                        [currentMonth]="currentMonth$()"
-                        [currentYear]="currentYear$()"
+                        [currentMonth]="currentMonth$"
+                        [currentYear]="currentYear$"
                         [userEvents$]="userEvents$"
                         (daySelected)="onDaySelected($event)"
                         (nextMonthClicked)="onNextMonth()"

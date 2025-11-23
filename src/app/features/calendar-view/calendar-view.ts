@@ -24,17 +24,20 @@ export class CalendarView implements OnInit {
   currentYear$ = signal<number>(new Date().getFullYear());
   activeFilter = signal<'hosting' | 'upcoming' | 'all'>('all');
   filteredEvents$ = signal<Event[]>([]);
-    displayedEvents$ = computed(() => {
+
+  displayedEvents$ = computed(() => {
       if (this.selectedDate$()) {
       return this.selectedDateEvents$();
     }
     return this.filteredEvents$();
-    });
+  });
+
   constructor(
     private eventService: EventService,
     private calendarService: CalendarService,
     private authService: AuthService
   ) {}
+
   ngOnInit(): void {
     this.loadUserEvents();
     this.generateCalendar();
