@@ -79,7 +79,6 @@ export class EventForm implements OnInit {
   }
 
   onStepChange(event: any) {
-    console.log('Step cambió a:', event.selectedIndex);
     this.isStep3Active.set(event.selectedIndex === 2);
   }
 
