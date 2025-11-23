@@ -14,9 +14,11 @@ import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service'; 
 import { EventService } from '../../core/services/event.service';   
 import { StorageService } from '../../core/services/storage.service';
-import { EventFormDTO } from '../../core/models/event.model';
+import { EventFormDTO, GeocodingResult } from '../../core/models/event.model';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
+import { LocationSearch  } from '../../shared/components/location-search/location-search';
+
 @Component({
   selector: 'app-event-form',
   imports: [
@@ -33,6 +35,7 @@ import { DatePicker } from 'primeng/datepicker';
     Footer, 
     FormsModule, 
     DatePicker,
+    LocationSearch
   ],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
@@ -46,6 +49,10 @@ export class EventForm implements OnInit {
   selectedFileName = '';
   isEditMode = signal(false);
   currentEventId = signal<string | null>(null);
+  isStep3Active = signal(false);
+  confirmedLocationAddress = signal<string | null>(null);
+  selectedLocationCoords: GeocodingResult | null = null;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -70,6 +77,12 @@ export class EventForm implements OnInit {
       bringList: ['']
     });
   }
+
+  onStepChange(event: any) {
+    console.log('Step cambió a:', event.selectedIndex);
+    this.isStep3Active.set(event.selectedIndex === 2);
+  }
+
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       const id = params['id'];
@@ -158,5 +171,10 @@ export class EventForm implements OnInit {
     } catch (error) {
       console.error('Error al cargar el evento:', error);
     }
+  }
+
+  onLocationSelected(location: GeocodingResult) {
+    this.confirmedLocationAddress.set(location.displayName);
+    this.selectedLocationCoords = location;
   }
 }

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Koulen&family=Nunito+Sans:wght@400;600;700&display=swap');
-@import '~maplibre-gl/dist/maplibre-gl.css';
 
 :root {
   --color-ice: #e8f0e9;

@@ -1,15 +1,29 @@
 <div class="map-location-container">
 
     <div class="search-section">
-        <label for="addressInput">Address</label>
+        <div class="label-with-confirmation">
+        <label for="addressInput">Location address</label>
+            @if (confirmedLocation()) {
+                <span class="confirmed-badge"> ✓ {{ confirmedLocation() }}</span>
+            }
+        </div>
+
         <div class="search-input-wrapper">
             <input 
-            id="addressInput"
-            type="text"
-            placeholder="Write the address here"
-            [formControl]="addressInput"
-            class="address-input"
+                id="addressInput"
+                type="text"
+                placeholder="Search address here"
+                [formControl]="addressInput"
+                (keydown.enter)="searchAddress(addressInput.value || '')"
+                class="address-input"
             />
+            <button 
+                type="button"
+                (click)="searchAddress(addressInput.value || '')"
+                [disabled]="isLoading() || !addressInput.value"
+                class="search-button">
+                Search
+            </button>
             @if (isLoading()) {
                 <span class="loading-indicator">Searching...</span>
             }
@@ -26,20 +40,20 @@
             <h3>Selected location</h3>
         </div>
         <div class="info-content">
-            <p>
-                <strong>Address:</strong> 
-            <span>{{ selectedLocation()?.displayName }}</span>
-            </p>
+            <p>{{ selectedLocation()?.displayName }}</p>
         </div>
+        <button 
+            class="confirm-button"
+            (click)="confirmLocation()"
+            [disabled]="isLoading()">
+            Confirm Location
+        </button>
     </div>
     }
 
     @if (errorMessage()) {
     <div class="error-message">
-        <div class="error-icon">❌</div>
-        <div class="error-text">
-            <strong>Error:</strong> {{ errorMessage() }}
-        </div>
+        ❌ {{ errorMessage() }}
     </div>
     }
 
