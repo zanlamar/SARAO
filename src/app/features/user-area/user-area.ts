@@ -74,8 +74,6 @@ export class UserArea implements OnInit {
     this.searchText$.set(text.trim());
   }
   onSort(field: string): void {
-    console.log('Sorting por:', field); 
-
     if (this.sortField$() === field) {
       this.sortOrder$.set(this.sortOrder$() === 1 ? -1 : 1);
     } else {

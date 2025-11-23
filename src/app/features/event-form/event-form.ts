@@ -129,7 +129,9 @@ export class EventForm implements OnInit {
       eventDateTime: this.step2FormGroup.value.eventDateTime,
       location: {
         alias: this.step3FormGroup.value.location,
-        address: '',
+        address: this.selectedLocationCoords?.displayName || '',
+        latitude: this.selectedLocationCoords?.latitude,
+        longitude: this.selectedLocationCoords?.longitude
       },
       imageUrl: imageUrl  || '',
       allowPlusOne: this.step4FormGroup.value.allowedPlusOne,
