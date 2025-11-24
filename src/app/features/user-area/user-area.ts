@@ -8,9 +8,22 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { Footer } from '../../shared/components/footer/footer';
+import { ChartView } from '../chart-view/chart-view';
+import { EventBars } from '../event-bars/event-bars';
+
+
 @Component({
   selector: 'app-user-area',
-  imports: [CommonModule, TableView, Footer, IconFieldModule, InputIconModule, InputTextModule],
+  imports: [
+    CommonModule, 
+    TableView, 
+    Footer, 
+    IconFieldModule, 
+    InputIconModule, 
+    InputTextModule,
+    ChartView,
+    EventBars
+  ],
   templateUrl: './user-area.html',
   styleUrl: './user-area.css',
   standalone: true

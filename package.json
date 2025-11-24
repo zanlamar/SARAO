@@ -37,6 +37,7 @@
     "@tailwindcss/postcss": "^4.1.16",
     "@types/geojson": "^7946.0.16",
     "@types/maplibre-gl": "^1.13.2",
+    "chart.js": "^4.5.1",
     "firebase": "^12.4.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
