@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background-color: var(--color-ice);
+  background-color: white;
   min-height: calc(100vh - 4rem);
   padding-top: 5rem;
   padding-bottom: 100px;
