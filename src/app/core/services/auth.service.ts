@@ -55,20 +55,22 @@ export class AuthService {
         await signOut(this.auth);
         this.router.navigate(['/login']);
     }
+
     isAuthenticated(): boolean {
         return this.currentUser() !== null;
     }
+
     waitForAuthentication(): Promise<void> {
         return new Promise((resolve) => {
             if (this.currentUser() !== null) {
                 resolve();
                 return;
             }
-            const effectRef = effect(() => {
-                if (this.currentUser() !== null) {
-                    effectRef.destroy();  
-                    resolve(); 
-                }
+            const subscription = user(this.auth).subscribe(usr => {
+            if (usr !== null) {
+                subscription.unsubscribe();
+                resolve();
+            }
             });
         });
     }

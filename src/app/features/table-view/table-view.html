@@ -35,6 +35,9 @@
                 Pending answer
                 <p-sortIcon field="Pending"></p-sortIcon>
             </th>
+            <th>
+                Stats
+            </th>
         </tr>
     </ng-template>
     <ng-template #body let-event>
@@ -42,44 +45,31 @@
             <td>{{ event.title }}</td>
             <td>{{ event.eventDateTime | date:'short' }}</td>
             <td>{{ event.location?.alias }}</td>
-            <td>
-                <button (click)="toggleEventDetails(event.id)">
-                {{ event.confirmed }}
-                <span class="toggle-icon">▼</span>
-                </button> 
+            <td>{{ event.confirmed }}</td>
+            <td>{{ event.notComing }}</td>  
+            <td>{{ event.undecided }}</td>
+            <td>{{ event.pending}}</td>
+            <td><button (click)="toggleEventDetails(event.id)">
+                More info</button>
             </td>
-            <td>  
-                <button (click)="toggleEventDetails(event.id)">
-                {{ event.notComing }}
-                <span class="toggle-icon">▼</span>
-                </button>
-            </td>  
-            
-            <td>
-                <button (click)="toggleEventDetails(event.id)">
-                {{ event.undecided }}
-                <span class="toggle-icon">▼</span>
-                </button>
-            </td>
-            <td>
-                <button (click)="toggleEventDetails(event.id)">
-                {{ event.pending}}
-                <span class="toggle-icon">▼</span>
-                </button>
-            </td>
+                
         </tr>
 
         @if (expandedEventId() === event.id) {
             <tr class="expansion-row">
                 <td [attr.colspan]="7">
                     <div class="attendees-details">
-                        <!-- Confirmed -->
                         <div class="status-group">
                             <strong>✅ Confirmed</strong>
                             @if (attendeesByEvent().get(event.id)?.confirmed?.length) {
                                 <ul>
                                 @for (email of attendeesByEvent().get(event.id)?.confirmed; track email) {
-                                    <li>{{ email }}</li>
+                                    <li class="email-item">
+                                    <span>{{ email }}</span>
+                                    <button class="email-btn" 
+                                            title="Send reminder">
+                                        <span class="material-icons">mail</span>
+                                    </button>
                                 }
                                 </ul>
                             } @else {
@@ -92,7 +82,12 @@
                             @if (attendeesByEvent().get(event.id)?.notComing?.length) {
                                 <ul>
                                 @for (email of attendeesByEvent().get(event.id)?.notComing; track email) {
-                                    <li>{{ email }}</li>
+                                    <li class="email-item">
+                                    <span>{{ email }}</span>
+                                    <button class="email-btn" 
+                                            title="Send reminder">
+                                        <span class="material-icons">mail</span>
+                                    </button>
                                 }
                                 </ul>
                             } @else {
@@ -105,7 +100,13 @@
                             @if (attendeesByEvent().get(event.id)?.pending?.length) {
                                 <ul>
                                 @for (email of attendeesByEvent().get(event.id)?.pending; track email) {
-                                    <li>{{ email }}</li>
+                                    <li class="email-item">
+                                    <span>{{ email }}</span>
+                                    <button class="email-btn" 
+                                            title="Send reminder">
+                                        <span class="material-icons">mail</span>
+                                    </button>
+                                </li>
                                 }
                                 </ul>
                             } @else {
