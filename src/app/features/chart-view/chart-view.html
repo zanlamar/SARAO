@@ -1,47 +1,49 @@
 <div class="chart-container">
-
     <div class="chart-header">
         <h2 class="chart-title">Guest Overview</h2>
         <p class="chart-subtitle">Total invites: {{ stats().total }}</p>
     </div>
 
-<div class="period-selector">
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('thisMonth')"
-        (click)="selectPeriod('thisMonth')">
-        This Month
-    </button>
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('nextMonth')"
-        (click)="selectPeriod('nextMonth')">
-        Next Month
-    </button>
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('spring')"
-        (click)="selectPeriod('spring')">
-        Spring
-    </button>
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('summer')"
-        (click)="selectPeriod('summer')">
-        Summer
-    </button>
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('autumn')"
-        (click)="selectPeriod('autumn')">
-        Autumn
-    </button>
-    <button 
-        class="period-btn"
-        [class.active]="isSelected('winter')"
-        (click)="selectPeriod('winter')">
-        Winter
-    </button>
+    <div class="period-selector">
+        <button 
+            class="period-btn"
+            [class.active]="isSelected('thisMonth')"
+            (click)="selectPeriod('thisMonth')">
+            This Month
+        </button>
+        <button 
+            class="period-btn"
+            [class.active]="isSelected('nextMonth')"
+            (click)="selectPeriod('nextMonth')">
+            Next Month
+        </button>
+    </div>
+
+    <div class="season-selector">
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('spring')"
+            (click)="selectPeriod('spring')">
+            🌸 Spring
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('summer')"
+            (click)="selectPeriod('summer')">
+            ☀️ Summer
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('autumn')"
+            (click)="selectPeriod('autumn')">
+            🍂 Autumn
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('winter')"
+            (click)="selectPeriod('winter')">
+            ❄️ Winter
+        </button>
     </div>
 
     <div class="canvas-wrapper">

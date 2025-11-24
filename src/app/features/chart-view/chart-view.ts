@@ -34,12 +34,10 @@ export class ChartView implements OnInit {
       
       switch (period) {
         case 'thisMonth':
-          // Filtramos eventos del mes actual
           return eventDate.getMonth() === now.getMonth() && 
             eventDate.getFullYear() === now.getFullYear();
         
         case 'nextMonth':
-          // Filtramos eventos del próximo mes
           const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
           return eventDate.getMonth() === nextMonth.getMonth() && 
             eventDate.getFullYear() === nextMonth.getFullYear();

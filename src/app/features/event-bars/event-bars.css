@@ -5,6 +5,9 @@
     padding: 1.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
 }
 
 .bars-header {
@@ -17,7 +20,7 @@
     font-weight: 700;
     color: var(--color-dark);
     margin: 0 0 0.5rem 0;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Koulen', sans-serif;
 }
 
 .bars-subtitle {
@@ -35,12 +38,11 @@
 }
 
 .season-btn {
-    padding: 0.75rem 1rem;
+    padding: 0.30rem 1rem;
     background-color: #f3f4f6;
     color: var(--color-dark);
     border: 2px solid transparent;
     border-radius: 0.5rem;
-    font-weight: 600;
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -52,9 +54,8 @@
 }
 
 .season-btn.active {
-    background-color: var(--color-azul);
-    color: white;
-    border-color: var(--color-azul-dark);
+    background-color: var(--color-banana);
+    color: black;
 }
 
 .season-btn:active {
