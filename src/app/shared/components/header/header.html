@@ -20,9 +20,8 @@
         @if (!isHome && authService.currentUser()) {
             <div class="navbar-center">
                 <a routerLink="/memento" class="btn-memento" [class.active]="isMemento">
-                    <span class="material-symbols-outlined">diversity_1</span>
-                    <span class="memento-text">Memento</span>
-                </a>
+                <span class="material-symbols-outlined">diversity_1</span>
+            </a>
             </div>
         }
         @if ((isHome) && authService.currentUser()) {

@@ -1,1 +1,17 @@
-<p>memento works!</p>
+<div class="memento-wrapper">
+    <div class="memento-container">
+        <div class="memento-header">
+            <h1 class="memento-title">MEMENTO</h1>
+            <p class="memento-subtitle">Looking back & looking forward</p>
+        </div>
+
+        <div class="charts-grid">
+            <app-chart-view 
+                [events]="userEvents()">
+            </app-chart-view>
+            <app-event-bars 
+                [events]="userEvents()">
+            </app-event-bars>
+        </div>
+    </div>
+</div>
