@@ -5,13 +5,15 @@ import { AuthService } from '../../core/services/auth.service';
 import { EventWithStats } from '../../core/models/event.model';
 import { EventBars } from '../event-bars/event-bars';
 import { ChartView } from '../chart-view/chart-view';
+import { Footer } from '../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-memento',
   imports: [
     CommonModule,
     EventBars,
-    ChartView
+    ChartView,
+    Footer
   ],
   templateUrl: './memento.html',
   styleUrl: './memento.css',

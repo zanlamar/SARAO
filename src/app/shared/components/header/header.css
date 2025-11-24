@@ -194,6 +194,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
 .notification-bell {
   position: relative;
   display: flex;
@@ -281,7 +282,6 @@
     font-size: 0.875rem;
   }
   
-  /* Botón memento más compacto en móvil */
   .btn-memento {
     padding: 0.5rem;
     min-width: 3rem;
