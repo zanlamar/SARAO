@@ -8,9 +8,6 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { Footer } from '../../shared/components/footer/footer';
-import { ChartView } from '../chart-view/chart-view';
-import { EventBars } from '../event-bars/event-bars';
-
 
 @Component({
   selector: 'app-user-area',
@@ -21,8 +18,6 @@ import { EventBars } from '../event-bars/event-bars';
     IconFieldModule, 
     InputIconModule, 
     InputTextModule,
-    ChartView,
-    EventBars
   ],
   templateUrl: './user-area.html',
   styleUrl: './user-area.css',

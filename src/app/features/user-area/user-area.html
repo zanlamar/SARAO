@@ -1,11 +1,5 @@
 <div class="user-area-wrapper">    
     <div class="user-area-container">
-        
-        <!-- GRÁFICOS - Añadir aquí arriba de los filtros -->
-        <div class="charts-grid">
-            <app-chart-view [events]="filteredEvents$()"></app-chart-view>
-            <app-event-bars [events]="filteredEvents$()"></app-event-bars>
-        </div>
 
         <div class="filters-section">
             <div class="search-wrapper">
@@ -37,7 +31,6 @@
                 Clear
             </button>
             
-            <!-- BOTONES FILTRO -->
             <button class="month-btn" (click)="onThisMonth()">
                 This Month
             </button>
