@@ -6,13 +6,16 @@ export const authGuard = (route: any, state: any) => {
     const authService = inject(AuthService);
     const router = inject(Router);
 
-    if (authService.isAuthenticated()) {
-        return true;
-    } else {
-        const returnUrl = state.url || '/home';
+    return authService.waitForAuthentication().then(() => {
+        if (authService.isAuthenticated()) {
+            return true;
+        } else {
+        const returnUrl = state.url || '/calendar-view';
         router.navigate(['/login'], {
             queryParams: { returnUrl: returnUrl }
         });
         return false;
-    }
+        }
+    });
 }
+

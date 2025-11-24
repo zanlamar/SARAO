@@ -1,19 +1,13 @@
 <div class="calendar-wrapper">
     <main class="calendar-container">
         <div class="calendar-content">
-
-            <!-- GRID PRINCIPAL: 2 COLUMNAS -->
             <div class="calendar-grid">
                 <div class="events-column">
-                
-                    <!-- Header -->
                     <div class="events-header">
                         <div class="header-text">
                             <h1 class="events-title">Your saraos</h1>
                             <p class="events-subtitle">Filter by type or clic on a date </p>
                         </div>
-                        
-                        <!-- Botones UPCOMING / HOSTING -->
                         <div class="filter-buttons">
                             <button
                                 class="filter-btn"
@@ -32,7 +26,6 @@
                             >All</button>
                         </div>
                     </div>
-                    
                     <app-events-list
                         [events$]="displayedEvents$"
                         [activeFilter]="activeFilter"
@@ -41,13 +34,12 @@
                         (onEventDeleted)="loadUserEvents()"
                     ></app-events-list>
                 </div>
-                
                 <div class="calendar-column">
                     <app-calendar-grid
                         [calendarDays$]="calendarDays$"
                         [selectedDate$]="selectedDate$"
-                        [currentMonth]="currentMonth$()"
-                        [currentYear]="currentYear$()"
+                        [currentMonth]="currentMonth$"
+                        [currentYear]="currentYear$"
                         [userEvents$]="userEvents$"
                         (daySelected)="onDaySelected($event)"
                         (nextMonthClicked)="onNextMonth()"

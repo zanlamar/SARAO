@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Footer } from '../../shared/components/footer/footer';
-
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -14,13 +12,9 @@ import { Footer } from '../../shared/components/footer/footer';
 })
 export class Home implements OnInit {
   username = 'Pendón';
-
   constructor(private router: Router) {}
-
   ngOnInit(): void {
-
   }
-
   onLogout() {
     this.router.navigate(['/login']);
   }

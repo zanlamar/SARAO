@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from "./shared/components/header/header";
 import { RouterModule, Routes } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, RouterModule],
@@ -12,3 +11,4 @@ import { RouterModule, Routes } from '@angular/router';
 export class App {
   protected readonly title = signal('EntryPoint');
 }
+

@@ -1,15 +1,11 @@
 <div class="events-list">
-    <!-- Sin eventos -->
     @if (events$().length === 0) {
         <div class="content-empty-state">
             <h2 class="empty-title"> No saraos yet 💤</h2>
         </div>
     }
-    
-    <!-- Con eventos -->
     @for (event of events$(); track event.id) {
         <div class="event-card">
-            <!-- Imagen -->
             @if (event.imageUrl && event.imageUrl !== '') {
                 <img 
                     [src]="event.imageUrl" 
@@ -19,8 +15,6 @@
             } @else {
                 <div class="event-image-placeholder">📅</div>
             }
-            
-            <!-- Contenido -->
             <div class="event-content">
                 <div class="event-title-container">
                     <h3 class="event-title">{{ event.title }}</h3>
@@ -41,7 +35,6 @@
                                 (click)="onShareEvent(event.id)"
                             >share</span>
                         }
-                        <!-- ✅ SIEMPRE el botón VER -->
                         <span 
                             class="material-symbols-outlined icon-see"
                             routerLink="/event-preview"
@@ -57,12 +50,11 @@
             </div>
         </div>
     }
-
     @if (eventToDelete) { 
         <app-delete-modal
             [event]="eventToDelete"
             (onConfirmDelete)="onConfirmDelete($event)"
         ></app-delete-modal>
     }
-
 </div>
+

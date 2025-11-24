@@ -10,7 +10,6 @@ import { EventWithStats } from '../../core/models/event.model';
   styleUrl: './table-view.css',
   standalone: true
 })
-
 export class TableView {
   @Input() events!: Signal<EventWithStats[]>;
   @Input() sortField!: Signal<string>;

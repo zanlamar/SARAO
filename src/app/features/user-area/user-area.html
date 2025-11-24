@@ -1,7 +1,6 @@
 <div class="user-area-wrapper">    
     <div class="user-area-container">
         <div class="filters-section">
-            <!-- BÚSQUEDA -->
             <div class="search-wrapper">
                 <p-iconfield>
                     <p-inputicon class="pi pi-search"></p-inputicon>
@@ -19,8 +18,6 @@
                     Search
                 </button>
             </div>  
-
-            <!-- FECHA + CLEAR DATE juntos -->
             <div class="date-wrapper">
                 <input 
                     #dateInput
@@ -37,12 +34,10 @@
             <button class="month-btn" (click)="onThisMonth()">
                 This Month
             </button>
-
             <button class="month-btn" (click)="onNextMonth()">
                 Next Month
             </button>
         </div>  
-    
         <div class="table-section">
             <app-table-view 
                 [events]="filteredEvents$">

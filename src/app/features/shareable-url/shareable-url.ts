@@ -5,7 +5,6 @@ import { Footer } from '../../shared/components/footer/footer';
 import { ShareUrlService } from '../../core/services/shareable-url.service';
 import { EventService } from '../../core/services/event.service';
 import { ActivatedRoute } from '@angular/router';
-
 @Component({
   selector: 'app-shareable-url',
   imports: [CommonModule, Footer],
@@ -17,15 +16,12 @@ export class ShareableUrlComponent implements OnInit {
   private eventService = inject(EventService);
   private route = inject(ActivatedRoute);
   private shareUrlService = inject(ShareUrlService);
-  
   event = signal<Event | null>(null);
   shareUrl = signal<string>('');
   copied = signal<boolean>(false);
-  
   ngOnInit(): void {
     this.route.params.subscribe(async params => {
       const eventId = params['id'];
-      
       if (eventId) {
         try {
           const loadedEvent = await this.eventService.getEventById(eventId);
@@ -37,12 +33,10 @@ export class ShareableUrlComponent implements OnInit {
       }
     });
   }
-
   async copyToClipboard(): Promise<void> {
     try {
       await this.shareUrlService.copyToClipboard(this.shareUrl());
       this.copied.set(true);
-      
       setTimeout(() => {
         this.copied.set(false);
       }, 2000);

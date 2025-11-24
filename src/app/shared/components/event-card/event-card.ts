@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-event-card',
   imports: [],
@@ -8,5 +7,5 @@ import { Component } from '@angular/core';
   standalone: true,
 })
 export class EventCard {
-
 }
+

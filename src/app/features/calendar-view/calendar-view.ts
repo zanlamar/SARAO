@@ -8,7 +8,6 @@ import { EventsList } from './events-list/events-list';
 import { CalendarService } from '../../core/services/calendar.service';
 import { CalendarGrid } from './calendar-grid/calendar-grid';
 import { AuthService } from '../../core/services/auth.service';
-
 @Component({
   selector: 'app-calendar-view',
   imports: [CommonModule, Footer, EventsList, CalendarGrid],
@@ -16,9 +15,7 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './calendar-view.css',
   standalone: true,
 })
-
 export class CalendarView implements OnInit {
-
   calendarDays$ = signal<CalendarDay[]>([]);
   userEvents$ = signal<Event[]>([]);
   selectedDate$ = signal<string>('');
@@ -28,13 +25,12 @@ export class CalendarView implements OnInit {
   activeFilter = signal<'hosting' | 'upcoming' | 'all'>('all');
   filteredEvents$ = signal<Event[]>([]);
 
-    displayedEvents$ = computed(() => {
+  displayedEvents$ = computed(() => {
       if (this.selectedDate$()) {
       return this.selectedDateEvents$();
     }
     return this.filteredEvents$();
-    });
-
+  });
 
   constructor(
     private eventService: EventService,
@@ -47,16 +43,13 @@ export class CalendarView implements OnInit {
     this.generateCalendar();
     this.updateFilteredEvents();
   }
-
   private generateCalendar(): void {
     const days = this.calendarService.generateCalendarDays(
       this.currentMonth$(), this.currentYear$()
     );
     this.calendarDays$.set(days);
   }
-
   async loadUserEvents(): Promise<void> { 
-
     const createdEvents = await this.eventService.getLoggedUserEvents();
     const guestEvents = await this.eventService.getGuestEvents();
     const allEvents = [...createdEvents, ...guestEvents];
@@ -65,31 +58,25 @@ export class CalendarView implements OnInit {
       
       this.userEvents$.set(allEvents);
       this.updateFilteredEvents(); 
-      
     if (this.selectedDate$()) {
       this.selectDay(this.selectedDate$());
     }
   }
-
   selectDay(dateString: string): void {
     this.selectedDate$.set(dateString);
-
     const filtered = this.userEvents$().filter(event => {
       const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);
       return eventDateString === dateString;
     });
     this.selectedDateEvents$.set(filtered);
   }
-
   getTodayDateString(): string {
     const today = new Date();
     return this.calendarService.formatDateToString(today);
   }
-    
   onDaySelected(dateString: string): void {
     this.selectDay(dateString);
   }
-
   onPreviousMonth(): void {
     const { month, year } = this.calendarService.previousMonth(
       this.currentMonth$(), this.currentYear$(),
@@ -98,7 +85,6 @@ export class CalendarView implements OnInit {
     this.currentYear$.set(year);
     this.generateCalendar();
   }
-
   onNextMonth(): void {
     const { month, year } = this.calendarService.nextMonth(
     this.currentMonth$(), this.currentYear$());
@@ -106,18 +92,14 @@ export class CalendarView implements OnInit {
     this.currentYear$.set(year);
     this.generateCalendar();
   }
-
   onEventClicked(event: Event): void {
   }
-
   setFilter(filter: 'hosting' | 'upcoming' | 'all'): void {
   this.selectedDate$.set('');
   this.selectedDateEvents$.set([]);
-  
   this.activeFilter.set(filter);
   this.updateFilteredEvents();
 }
-
   private updateFilteredEvents(): void {
     const user = this.authService.currentUser();
     const allEvents = this.userEvents$();

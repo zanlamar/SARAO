@@ -1,4 +1,3 @@
-/* ===== CONTENEDOR PRINCIPAL ===== */
 .user-area-wrapper {
     display: flex;
     flex-direction: column;
@@ -7,21 +6,17 @@
     padding-top: 5rem;      
     padding-bottom: 100px; 
 }
-
 .user-area-container {
     max-width: 90rem;
     margin: 0 auto;
     width: 100%;
     padding: 2rem 1rem;    
 }
-
 @media (max-width: 640px) {
     .user-area-container {
         padding: 1rem 0.5rem;
     }
 }
-
-/* ===== FILTROS HEADER ===== */
 .filters-section {
     display: flex;
     flex-direction: column;
@@ -33,7 +28,6 @@
     border: 1px solid #e5e7eb;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 @media (min-width: 768px) {
     .filters-section {
         display: grid;
@@ -42,15 +36,12 @@
         align-items: center;
     }
 }   
-
 @media (max-width: 640px) {
     .filters-section {
         padding: 1rem;
         gap: 0.75rem;
     }
 }
-
-/* ===== BÚSQUEDA (Input + Botón pegados) ===== */
 .search-wrapper {
     display: flex;
     gap: 0;
@@ -59,18 +50,14 @@
     border-radius: 0.5rem;
     overflow: hidden;
 }
-
 .search-wrapper p-iconfield {
     flex: 1;
     width: 100%;
 }
-
-/* PrimeNG IconField */
 :host ::ng-deep .p-iconfield {
     width: 100%;
     border: none;
 }
-
 :host ::ng-deep .p-iconfield .p-inputtext {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -82,19 +69,15 @@
     transition: background-color 0.2s ease;
     background-color: transparent;
 }
-
 :host ::ng-deep .p-iconfield .p-inputtext:focus {
     outline: none;
     box-shadow: none;
     background-color: #fafafa;
 }
-
 :host ::ng-deep .p-iconfield .p-inputicon {
     color: #9ca3af;
     left: 0.75rem;
 }
-
-/* BOTÓN SEARCH */
 .search-btn {
     padding: 0.75rem 1.5rem;
     background-color: var(--color-azul);
@@ -109,15 +92,12 @@
     white-space: nowrap;
     height: auto;
 }
-
 .search-btn:hover {
     background-color: var(--color-azul-dark);
 }
 .search-btn:active {
     transform: scale(0.98);
 }
-
-/* ===== INPUTS DE FECHA (más pequeño) ===== */
 .date-input {
     padding: 0.75rem 1rem;
     border: 1px solid #e5e7eb;
@@ -130,19 +110,15 @@
     width: 100%;
     max-width: 200px;
 }
-
 @media (max-width: 640px) {
     .date-input {
         max-width: 100%;
     }
 }
-
 .date-input:focus {
     outline: none;
     border-color: var(--color-azul);
 }
-
-/* ===== BOTONES FILTRO (Amarillo hover) ===== */
 .month-btn {
     padding: 0.75rem 1.5rem;
     background-color: var(--color-azul);
@@ -156,23 +132,18 @@
     width: 100%;
     font-family: 'Nunito Sans', sans-serif;
 }
-
 @media (min-width: 768px) {
     .month-btn {
         width: auto;
     }
 }
-
 .month-btn:hover {
     background-color: var(--color-azul-dark);
     color: white;
 }
-
 .month-btn:active {
     transform: scale(0.98);
 }
-
-/* ===== BOTÓN CLEAR (Negro con hover blanco) ===== */
 .clear-btn {
     padding: 0.75rem 1.5rem;
     background-color: #1f2937;
@@ -186,24 +157,19 @@
     width: 100%;
     font-family: 'Nunito Sans', sans-serif;
 }
-
 @media (min-width: 768px) {
     .clear-btn {
         width: auto;
     }
 }
-
 .clear-btn:hover {
     background-color: #ffffff;
     color: #1f2937;
     border: 1px solid #e5e7eb;
 }
-
 .clear-btn:active {
     transform: scale(0.98);
 }
-
-/* ===== TABLA CONTENEDOR ===== */
 .table-section {
     background-color: white;
     border-radius: 0.75rem;
@@ -211,26 +177,21 @@
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
-/* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
     .search-btn {
         padding: 0.75rem 1rem;
         font-size: 0.75rem;
     }
-    
     .date-input {
         font-size: 0.75rem;
         padding: 0.6rem 0.75rem;
     }
-    
     .month-btn,
     .clear-btn {
         font-size: 0.75rem;
         padding: 0.6rem 1.2rem;
     }
 }
-
 @media (min-width: 768px) {
     .search-btn,
     .date-input,
@@ -239,8 +200,6 @@
         font-size: 1rem;
     }
 }
-
-/* ===== FECHA + CLEAR JUNTOS ===== */
 .date-wrapper {
     display: flex;
     gap: 0;
@@ -249,14 +208,12 @@
     border-radius: 0.5rem;
     overflow: hidden;
 }
-
 .date-wrapper .date-input {
     flex: 1;
     border: none;
     border-radius: 0;
     max-width: none;
 }
-
 .date-wrapper .clear-btn {
     border: none;
     border-radius: 0;
@@ -265,13 +222,11 @@
     color: white;
     padding: 0.75rem 1rem;
 }
-
 .date-wrapper .clear-btn:hover {
     background-color: #374151;
     color: white;
     border: none;
 }
-
 @media (max-width: 640px) {
     .date-wrapper .clear-btn {
         padding: 0.6rem 0.75rem;

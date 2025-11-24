@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';  
-
 @Component({
   selector: 'app-register',
   imports: [CommonModule, FormsModule, RouterLink],
@@ -12,34 +11,27 @@ import { AuthService } from '../../../core/services/auth.service';
   standalone: true,
 })
 export class Register {
-
   email = '';
   password = '';
   confirmPassword = '';
   errorMessage = signal('');
   loading = signal(false);
-
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
-
   async onRegister() {
     if (this.password !== this.confirmPassword) {
       this.errorMessage.set('The passwords do not match');
       return;
     }
-
     if (this.password.length < 6) {
       this.errorMessage.set('The password must be at least 6 characters long');
       return;
     }
-
     this.loading.set(true);
     this.errorMessage.set('');
-
     const result = await this.authService.register(this.email, this.password);
-
     if (result. success) {
       this.router.navigate(['/home']);
     } else {

@@ -42,3 +42,9 @@ export interface EventWithStats extends Event {
     percentageConfirmed: number;
 }
 
+export interface GeocodingResult {
+    latitude: number;
+    longitude: number;
+    displayName: string;
+}
+

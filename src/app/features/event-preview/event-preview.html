@@ -1,6 +1,4 @@
 <div class="preview-wrapper">
-    <!-- ACTION BUTTONS (ARRIBA) -->
-
     @if (isCreating()) {
     <div class="preview-top-buttons">
         <button class="btn-secondary" (click)="onEdit()"> < EDIT</button>
@@ -11,17 +9,10 @@
         <button class="btn-secondary" (click)="onBack()"> < BACK</button>
     </div>
     }
-    
-    
     <main class="preview-container">
-        
         @if (event()) {
         <div class="preview-content">
-            
-            <!-- TÍTULO -->
             <h1 class="preview-title">{{ event()?.title }}</h1>
-
-            <!-- IMAGEN -->
             <div class="preview-image">
                 @if (event()?.imageUrl && event()?.imageUrl !== '') {
                     <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
@@ -29,8 +20,6 @@
                     <div class="image-placeholder">📅</div>
                 }
             </div>
-
-            <!-- DETALLES PRINCIPALES (EN LÍNEA) -->
             <div class="preview-main-details">
                 <div class="main-detail">
                     <span class="main-label">📅 DATE</span>
@@ -40,21 +29,29 @@
                     <span class="main-label">⏰ TIME</span>
                     <span class="main-value">{{ event()?.eventDateTime | date: 'shortTime' }}</span>
                 </div>
+                <div class="main-detail">
+                    <span class="main-label">📍 WHERE</span>
+                    <span class="main-value">{{ event()?.location?.alias }}</span>
+                </div>
             </div>
-
-            <!-- WHERE (SEPARADO) -->
             <div class="preview-where">
-                <span class="main-label">📍 WHERE</span>
-                <span class="main-value">{{ event()?.location?.alias }}</span>
-            </div>
+                    <span class="main-label">📍 ADRESS</span>
+                    <span class="main-value">{{ event()?.location?.address }}</span>
+                </div>
 
-            <!-- DESCRIPCIÓN -->
+            @if (event()?.location?.latitude && event()?.location?.longitude) {
+                <div class="map-section">
+                    <app-preview-map 
+                        [latitude]="event()?.location?.latitude"
+                        [longitude]="event()?.location?.longitude"
+                        [address]="event()?.location?.address || event()?.location?.alias || ''">
+                    </app-preview-map>
+                </div>
+            }
             <div class="preview-description">
                 <h3 class="description-title">LISTEN UP</h3>
                 <p>{{ event()?.description }}</p>
             </div>
-
-            <!-- EXTRAS (CON COLOR DIFERENTE) -->
             <div class="preview-extras">
                 <div class="extra-item">
                     <span class="extra-label">💃 Can I bring someone?</span>
@@ -62,7 +59,6 @@
                         {{ event()?.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
                     </span>
                 </div>
-
                 @if (event()?.bringList) {
                     <div class="extra-item">
                         <span class="extra-label">📋 Should I bring something?</span>
@@ -70,9 +66,6 @@
                     </div>
                 }
             </div>
-
-
-            <!-- RSVP SECTION -->
             @if (!isCreating()) {
                 <div class="rsvp-section">
                     <h3 class="rsvp-title">RSVP</h3>
@@ -110,7 +103,6 @@
             <p>No event to preview</p>
         </div>
         }
-
     </main>
     <app-footer></app-footer>
 </div>

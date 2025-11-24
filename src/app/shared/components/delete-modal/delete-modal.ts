@@ -4,7 +4,6 @@ import { Event } from '../../../core/models/event.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
-
 @Component({
   selector: 'app-delete-modal',
   imports: [CommonModule, ConfirmDialog, ToastModule],
@@ -16,14 +15,11 @@ import { ToastModule } from 'primeng/toast';
 export class DeleteModal implements OnInit {
   confirmationService = inject(ConfirmationService);
   messageService = inject(MessageService) 
-
   @Input() event!: Event;
   @Output() onConfirmDelete = new EventEmitter<Event>();
-
   ngOnInit(): void {
     this.confirm();
   }
-
   confirm(): void {
     this.confirmationService.confirm({
       message: `Delete "${this.event.title}"?`,
@@ -57,3 +53,4 @@ export class DeleteModal implements OnInit {
     });
   }
 }
+

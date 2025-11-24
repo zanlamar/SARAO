@@ -1,4 +1,3 @@
-/* ===== FOOTER ===== */
 .footer {
   position: fixed;
   bottom: 0;
@@ -9,20 +8,17 @@
   border-top: 1px solid #333;
   padding: 0.5rem 0;
 }
-
 .footer-inner {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 0 1rem;
 }
-
 @media (min-width: 640px) {
   .footer-inner {
     padding: 0 2rem;
   }
 }
-
 .footer-icon {
   display: flex;
   align-items: center;
@@ -35,19 +31,16 @@
   transition: all 0.2s ease;
   border-radius: 8px;
 }
-
 @media (min-width: 640px) {
   .footer-icon {
     width: 3rem;
     height: 3rem;
   }
 }
-
 .footer-icon:hover {
   color: var(--color-azul);
   transform: scale(1.05);
 }
-
 .footer-icon-add {
   width: 3rem;
   height: 3rem;
@@ -55,20 +48,17 @@
   color: var(--color-dark);
   border-radius: 50%;
 }
-
 @media (min-width: 640px) {
   .footer-icon-add {
     width: 3.5rem;
     height: 3.5rem;
   }
 }
-
 .footer-icon-add:hover {
   background-color: #ffc107;
   transform: scale(1.1);
   color: var(--color-dark);
 }
-
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
   font-size: 1.5rem;
@@ -79,7 +69,6 @@
   letter-spacing: normal;
   word-wrap: normal;
 }
-
 @media (min-width: 640px) {
   .material-symbols-outlined {
     font-size: 1.75rem;

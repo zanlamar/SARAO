@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
 @Component({
   selector: 'app-landingPage',
   imports: [RouterLink],
@@ -9,4 +8,4 @@ import { RouterLink } from '@angular/router';
 })
 export class landingPage {
 }
-  
+

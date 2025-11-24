@@ -9,7 +9,6 @@ import { CalendarView } from './features/calendar-view/calendar-view';
 import { EventPreview } from './features/event-preview/event-preview';
 import { ShareableUrlComponent } from './features/shareable-url/shareable-url';
 import { UserArea } from './features/user-area/user-area';
-
 export const routes: Routes = [
     { path: '', component: landingPage },
     { path: 'landing', component: landingPage}, 

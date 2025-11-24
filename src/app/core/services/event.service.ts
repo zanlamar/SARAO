@@ -5,22 +5,18 @@ import { mapEventFormDTOToSupabase, getSupabaseUserId, mapSupabaseResponseToEven
 import { StorageService } from "./storage.service";
 import { EventDataService } from "./event-data.service";
 import { SupabaseService } from "./supabase.service";
-
 @Injectable({
     providedIn: 'root'
 })
 export class EventService {
-
     eventPreview = signal<EventFormDTO | null>(null);
     imageFilePreview: File | null = null;
-    
     constructor(
         private authService: AuthService,
         private storageService: StorageService,
         private eventDataService: EventDataService,
         private supabaseService: SupabaseService
     ) { }   
-
     async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
         if (imageFile) {

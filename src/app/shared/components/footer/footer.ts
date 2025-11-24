@@ -3,8 +3,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
-
-
 @Component({
   selector: 'app-footer',
   imports: [RouterLink, CommonModule],
@@ -14,22 +12,19 @@ import { filter } from 'rxjs';
 })
 export class Footer implements OnInit {
   router = inject(Router);
-  
   isHome = false;
   isCreateEvent = false;
-
   ngOnInit(): void {
     this.checkRoute();
-
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.checkRoute();
       });
   }
-
   private checkRoute() {
     this.isHome = this.router.url === '/home';
     this.isCreateEvent = this.router.url === '/create';
   }
 }
+

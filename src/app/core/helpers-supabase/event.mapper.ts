@@ -40,6 +40,9 @@ export function mapEventFormDTOToSupabase(
         real_date: realDate,
         image_url: eventData.imageUrl || null,
         location_alias: eventData.location.alias,
+        location_address: eventData.location.address || null,    
+        location_latitude: eventData.location.latitude || null,    
+        location_longitude: eventData.location.longitude || null,  
         allow_companion: eventData.allowPlusOne, 
         bring_list: eventData.bringList || false,
         updated_at: new Date()
