@@ -9,6 +9,7 @@ import { CalendarView } from './features/calendar-view/calendar-view';
 import { EventPreview } from './features/event-preview/event-preview';
 import { ShareableUrlComponent } from './features/shareable-url/shareable-url';
 import { UserArea } from './features/user-area/user-area';
+import { Memento } from './features/memento/memento';
 export const routes: Routes = [
     { path: '', component: landingPage },
     { path: 'landing', component: landingPage}, 
@@ -21,5 +22,6 @@ export const routes: Routes = [
     { path: 'event-preview/:id', component: EventPreview, canActivate: [authGuard] },
     { path: 'shareable-url/:id', component: ShareableUrlComponent, canActivate: [authGuard] },
     { path: 'user-area', component: UserArea, canActivate: [authGuard] },
+    { path: 'memento', component: Memento, canActivate: [authGuard] },
     { path: '**', redirectTo: '' } 
 ]; 
