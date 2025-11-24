@@ -124,10 +124,13 @@ export class EventDataService {
         }
     }
 
-    async getEventStats(eventId: string): Promise<{ confirmed: number; notComing: number; undecided: number; pending: number }> {
+    async getEventStats(eventId: string): Promise<{
+        stats: { confirmed: number; notComing: number; undecided: number; pending: number },
+        attendees: { confirmed: string[]; notComing: string[]; pending: string[] };}>
+        {
         const { data, error } = await this.supabaseService.getClient()
             .from('invitations')
-            .select('rsvp_status')
+            .select('email, rsvp_status')
             .eq('event_id', eventId);
         
         if (error) throw new Error(error.message);
@@ -137,11 +140,31 @@ export class EventDataService {
             return acc;
         }, {});
         
+        const attendees = {
+            confirmed: data
+            .filter((inv: any) => inv.rsvp_status === 'yes')
+            .map((inv: any) => inv.email),
+
+            notComing: data
+            .filter((inv: any) => inv.rsvp_status === 'no')
+            .map((inv: any) => inv.email),
+
+            pending: data
+            .filter((inv: any) => inv.rsvp_status === 'not_responded')
+            .map((inv: any) => inv.email)
+        };
+
         return {
+            stats: {
             confirmed: stats.yes || 0,
             notComing: stats.no || 0,
             undecided: stats.maybe || 0,
             pending: stats.not_responded || 0
+        }, 
+            attendees
         };
     }
 }
+
+
+
