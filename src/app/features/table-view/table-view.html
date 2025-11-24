@@ -42,10 +42,79 @@
             <td>{{ event.title }}</td>
             <td>{{ event.eventDateTime | date:'short' }}</td>
             <td>{{ event.location?.alias }}</td>
-            <td>{{ event.confirmed }}</td>
-            <td>{{ event.notComing }}</td>
-            <td>{{ event.undecided }}</td>
-            <td>{{ event.pending}}</td>
+            <td>
+                <button (click)="toggleEventDetails(event.id)">
+                {{ event.confirmed }}
+                <span class="toggle-icon">▼</span>
+                </button> 
+            </td>
+            <td>  
+                <button (click)="toggleEventDetails(event.id)">
+                {{ event.notComing }}
+                <span class="toggle-icon">▼</span>
+                </button>
+            </td>  
+            
+            <td>
+                <button (click)="toggleEventDetails(event.id)">
+                {{ event.undecided }}
+                <span class="toggle-icon">▼</span>
+                </button>
+            </td>
+            <td>
+                <button (click)="toggleEventDetails(event.id)">
+                {{ event.pending}}
+                <span class="toggle-icon">▼</span>
+                </button>
+            </td>
         </tr>
+
+        @if (expandedEventId() === event.id) {
+            <tr class="expansion-row">
+                <td [attr.colspan]="7">
+                    <div class="attendees-details">
+                        <!-- Confirmed -->
+                        <div class="status-group">
+                            <strong>✅ Confirmed</strong>
+                            @if (attendeesByEvent().get(event.id)?.confirmed?.length) {
+                                <ul>
+                                @for (email of attendeesByEvent().get(event.id)?.confirmed; track email) {
+                                    <li>{{ email }}</li>
+                                }
+                                </ul>
+                            } @else {
+                                <p class="empty-state">No confirmed attendees</p>
+                            }
+                        </div>
+
+                        <div class="status-group">
+                            <strong>❌ Not Coming</strong>
+                            @if (attendeesByEvent().get(event.id)?.notComing?.length) {
+                                <ul>
+                                @for (email of attendeesByEvent().get(event.id)?.notComing; track email) {
+                                    <li>{{ email }}</li>
+                                }
+                                </ul>
+                            } @else {
+                                <p class="empty-state">No one rejected</p>
+                            }
+                        </div>
+
+                        <div class="status-group">
+                            <strong>⏳ Pending</strong>
+                            @if (attendeesByEvent().get(event.id)?.pending?.length) {
+                                <ul>
+                                @for (email of attendeesByEvent().get(event.id)?.pending; track email) {
+                                    <li>{{ email }}</li>
+                                }
+                                </ul>
+                            } @else {
+                                <p class="empty-state">No pending responses</p>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
     </ng-template>
 </p-table>

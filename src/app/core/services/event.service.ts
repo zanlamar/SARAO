@@ -100,10 +100,10 @@ export class EventService {
                     const stats = await this.eventDataService.getEventStats(event.id);
                     const eventWithStats: EventWithStats = {
                         ...event,
-                        confirmed: stats.confirmed || 0,
-                        notComing: stats.notComing || 0,
-                        undecided: stats.undecided || 0,
-                        pending: stats.pending || 0,
+                        confirmed: stats.stats.confirmed || 0,
+                        notComing: stats.stats.notComing || 0,
+                        undecided: stats.stats.undecided || 0,
+                        pending: stats.stats.pending || 0,
                         totalInvites: 0,
                         percentageConfirmed: 0
                     };
@@ -118,4 +118,20 @@ export class EventService {
         return [];
         }
     };
+
+    async getEventStatsWithAttendees(eventId: string): Promise<{
+        stats: { confirmed: number; notComing: number; undecided: number; pending: number };
+        attendees: { confirmed: string[]; notComing: string[]; pending: string[] };
+    }> {
+        return this.eventDataService.getEventStats(eventId);
+    }
+
+    async getAttendeesByEvent(eventId: string): Promise<{
+        confirmed: string[];
+        notComing: string[];
+        pending: string[];
+    }> {
+    const result = await this.eventDataService.getEventStats(eventId);
+    return result.attendees; // Solo devuelves los emails
+    }
 }
