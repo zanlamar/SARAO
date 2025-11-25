@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BringlistItem } from '../../core/models/event.model';
 
@@ -13,22 +13,25 @@ export class Bringlist {
   itemInput = new FormControl('');
   bringlist: BringlistItem[] = [];
   @Output() listConfirmed = new EventEmitter<BringlistItem[]>();
+  isConfirmed = signal(false);
 
-addNewItem(): void {
-  const text = this.itemInput.value?.trim();
-  if (!text) return;
+  addNewItem(): void {
+    const text = this.itemInput.value?.trim();
+    if (!text) return;
 
-  this.bringlist.push({
-    item: text,
-    checked: false
-  }); this.itemInput.setValue('');
+    this.bringlist.push({
+      item: text,
+      checked: false
+    }); this.itemInput.setValue('');
   }
 
   checkItem(index: number): void {
-    this.bringlist[index].checked = !this.bringlist[index].checked;
+      this.bringlist[index].checked = !this.bringlist[index].checked;
   }
 
   confirmList(): void {
-    console.log('Lista confirmada:', this.bringlist);
+      this.isConfirmed.set(true);
+      this.listConfirmed.emit(this.bringlist);
   }
 }
+

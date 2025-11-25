@@ -1,6 +1,9 @@
-<h3>Bringlist:</h3>
-<input type="text" placeholder="Add item" [formControl]="itemInput">
-<button (click)="addNewItem()">Add</button>
+<h3 class="bl-title">Bringlist:</h3>
+
+<div class="bl-input-row">
+    <input type="text" placeholder="Add item" [formControl]="itemInput">
+    <button class="littleAdd" (click)="addNewItem()">ADD</button>
+</div>
 
 <div class="bringlistContainer">
     @for (bringlistItem of bringlist; track $index) {
@@ -12,5 +15,11 @@
             (change)="checkItem($index)">
     </div>
     }
+</div>
 
-<button (click)="confirmList()">Confirm items!</button>
+<button class="bl-btn confirm-btn" (click)="confirmList()"> Confirm items!</button>
+@if (isConfirmed()) {
+    <div class="confirmed">
+        ✔ List confirmed
+    </div>
+}
