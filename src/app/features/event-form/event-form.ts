@@ -14,10 +14,11 @@ import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service'; 
 import { EventService } from '../../core/services/event.service';   
 import { StorageService } from '../../core/services/storage.service';
-import { EventFormDTO, GeocodingResult } from '../../core/models/event.model';
+import { EventFormDTO, GeocodingResult, BringlistItem } from '../../core/models/event.model';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
 import { LocationSearch  } from '../../shared/components/location-search/location-search';
+import { Bringlist } from '../../features/bringlist/bringlist';
 
 @Component({
   selector: 'app-event-form',
@@ -35,7 +36,8 @@ import { LocationSearch  } from '../../shared/components/location-search/locatio
     Footer, 
     FormsModule, 
     DatePicker,
-    LocationSearch
+    LocationSearch,
+    Bringlist
   ],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
@@ -46,6 +48,8 @@ export class EventForm implements OnInit {
   step2FormGroup: FormGroup;
   step3FormGroup: FormGroup;
   step4FormGroup: FormGroup;
+  step5FormGroup: FormGroup;
+
   selectedFileName = '';
   isEditMode = signal(false);
   currentEventId = signal<string | null>(null);
@@ -74,12 +78,17 @@ export class EventForm implements OnInit {
     this.step4FormGroup = this.formBuilder.group({
       image: ['', Validators.required],
       allowedPlusOne: [false, Validators.required],
-      bringList: ['']
     });
+    this.step5FormGroup = this.formBuilder.group({
+      bringList: [''],
+    })
   }
 
   onStepChange(event: any) {
     this.isStep3Active.set(event.selectedIndex === 2);
+  }
+
+  onBringlistConfirmed(items: BringlistItem[]) {
   }
 
   ngOnInit(): void {
