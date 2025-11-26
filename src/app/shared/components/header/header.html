@@ -13,13 +13,12 @@
             src="assets/images/sarao-logo.png"
             alt="SARAO Logo" 
             class="logo-img"
-            routerLink="/home"
+            routerLink="/calendar-view"
             >
         </div>
 
         @if ((isHome) && authService.currentUser()) {
             <div class="navbar-buttons">
-                <a routerLink="/home" class="btn btn-primary">Home</a>
                 <button (click)="onLogout()" class="btn-logout">
                     <span class="material-symbols-outlined">logout</span>
                     <span class="logout-text">Logout</span>
