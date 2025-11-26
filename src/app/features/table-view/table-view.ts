@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { EventWithStats } from '../../core/models/event.model';
 import { EventService } from '../../core/services/event.service';
+import { TableCard } from '../../shared/components/table-card/table-card';
 
 interface AttendeesByStatus {
   confirmed: string[];
@@ -12,12 +13,11 @@ interface AttendeesByStatus {
 
 @Component({
   selector: 'app-table-view',
-  imports: [CommonModule, TableModule],
+  imports: [CommonModule, TableModule, TableCard],
   templateUrl: './table-view.html',
   styleUrl: './table-view.css',
   standalone: true
 })
-
 
 export class TableView {
   
@@ -38,6 +38,10 @@ export class TableView {
       this.expandedEventId.set(eventId);
       this.loadAttendees(eventId);
     }
+  }
+  
+  openMobileModal(eventId: string): void {
+    this.toggleEventDetails(eventId);
   }
 
   private async loadAttendees(eventId: string): Promise<void> {

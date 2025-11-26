@@ -1,0 +1,55 @@
+<p-card class="event-card">
+
+    <!-- HEADER PERSONALIZADO -->
+    <ng-template pTemplate="header">
+        <div class="event-header">
+            <div class="event-header-content">
+                <h3 class="event-title">{{ event.title }}</h3>
+            </div>
+        </div>
+        <div class="event-details">
+            <div class="event-location">
+                    <i class="pi pi-map-marker"></i>
+                    {{ event.location.alias }}
+            </div>
+            <div class="event-date">
+                <i class="pi pi-calendar"></i>
+                {{ event.eventDateTime | date:'short' }}
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="event-body">
+
+        <div class="event-stats">
+            <div class="event-stat confirmed">
+                <span>Confirmed:</span>
+                <span class="value">{{ event.confirmed }}</span>
+            </div>
+
+            <div class="event-stat not-coming">
+                <span>Not coming:</span>
+                <span class="value">{{ event.notComing }}</span>
+            </div>
+
+            <div class="event-stat maybe">
+                <span>Maybe:</span>
+                <span class="value">{{ event.undecided }}</span>
+            </div>
+
+            <div class="event-stat pending">
+                <span>Pending:</span>
+                <span class="value">{{ event.pending }}</span>
+            </div>
+        </div>
+
+        <button
+            pButton
+            class="p-button-rounded p-button-sm event-button"
+            (click)="onMoreInfo()">
+            See who
+        </button>
+
+    </div>
+
+</p-card>
