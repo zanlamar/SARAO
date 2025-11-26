@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal, Input } from '@angular/core';
+import { Component, EventEmitter, Output, signal, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BringlistItem } from '../../core/models/event.model';
 
@@ -9,7 +9,7 @@ import { BringlistItem } from '../../core/models/event.model';
   styleUrl: './bringlist.css',
   standalone: true  
 })
-export class Bringlist {
+export class Bringlist implements OnInit {
   @Input() readonly = false;
   @Input() items: BringlistItem[] = [];
 
@@ -18,6 +18,12 @@ export class Bringlist {
 
   @Output() listConfirmed = new EventEmitter<BringlistItem[]>();
   isConfirmed = signal(false);
+
+  ngOnInit(): void {
+    if (this.readonly && this.items.length > 0) {
+      this.bringlist = [...this.items];
+    }
+  }
 
   addNewItem(): void {
     const text = this.itemInput.value?.trim();

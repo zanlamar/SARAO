@@ -69,7 +69,7 @@
                 @if (event()?.bringList && event()?.bringListItems && event()?.bringListItems!.length > 0) {
                     <app-bringlist 
                         [readonly]="true"
-                        [items]="event()!.bringListItems!">
+                        [items]="event()!.bringListItems ?? []">
                     </app-bringlist>
                 }
             </div>

@@ -91,7 +91,6 @@ export class EventForm implements OnInit {
 
   onBringlistConfirmed(items: BringlistItem[]):void {
     this.confirmedBringlistItems = items;
-    console.log('✅ Items confirmados:', items);
   }
 
   ngOnInit(): void {
