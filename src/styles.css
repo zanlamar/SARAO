@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --color-ice: #e8f0e9;
+  --color-dark: #010101;
+  --color-azul: #7489ff;
+  --color-azul-dark: #5a6dd4;
+  --color-banana: #ffd13a;
+  --color-blush: #ff9673; 
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  padding: revert-layer;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--color-dark);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Koulen', cursive;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+button {
+  font-family: 'Nunito Sans', sans-serif;
+}

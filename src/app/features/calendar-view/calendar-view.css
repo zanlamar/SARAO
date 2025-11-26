@@ -1,0 +1,133 @@
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-ice);
+  padding-top: 3rem;
+  padding-bottom: 0;
+}
+.calendar-content {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 90rem;
+  margin: 0 auto;
+  width: 100%;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  height: auto;
+}
+@media (min-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+.events-column {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  max-height: 60vh;
+}
+.calendar-column {
+  order: 1;
+}
+@media (min-width: 1024px) {
+  .events-column {
+    order: 1;
+    max-height: auto;
+  }
+  .calendar-column {
+    order: 2;
+  }
+}
+@media (max-width: 1023px) {
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .events-column {
+    order: 1;
+    max-height: unset;
+    height: auto;
+  }
+  .calendar-column {
+    order: 2;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .calendar-content {
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+    height: auto;
+  }
+}
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.filter-btn:hover {
+  border-color: #999;
+  background: #f5f5f5;
+}
+.filter-btn.active {
+  border-color: #000;
+  background: #000;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  padding: 1rem 1rem 1rem 1rem;
+}
+.events-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.events-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+@media (min-width: 768px) {
+  .header-text {
+    padding: 0.5rem;
+  }
+  .events-title {
+    font-size: 32px;
+  }
+  .events-subtitle {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .events-title {
+    font-size: 30px;
+  }
+  .events-subtitle {
+    font-size: 16px;
+  }
+}

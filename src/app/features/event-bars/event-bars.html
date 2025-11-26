@@ -1,0 +1,44 @@
+<div class="bars-container">
+    <div class="bars-header">
+        <h2 class="bars-title">CHECK THE SEASON</h2>
+        <p class="bars-subtitle">Total: {{ totalEvents() }} events</p>
+    </div>
+
+    <!-- Selector de estaciones -->
+    <div class="season-selector">
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('spring')"
+            (click)="selectSeason('spring')">
+            🌸 Spring
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('summer')"
+            (click)="selectSeason('summer')">
+            ☀️ Summer
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('autumn')"
+            (click)="selectSeason('autumn')">
+            🍂 Autumn
+        </button>
+        <button 
+            class="season-btn"
+            [class.active]="isSelected('winter')"
+            (click)="selectSeason('winter')">
+            ❄️ Winter
+        </button>
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas #barCanvas></canvas>
+    </div>
+
+    @if (totalEvents() === 0) {
+        <div class="no-data">
+            <p>No events in this season</p>
+        </div>
+    }
+</div>

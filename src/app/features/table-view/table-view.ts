@@ -1,0 +1,53 @@
+import { Component, Input, Signal, Output, EventEmitter, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { EventWithStats } from '../../core/models/event.model';
+import { EventService } from '../../core/services/event.service';
+
+interface AttendeesByStatus {
+  confirmed: string[];
+  notComing: string[];
+  pending: string[];
+}
+
+@Component({
+  selector: 'app-table-view',
+  imports: [CommonModule, TableModule],
+  templateUrl: './table-view.html',
+  styleUrl: './table-view.css',
+  standalone: true
+})
+
+
+export class TableView {
+  
+  @Input() events!: Signal<EventWithStats[]>;
+  @Input() sortField!: Signal<string>;
+  @Input() sortOrder!: Signal<1 | -1>;
+  @Output() sortEvent = new EventEmitter<string>();
+  
+  expandedEventId = signal<string | null>(null);
+  attendeesByEvent = signal<Map<string, AttendeesByStatus>>(new Map());
+  
+  constructor( private eventService: EventService) {}
+
+  toggleEventDetails(eventId: string): void {
+    if (this.expandedEventId() === eventId) {
+      this.expandedEventId.set(null);
+    } else {
+      this.expandedEventId.set(eventId);
+      this.loadAttendees(eventId);
+    }
+  }
+
+  private async loadAttendees(eventId: string): Promise<void> {
+    try {
+      const attendees = await this.eventService.getAttendeesByEvent(eventId);
+      const map = new Map(this.attendeesByEvent());
+      map.set(eventId, attendees);
+      this.attendeesByEvent.set(map);
+    } catch (error) {
+      console.error('Error cargando asistentes:', error);
+    }
+  }
+}
