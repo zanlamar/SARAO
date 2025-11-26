@@ -1,14 +1,15 @@
 <div class="preview-wrapper">
     @if (isCreating()) {
-    <div class="preview-top-buttons">
-        <button class="btn-secondary" (click)="onEdit()"> < EDIT</button>
-        <button class="btn-primary" (click)="onConfirm()">CONFIRM ></button>
-    </div>
+        <div class="preview-top-buttons">
+            <button class="btn-secondary" (click)="onEdit()"> < EDIT</button>
+            <button class="btn-primary" (click)="onConfirm()">CONFIRM ></button>
+        </div>
     } @else {
-    <div class="preview-top-buttons">
-        <button class="btn-secondary" (click)="onBack()"> < BACK</button>
-    </div>
+        <div class="preview-top-buttons">
+            <button class="btn-secondary" (click)="onBack()"> < BACK</button>
+        </div>
     }
+
     <main class="preview-container">
         @if (event()) {
         <div class="preview-content">
@@ -20,6 +21,7 @@
                     <div class="image-placeholder">📅</div>
                 }
             </div>
+
             <div class="preview-main-details">
                 <div class="main-detail">
                     <span class="main-label">📅 DATE</span>
@@ -33,39 +35,31 @@
                     <span class="main-label">📍 WHERE</span>
                     <span class="main-value">{{ event()?.location?.alias }}</span>
                 </div>
-            </div>
-            <div class="preview-where">
-                    <span class="main-label">📍 ADRESS</span>
-                    <span class="main-value">{{ event()?.location?.address }}</span>
-                </div>
 
-            @if (event()?.location?.latitude && event()?.location?.longitude) {
-                <div class="map-section">
-                    <app-preview-map 
-                        [latitude]="event()?.location?.latitude"
-                        [longitude]="event()?.location?.longitude"
-                        [address]="event()?.location?.address || event()?.location?.alias || ''">
-                    </app-preview-map>
+                <div class="main-detail">
+                    <span class="main-label">💃 CAN I BRING SOMEONE?</span>
+                    <span class="extra-value">
+                        {{ event()?.allowPlusOne ? 'YAYYYY' : 'Nope, sorry' }}
+                    </span>
                 </div>
-            }
+            </div>
+            
             <div class="preview-description">
                 <h3 class="description-title">LISTEN UP</h3>
                 <p>{{ event()?.description }}</p>
             </div>
+            
+
+            
             <div class="preview-extras">
-                <div class="extra-item">
-                    <span class="extra-label">💃 Can I bring someone?</span>
-                    <span class="extra-value">
-                        {{ event()?.allowPlusOne ? '✅ YAYYYY' : '❌ Nope, sorry' }}
-                    </span>
-                </div>
-                @if (event()?.bringList) {
-                    <div class="extra-item">
-                        <span class="extra-label">📋 Should I bring something?</span>
-                        <span class="extra-value">✅ Yes please</span>
-                    </div>
+                @if (event()?.bringList && event()?.bringListItems && event()?.bringListItems!.length > 0) {
+                    <app-bringlist 
+                        [readonly]="true"
+                        [items]="event()!.bringListItems ?? []">
+                    </app-bringlist>
                 }
             </div>
+
             @if (!isCreating()) {
                 <div class="rsvp-section">
                     <h3 class="rsvp-title">RSVP</h3>
@@ -97,12 +91,26 @@
                     </div>
                 </div>
             }
+                <div class="preview-where">
+                <span class="main-label">📍 ADRESS</span>
+                <span class="main-value">{{ event()?.location?.address }}</span>
+            </div>
+
+            @if (event()?.location?.latitude && event()?.location?.longitude) {
+                <div class="map-section">
+                    <app-preview-map 
+                        [latitude]="event()?.location?.latitude"
+                        [longitude]="event()?.location?.longitude"
+                        [address]="event()?.location?.address || event()?.location?.alias || ''">
+                    </app-preview-map>
+                </div>
+            }
         </div>
-        } @else {
+    } @else {
         <div class="no-event">
             <p>No event to preview</p>
         </div>
-        }
+    }
     </main>
     <app-footer></app-footer>
 </div>

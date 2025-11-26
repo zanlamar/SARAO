@@ -1,0 +1,29 @@
+<h3 class="bl-title">Bringlist:</h3>
+
+@if (!readonly) {
+    <div class="bl-input-row">
+        <input type="text" placeholder="Add item" [formControl]="itemInput">
+        <button class="littleAdd" (click)="addNewItem()">ADD</button>
+    </div>
+}
+
+<div class="bringlistContainer">
+    @for (bringlistItem of bringlist; track $index) {
+    <div class="item-row">
+        <span>{{ bringlistItem.item }}</span>
+        <input 
+            type="checkbox" 
+            [checked]="bringlistItem.checked"
+            (change)="checkItem($index)">
+    </div>
+    }
+</div>
+
+@if (!readonly) {
+    <button class="bl-btn confirm-btn" (click)="confirmList()"> Confirm items!</button>
+    @if (isConfirmed()) {
+        <div class="confirmed">
+            ✔ List confirmed
+        </div>
+    }
+}

@@ -132,6 +132,6 @@ export class EventService {
         pending: string[];
     }> {
     const result = await this.eventDataService.getEventStats(eventId);
-    return result.attendees; // Solo devuelves los emails
+    return result.attendees;
     }
 }

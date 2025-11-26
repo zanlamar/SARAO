@@ -20,6 +20,8 @@ export class Header implements OnInit {
   isEventPreview = false;
   isShareableUrl = false;
   isUserArea = false;
+  isMemento = false;
+
   username = 'Pendón';
   constructor() {
   }
@@ -38,6 +40,7 @@ export class Header implements OnInit {
       this.isEventPreview = this.router.url.startsWith('/event-preview');
       this.isShareableUrl = this.router.url.startsWith('/shareable-url');
       this.isUserArea = this.router.url.startsWith('/user-area');
+      this.isMemento = this.router.url.startsWith('/memento');
     }
     onLogout() {
       this.authService.logout();
