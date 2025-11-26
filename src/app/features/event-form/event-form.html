@@ -114,6 +114,16 @@
                 <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
+            <div class="button-container">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="step5FormGroup">
+        <ng-template matStepLabel>Bringlist</ng-template>
+        <form [formGroup]="step5FormGroup">
             <div class="form-row">
                 <label>Do you want a bring list?</label>
                 <mat-radio-group formControlName="bringList">
@@ -121,6 +131,15 @@
                     <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
+
+            @if (step5FormGroup.get('bringList')?.value === true) {
+                <div class="form-row full">
+                    <app-bringlist 
+                        (listConfirmed)="onBringlistConfirmed($event)">
+                    </app-bringlist>
+                </div>
+            }
+
             <div class="button-container">
                 <button mat-button matStepperPrevious>Back</button>
                 @if (isEditMode()) {
@@ -131,6 +150,7 @@
             </div>
         </form>
     </mat-step>
+    
     </mat-stepper>  
     </div>
     <app-footer></app-footer>

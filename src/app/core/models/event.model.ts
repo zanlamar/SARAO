@@ -11,6 +11,7 @@ export interface EventFormDTO {
     };
     allowPlusOne: boolean;
     bringList?: boolean;
+    bringListItems?: BringlistItem[];
 }
 
 export interface EventFromDB {
@@ -48,3 +49,7 @@ export interface GeocodingResult {
     displayName: string;
 }
 
+export interface BringlistItem {
+  item: string;
+  checked: boolean;
+}
