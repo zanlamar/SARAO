@@ -20,6 +20,7 @@ export class EventsList {
   @Output() eventClicked = new EventEmitter<Event>();
   @Output() onEventDeleted = new EventEmitter<void>();
   @Input() activeFilter!: Signal<'hosting' | 'upcoming' | 'all'>;
+  
   onEventClick(event: Event): void {
     this.eventClicked.emit(event);
   }
