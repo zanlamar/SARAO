@@ -120,7 +120,7 @@ export class EventBars implements OnInit {
         scales: {
           y: {
             beginAtZero: true,
-            max: 20,
+            max: 15,
             ticks: {
               stepSize: 1,
               font: {
