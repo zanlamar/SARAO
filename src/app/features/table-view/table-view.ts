@@ -1,15 +1,9 @@
 import { Component, Input, Signal, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { EventWithStats } from '../../core/models/event.model';
+import { EventWithStats, EmailAttendeesByStatus } from '../../core/models/event.model';
 import { EventService } from '../../core/services/event.service';
 import { TableCard } from '../../shared/components/table-card/table-card';
-
-interface AttendeesByStatus {
-  confirmed: string[];
-  notComing: string[];
-  pending: string[];
-}
 
 @Component({
   selector: 'app-table-view',
@@ -27,7 +21,7 @@ export class TableView {
   @Output() sortEvent = new EventEmitter<string>();
   
   expandedEventId = signal<string | null>(null);
-  attendeesByEvent = signal<Map<string, AttendeesByStatus>>(new Map());
+  attendeesByEvent = signal<Map<string, EmailAttendeesByStatus>>(new Map());
   
   constructor( private eventService: EventService) {}
 

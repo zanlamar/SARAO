@@ -26,8 +26,8 @@
     padding-left: 1rem;
     padding-right: 1rem;
     justify-content: space-between;
-
 }
+
 .event-title {
     font-family: 'Koulen', sans-serif;
     font-size: 1.3rem;
@@ -79,3 +79,34 @@
     padding: 0 !important;
 }
 
+:host ::ng-deep .p-dialog .p-dialog-header {
+    font-family: 'Koulen', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.attendees-modal {
+    h3 {
+        margin-top: 1rem;
+        margin-bottom: .5rem;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .email-row {
+        display: flex;
+        justify-content: space-between;
+        padding: .4rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .email-icon {
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .empty-state {
+        font-size: .9rem;
+        color: #999;
+        padding: .3rem 0;
+    }
+}

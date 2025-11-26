@@ -57,7 +57,7 @@
 
             @if (expandedEventId() === event.id) {
                 <tr class="expansion-row">
-                    <td [attr.colspan]="7">
+                    <td [attr.colspan]="6">
                         <div class="attendees-details">
                             <div class="status-group">
                                 <strong>✅ Confirmed</strong>
@@ -76,7 +76,6 @@
                                     <p class="empty-state">No confirmed guests</p>
                                 }
                             </div>
-
                             <div class="status-group">
                                 <strong>❌ Not Coming</strong>
                                 @if (attendeesByEvent().get(event.id)?.notComing?.length) {
@@ -92,6 +91,24 @@
                                     </ul>
                                 } @else {
                                     <p class="empty-state">No one rejected</p>
+                                }
+                            </div>
+
+                             <div class="status-group">
+                                <strong>🤔 Maybe</strong>
+                                @if (attendeesByEvent().get(event.id)?.undecided?.length) {
+                                    <ul>
+                                    @for (email of attendeesByEvent().get(event.id)?.undecided ?? []; track email) {
+                                        <li class="email-item">
+                                        <span>{{ email }}</span>
+                                        <button class="email-btn" 
+                                                title="Send reminder">
+                                            <span class="material-icons">mail</span>
+                                        </button>
+                                    }
+                                    </ul>
+                                } @else {
+                                    <p class="empty-state">No confirmed guests</p>
                                 }
                             </div>
 
@@ -113,6 +130,8 @@
                                     <p class="empty-state">No pending responses</p>
                                 }
                             </div>
+
+                           
                         </div>
                     </td>
                 </tr>
@@ -125,6 +144,7 @@
     @for(event of events(); track event.id) {
         <app-table-card   
             [event]="event" 
+            [attendees]="attendeesByEvent().get(event.id)"
             (moreInfo)="toggleEventDetails($event)">
         </app-table-card>
     }

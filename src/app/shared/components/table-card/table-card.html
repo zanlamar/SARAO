@@ -1,6 +1,5 @@
 <p-card class="event-card">
 
-    <!-- HEADER PERSONALIZADO -->
     <ng-template pTemplate="header">
         <div class="event-header">
             <div class="event-header-content">
@@ -53,3 +52,79 @@
     </div>
 
 </p-card>
+
+<p-dialog
+    header="{{ event.title }}"
+    [(visible)]="showModal"
+    [modal]="true"
+    [dismissableMask]="true"
+    [style]="{ width: '90vw', maxWidth: '500px' }"
+    class="attendees-modal">
+
+    <div class="status-block">
+        <h3>✅ Confirmed</h3>
+        @if (attendees?.confirmed?.length) {
+            <ul>
+                @for (email of attendees?.confirmed ?? []; track email) {
+                    <li class="email-row">
+                        <span>{{ email }}</span>
+                        <i class="pi pi-envelope email-icon"></i>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <p class="empty-state">No confirmed guests</p>
+        }
+    </div>
+
+
+    <div class="status-block">
+        <h3>❌ Not Coming</h3>
+        @if (attendees?.notComing?.length) {
+            <ul>
+                @for (email of attendees?.notComing?? [];track email) {
+                    <li class="email-row">
+                        <span>{{ email }}</span>
+                        <i class="pi pi-envelope email-icon"></i>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <p class="empty-state">No one rejected</p>
+        }
+    </div>
+
+    <div class="status-block">
+        <h3>🤔 Maybe</h3>
+        @if (attendees?.undecided?.length) {
+            <ul>
+                @for (email of attendees?.undecided ?? []; track email) {
+                    <li class="email-row">
+                        <span>{{ email }}</span>
+                        <i class="pi pi-envelope email-icon"></i>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <p class="empty-state">No maybe responses</p>
+        }
+    </div>
+
+    <div class="status-block">
+        <h3>⏳ Pending</h3>
+        @if (attendees?.pending?.length) {
+            <ul>
+                @for (email of attendees?.pending ?? []; track email) {
+                    <li class="email-row">
+                        <span>{{ email }}</span>
+                        <i class="pi pi-envelope email-icon"></i>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <p class="empty-state">No pending responses</p>
+        }
+    </div>
+
+
+</p-dialog>
