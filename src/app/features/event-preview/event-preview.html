@@ -49,21 +49,7 @@
                 <p>{{ event()?.description }}</p>
             </div>
             
-            <div class="preview-where">
-                <span class="main-label">📍 ADRESS</span>
-                <span class="main-value">{{ event()?.location?.address }}</span>
-            </div>
-        
 
-            @if (event()?.location?.latitude && event()?.location?.longitude) {
-                <div class="map-section">
-                    <app-preview-map 
-                        [latitude]="event()?.location?.latitude"
-                        [longitude]="event()?.location?.longitude"
-                        [address]="event()?.location?.address || event()?.location?.alias || ''">
-                    </app-preview-map>
-                </div>
-            }
             
             <div class="preview-extras">
                 @if (event()?.bringList && event()?.bringListItems && event()?.bringListItems!.length > 0) {
@@ -103,6 +89,20 @@
                             <span class="rsvp-label">NO</span>
                         </button>
                     </div>
+                </div>
+            }
+                <div class="preview-where">
+                <span class="main-label">📍 ADRESS</span>
+                <span class="main-value">{{ event()?.location?.address }}</span>
+            </div>
+
+            @if (event()?.location?.latitude && event()?.location?.longitude) {
+                <div class="map-section">
+                    <app-preview-map 
+                        [latitude]="event()?.location?.latitude"
+                        [longitude]="event()?.location?.longitude"
+                        [address]="event()?.location?.address || event()?.location?.alias || ''">
+                    </app-preview-map>
                 </div>
             }
         </div>
