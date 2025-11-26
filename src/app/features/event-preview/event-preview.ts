@@ -51,9 +51,6 @@ export class EventPreview implements OnInit {
         this.event.set(previewData);
         this.isCreating.set(true);
       }
-      console.log('🔍 Evento en preview:', this.event());
-      console.log('🔍 bringList:', this.event()?.bringList);
-      console.log('🔍 bringListItems:', this.event()?.bringListItems);
     });
   }
 

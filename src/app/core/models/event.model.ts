@@ -50,6 +50,13 @@ export interface GeocodingResult {
 }
 
 export interface BringlistItem {
-  item: string;
-  checked: boolean;
+    item: string;
+    checked: boolean;
+    }
+
+export interface EmailAttendeesByStatus {
+    confirmed: string[];
+    notComing: string[];
+    pending: string[];
+    undecided?: string[];
 }

@@ -130,6 +130,7 @@ export class EventService {
         confirmed: string[];
         notComing: string[];
         pending: string[];
+        undecided?: string[];
     }> {
     const result = await this.eventDataService.getEventStats(eventId);
     return result.attendees;

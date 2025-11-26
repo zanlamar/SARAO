@@ -1,23 +1,17 @@
 import { Component, Input, Signal, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { EventWithStats } from '../../core/models/event.model';
+import { EventWithStats, EmailAttendeesByStatus } from '../../core/models/event.model';
 import { EventService } from '../../core/services/event.service';
-
-interface AttendeesByStatus {
-  confirmed: string[];
-  notComing: string[];
-  pending: string[];
-}
+import { TableCard } from '../../shared/components/table-card/table-card';
 
 @Component({
   selector: 'app-table-view',
-  imports: [CommonModule, TableModule],
+  imports: [CommonModule, TableModule, TableCard],
   templateUrl: './table-view.html',
   styleUrl: './table-view.css',
   standalone: true
 })
-
 
 export class TableView {
   
@@ -27,7 +21,7 @@ export class TableView {
   @Output() sortEvent = new EventEmitter<string>();
   
   expandedEventId = signal<string | null>(null);
-  attendeesByEvent = signal<Map<string, AttendeesByStatus>>(new Map());
+  attendeesByEvent = signal<Map<string, EmailAttendeesByStatus>>(new Map());
   
   constructor( private eventService: EventService) {}
 
@@ -38,6 +32,10 @@ export class TableView {
       this.expandedEventId.set(eventId);
       this.loadAttendees(eventId);
     }
+  }
+  
+  openMobileModal(eventId: string): void {
+    this.toggleEventDetails(eventId);
   }
 
   private async loadAttendees(eventId: string): Promise<void> {
