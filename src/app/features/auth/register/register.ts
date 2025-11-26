@@ -33,7 +33,7 @@ export class Register {
     this.errorMessage.set('');
     const result = await this.authService.register(this.email, this.password);
     if (result. success) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/calendar-view']);
     } else {
       if (result.error?.includes('email-already-in-use')) {
         this.errorMessage.set('That email is already registered.');

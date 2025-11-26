@@ -34,7 +34,7 @@ export class Header implements OnInit {
       });
     }
     private checkRoute() {
-      this.isHome = this.router.url === '/home';
+      // this.isHome = this.router.url === '/home';
       this.isCreateEvent = this.router.url.startsWith('/create');
       this.isCalendarView = this.router.url === '/calendar-view';
       this.isEventPreview = this.router.url.startsWith('/event-preview');

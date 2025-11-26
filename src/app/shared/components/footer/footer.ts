@@ -12,8 +12,9 @@ import { filter } from 'rxjs';
 })
 export class Footer implements OnInit {
   router = inject(Router);
-  isHome = false;
   isCreateEvent = false;
+  isLanding = false;
+
   ngOnInit(): void {
     this.checkRoute();
     this.router.events
@@ -23,8 +24,8 @@ export class Footer implements OnInit {
       });
   }
   private checkRoute() {
-    this.isHome = this.router.url === '/home';
     this.isCreateEvent = this.router.url === '/create';
+    this.isLanding = this.router.url === '/';
   }
 }
 
