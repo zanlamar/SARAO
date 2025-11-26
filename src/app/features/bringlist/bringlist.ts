@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal, Input } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BringlistItem } from '../../core/models/event.model';
 
@@ -10,8 +10,12 @@ import { BringlistItem } from '../../core/models/event.model';
   standalone: true  
 })
 export class Bringlist {
+  @Input() readonly = false;
+  @Input() items: BringlistItem[] = [];
+
   itemInput = new FormControl('');
   bringlist: BringlistItem[] = [];
+
   @Output() listConfirmed = new EventEmitter<BringlistItem[]>();
   isConfirmed = signal(false);
 

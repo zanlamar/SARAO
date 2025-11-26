@@ -45,6 +45,7 @@ export function mapEventFormDTOToSupabase(
         location_longitude: eventData.location.longitude || null,  
         allow_companion: eventData.allowPlusOne, 
         bring_list: eventData.bringList || false,
+        bringListItems: eventData.bringListItems || [], 
         updated_at: new Date()
     };
 }
@@ -63,7 +64,7 @@ export function mapSupabaseResponseToEvent(data: any): Event {
         },
         allowPlusOne: data.allow_companion,
         bringList: data.bring_list,
-        
+        bringListItems: data.bring_list_items || [], 
         id: data.id,
         userId: data.creator_id,
         createdAt: new Date(data.created_at),

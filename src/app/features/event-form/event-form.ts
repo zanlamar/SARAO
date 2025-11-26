@@ -56,6 +56,7 @@ export class EventForm implements OnInit {
   isStep3Active = signal(false);
   confirmedLocationAddress = signal<string | null>(null);
   selectedLocationCoords: GeocodingResult | null = null;
+  confirmedBringlistItems: BringlistItem[] = [];
 
   constructor(
     private router: Router,
@@ -88,7 +89,9 @@ export class EventForm implements OnInit {
     this.isStep3Active.set(event.selectedIndex === 2);
   }
 
-  onBringlistConfirmed(items: BringlistItem[]) {
+  onBringlistConfirmed(items: BringlistItem[]):void {
+    this.confirmedBringlistItems = items;
+    console.log('✅ Items confirmados:', items);
   }
 
   ngOnInit(): void {
@@ -130,7 +133,6 @@ export class EventForm implements OnInit {
       };
 
     const imageUrl = this.step4FormGroup.value.image;
-
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
       description: this.step1FormGroup.value.description,
@@ -143,7 +145,8 @@ export class EventForm implements OnInit {
       },
       imageUrl: imageUrl  || '',
       allowPlusOne: this.step4FormGroup.value.allowedPlusOne,
-      bringList: this.step4FormGroup.value.bringList || false,
+      bringList: this.step5FormGroup.value.bringList || false,
+      bringListItems: this.confirmedBringlistItems
     };
 
     try {
