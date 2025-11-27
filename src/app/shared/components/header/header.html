@@ -8,46 +8,47 @@
     'navbar-memento': isMemento}">
     <div class="navbar-content">
         <div class="navbar-inner">
-        <div class="navbar-logo">
-            <img 
-            src="assets/images/sarao-logo.webp"
-            alt="SARAO Logo" 
-            class="logo-img"
-            routerLink="/calendar-view"
-            >
-        </div>
 
-        @if ((isHome) && authService.currentUser()) {
-            <div class="navbar-buttons">
-                <button (click)="onLogout()" class="btn-logout">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span class="logout-text">Logout</span>
-                </button>
+            <div class="navbar-logo">
+                <img 
+                src="assets/images/sarao-logo.webp"
+                alt="SARAO Logo" 
+                class="logo-img"
+                routerLink="/calendar-view"
+                >
             </div>
-        }
-        @if ((isCreateEvent || isEventPreview || isShareableUrl || isCalendarView || isUserArea || isMemento) && authService.currentUser()) {
-            <div class="navbar-center">
-                <a routerLink="/memento" class="btn-memento" [class.active]="isMemento">
-                <span class="material-symbols-outlined">diversity_1</span>
-                </a>
-            </div>
-            <div class="navbar-buttons-create">
-                <button (click)="onLogout()" class="btn-logout">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span class="logout-text">Logout</span>
-                </button>
-                <div class="notification-bell">
-                    <span class="material-symbols-outlined icon-bell">notifications</span>
-                    <span class="notification-badge"></span>
+            @if (!authService.currentUser()) {
+                <div class="navbar-buttons">
+                    <a routerLink="/login" class="btn btn-secondary">Login</a>
+                    <a routerLink="/register" class="btn btn-primary">Register</a>
                 </div>
-            </div>
-        }
-        @else if (!authService.currentUser()) {
-            <div class="navbar-buttons">
-                <a routerLink="/login" class="btn btn-secondary">Login</a>
-                <a routerLink="/register" class="btn btn-primary">Register</a>
-            </div>
-        }
+            }
+
+            @if ((isHome) && authService.currentUser()) {
+                <div class="navbar-buttons">
+                    <button (click)="onLogout()" class="btn-logout">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span class="logout-text">Logout</span>
+                    </button>
+                </div>
+            }
+            @if ((isCreateEvent || isEventPreview || isShareableUrl || isCalendarView || isUserArea || isMemento) && authService.currentUser()) {
+                <div class="navbar-center">
+                    <a routerLink="/memento" class="btn-memento" [class.active]="isMemento">
+                    <span class="material-symbols-outlined">diversity_1</span>
+                    </a>
+                </div>
+                <div class="navbar-buttons-create">
+                    <button (click)="onLogout()" class="btn-logout">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span class="logout-text">Logout</span>
+                    </button>
+                    <div class="notification-bell">
+                        <span class="material-symbols-outlined icon-bell">notifications</span>
+                        <span class="notification-badge"></span>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </nav>

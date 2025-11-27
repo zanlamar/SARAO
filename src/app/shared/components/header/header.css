@@ -140,7 +140,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #ffd13a;
+  background-color: var(--color-banana);
 }
 
 .btn-secondary {

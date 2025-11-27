@@ -28,15 +28,11 @@ export class EventPreview implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('🔍 ngOnInit ejecutado');
     this.route.params.subscribe(async params => {
       const eventId = params['id'];
-      console.log('🔍 eventId recibido:', eventId);
       
       if (eventId) {
-        console.log('🔍 Intentando cargar evento...');
         await this.loadEventFromDatabase(eventId);
-        console.log('🔍 Evento cargado:', this.event());
 
         this.isCreating.set(false);
 
@@ -64,11 +60,9 @@ export class EventPreview implements OnInit {
   }
 
   private async loadEventFromDatabase(eventId: string): Promise<void> {
-    console.log('🔍 loadEventFromDatabase iniciado');
 
     try {
       const loadedEvent = await this.eventService.getEventById(eventId);
-      console.log('🔍 Evento obtenido de BD:', loadedEvent);
       this.event.set(loadedEvent);
       
     } catch (error: any) {
