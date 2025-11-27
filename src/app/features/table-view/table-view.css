@@ -1,0 +1,250 @@
+:host {
+    --row-padding: 0.6rem;
+    --font-normal: 'Nunito Sans', sans-serif;
+    --font-title: 'Koulen', sans-serif;
+    --border-color: #e5e7eb;
+}
+
+:host ::ng-deep .p-datatable {
+    border: none;
+    background: transparent;
+    font-family: var(--font-normal);
+}
+
+:host ::ng-deep .p-datatable-thead > tr > th {
+    background: #f7f7f7;
+    color: var(--color-dark);
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-title);
+    letter-spacing: 0.5px;
+}
+
+:host ::ng-deep .p-datatable-tbody > tr > td {
+    padding: var(--row-padding);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+:host ::ng-deep .p-datatable-tbody > tr:hover {
+    background-color: var(--hover-bg);
+}
+
+:host ::ng-deep .p-datatable-tbody > tr:last-child > td {
+    border-bottom: none;
+}
+
+:host ::ng-deep .p-datatable-emptymessage td {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-family: var(--font-title);
+    color: #9ca3af;
+    letter-spacing: 0.5px;
+}
+
+.attendee-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-title);
+    font-size: 0.95rem;
+    padding: 0.35rem 0.4rem;
+    border-radius: 4px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: 0.2s ease;
+}
+
+.attendee-btn:hover {
+    background: #efefef;
+    transform: translateY(-1px);
+}
+
+.status-group {
+    border-left: 3px solid #ddd;
+    padding-left: 0.75rem;
+}
+
+.status-group strong {
+    font-family: var(--font-title);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.status-group li {
+    font-family: var(--font-title);
+    padding: 0.3rem 0;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.email-btn {
+    background: none;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 4px;
+    font-family: var(--font-title);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.email-btn:hover {
+    background: #efefef;
+}
+
+
+@media (max-width: 680px) {
+    :host ::ng-deep .p-datatable-thead {
+        display: none;
+    }
+
+    :host ::ng-deep .p-datatable-tbody > tr {
+        display: block;
+        margin-bottom: 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        padding: 0.5rem 0.75rem;
+    }
+
+    :host ::ng-deep .p-datatable-tbody > tr > td {
+        display: flex;
+        justify-content: space-between;
+        border: none !important;
+        padding: 0.4rem 0;
+    }
+
+    :host ::ng-deep .p-datatable-tbody > tr > td::before {
+        content: attr(data-label);
+        font-family: var(--font-title);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #666;
+    }
+}
+
+.more-info-btn {
+    font-family: 'Koulen', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--color-dark);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-family: 'Koulen', sans-serif;
+}
+
+.more-info-btn:hover {
+    background-color: var(--color-azul);
+}
+
+.attendees-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.status-group {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.status-group strong {
+    font-family: 'Koulen', sans-serif;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #111827;
+}
+.status-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.email-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.empty-state {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    font-style: italic;
+    margin: 0.25rem 0 0 0;
+}
+.email-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.email-btn:hover .material-icons {
+    color: var(--color-banana);
+}
+
+.email-btn .material-icons {
+    font-size: 1.2rem;
+    color: var(--color-azul);
+}
+
+@media (max-width: 640px) {
+    .attendees-details {
+        grid-template-columns: 1fr;
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+
+    .status-group {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .email-item {
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .email-btn .material-icons {
+        font-size: 1.15rem;
+    }
+}
+
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .desktop-only { 
+        display: none; 
+    }
+    
+    .mobile-only { 
+        display: flex;            
+        flex-direction: column;    
+        padding: 1rem;
+        background-color: transparent;
+    }
+}

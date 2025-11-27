@@ -1,0 +1,167 @@
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.calendar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-ice);
+  padding-top: 3rem;
+  padding-bottom: 0;
+}
+.calendar-content {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 90rem;
+  margin: 0 auto;
+  width: 100%;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  height: auto;
+}
+@media (min-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+.events-column {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  max-height: 60vh;
+}
+.calendar-column {
+  order: 1;
+}
+@media (min-width: 1024px) {
+  .events-column {
+    order: 1;
+    max-height: auto;
+  }
+  .calendar-column {
+    order: 2;
+  }
+}
+@media (max-width: 1023px) {
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .events-column {
+    order: 1;
+    max-height: unset;
+    height: auto;
+  }
+  .calendar-column {
+    order: 2;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .calendar-content {
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+    height: auto;
+  }
+}
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: #7489ff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  width: 80%;
+  font-family: 'Koulen', sans-serif;
+  letter-spacing: 2px;
+}
+.filter-btn:hover {
+  background: #ffd13a;
+}
+.filter-btn.active {
+  border-color: #000;
+  background: #1f2937; 
+  color: white;
+  width: 80%;
+}
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  padding: 1rem 1rem 1rem 1rem;
+}
+.events-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.events-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+@media (min-width: 768px) {
+  .header-text {
+    padding: 0.5rem;
+  }
+  .events-title {
+    font-size: 32px;
+  }
+  .events-subtitle {
+    font-size: 16px;
+  }
+
+}
+@media (min-width: 1024px) {
+  .events-title {
+    font-size: 30px;
+  }
+  .events-subtitle {
+    font-size: 16px;
+  }
+}
+
+.filter-buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #e5e7eb;
+  color: #9ca3af;
+}
+
+.selected-day-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #dbeafe;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-family: 'Koulen', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.selected-day-indicator button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+

@@ -1,0 +1,100 @@
+.bars-container {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bars-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.bars-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin: 0 0 0.5rem 0;
+    font-family: 'Koulen', sans-serif;
+}
+
+.bars-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.season-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.season-btn {
+    padding: 0.30rem 1rem;
+    background-color: #f3f4f6;
+    color: var(--color-dark);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Koulen', sans-serif;
+}
+
+.season-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.season-btn.active {
+    background-color: var(--color-banana);
+    color: black;
+}
+
+.season-btn:active {
+    transform: scale(0.98);
+}
+
+.canvas-wrapper {
+    position: relative;
+    height: 300px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af;
+    font-style: italic;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+@media (max-width: 640px) {
+    .bars-container {
+        padding: 1rem;
+    }
+
+    .bars-title {
+        font-size: 1.25rem;
+    }
+
+    .season-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .season-btn {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .canvas-wrapper {
+        height: 250px;
+    }
+}

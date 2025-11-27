@@ -1,0 +1,81 @@
+.bl-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+}
+
+.bl-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.bl-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.bl-input:focus {
+  border-color: var(--color-azul);
+  outline: none;
+}
+
+.bl-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-azul);
+  border: none;
+  border-radius: 8px;
+  color: var(--color-dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.bl-btn:hover {
+  background-color: var(--color-banana);
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.confirm-btn {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.confirmed {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  color: green;
+  font-size: 0.95rem;
+}
+
+.littleAdd {
+    font-family: 'Koulen', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--color-dark);
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.littleAdd:hover {
+  background-color: var(--color-blush);
+}
+

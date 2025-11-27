@@ -1,0 +1,63 @@
+<div class="calendar-wrapper">
+    <main class="calendar-container">
+        <div class="calendar-content">
+            <div class="calendar-grid">
+                <div class="events-column">
+                    <div class="events-header">
+                        <div class="header-text">
+                            <h1 class="events-title">Your saraos</h1>
+                            <p class="events-subtitle">Filter by type or clic on a date </p>
+                        </div>
+                        <div class="filter-buttons">
+                            <button
+                                class="filter-btn"
+                                [class.active]="activeFilter() === 'upcoming'"
+                                (click)="setFilter('upcoming')"
+                                [disabled]="selectedDate$()"
+                            >Upcoming</button>
+                            <button 
+                                class="filter-btn"
+                                [class.active]="activeFilter() === 'hosting'"
+                                (click)="setFilter('hosting')"
+                                [disabled]="selectedDate$()"
+                            >Hosting</button>
+                            <button 
+                                class="filter-btn"
+                                [class.active]="activeFilter() === 'all'"
+                                (click)="setFilter('all')"
+                                [disabled]="selectedDate$()"
+                            >All</button>
+                        </div>
+
+                        @if (selectedDate$()) {
+                            <div class="selected-day-indicator">
+                                <span> Checking {{ selectedDate$() | date:'mediumDate' }} </span>
+                                <button (click)="clearDaySelection()">✕</button>
+                            </div>
+                        }
+                    </div>
+                    <app-events-list
+                        [events$]="displayedEvents$"
+                        [activeFilter]="activeFilter"
+                        (eventClicked)="onEventClicked($event)"
+                        [selectedDate$]="selectedDate$"
+                        (onEventDeleted)="loadUserEvents()"
+                    ></app-events-list>
+                </div>
+                <div class="calendar-column">
+                    <app-calendar-grid
+                        [calendarDays$]="calendarDays$"
+                        [selectedDate$]="selectedDate$"
+                        [currentMonth]="currentMonth$"
+                        [currentYear]="currentYear$"
+                        [userEvents$]="userEvents$"
+                        (daySelected)="onDaySelected($event)"
+                        (nextMonthClicked)="onNextMonth()"
+                        (previousMonthClicked)="onPreviousMonth()"
+                    ></app-calendar-grid>
+                </div>
+            </div>
+        </div>
+    </main> 
+    <app-footer></app-footer>
+</div>
