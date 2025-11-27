@@ -20,7 +20,7 @@ const defaultIcon = L.icon({
 export class PreviewMap implements AfterViewInit {
   @Input() latitude: number | undefined = undefined;
   @Input() longitude: number | undefined = undefined;
-  @Input() address: string = '';
+  @Input() address = '';
 
   private map: L.Map | null = null;
 

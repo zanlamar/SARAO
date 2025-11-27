@@ -95,7 +95,7 @@ export class EventService {
             const events = await this.getLoggedUserEvents();
             const eventsWithStats: EventWithStats[] = [];
 
-            for (let event of events) {
+            for (const event of events) {
                 try {
                     const stats = await this.eventDataService.getEventStats(event.id);
                     const eventWithStats: EventWithStats = {

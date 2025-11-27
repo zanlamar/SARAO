@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Signal, Output, EventEmitter, inject, signal } from '@angular/core';
+import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular/core';
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';

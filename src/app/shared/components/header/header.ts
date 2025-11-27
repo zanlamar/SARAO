@@ -23,8 +23,7 @@ export class Header implements OnInit {
   isMemento = false;
 
   username = 'Pendón';
-  constructor() {
-  }
+
   ngOnInit(): void {
     this.checkRoute();
     this.router.events

@@ -13,13 +13,13 @@
         <form [formGroup]="step1FormGroup">
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Event Name</label>
+                    <label for="eventTitle">Event Name</label>
                     <input matInput formControlName="eventTitle" placeholder="Enter event name" />
                 </mat-form-field>
             </div>
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Event Description</label>
+                    <label for="description">Event Description</label>
                     <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
@@ -32,7 +32,7 @@
         <ng-template matStepLabel>Date & Time</ng-template>
         <form [formGroup]="step2FormGroup">
             <div class="form-row full">
-                <label>Event Date & Time</label>
+                <label for="eventDateTime">Event Date & Time</label>
                     <p-datepicker 
                         formControlName="eventDateTime"
                         dateFormat="dd/mm/yy"
@@ -58,7 +58,7 @@
         <form [formGroup]="step3FormGroup">
             <div class="form-row">
                 <mat-form-field>
-                    <label>Location Alias</label>
+                    <label for="location">Location Alias</label>
                     <input matInput formControlName="location" placeholder="Enter location name" />
                 </mat-form-field>
             </div>
@@ -73,7 +73,7 @@
             @if (confirmedLocationAddress()) {
                 <div class="form-row full">
                     <mat-form-field>
-                    <label>Confirmed Address</label>
+                    <label for="confirmedLocationAddress">Confirmed Address</label>
                     <input 
                         matInput 
                         [value]="confirmedLocationAddress()" 
@@ -94,7 +94,7 @@
         <form [formGroup]="step4FormGroup">
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Upload Cover Image</label>
+                    <label for="selectedFileName">Upload Cover Image</label>
                     <input matInput [value]="selectedFileName || ''" readonly />
                     <input
                             type="file"
@@ -108,7 +108,7 @@
                     </mat-form-field>
                 </div>
             <div class="form-row">
-                <label>Are +1 people allowed?</label>
+                <label for="allowedPlusOne">Are +1 people allowed?</label>
                 <mat-radio-group formControlName="allowedPlusOne">
                 <mat-radio-button [value]="true">Yes</mat-radio-button>
                 <mat-radio-button [value]="false">No</mat-radio-button>
@@ -125,7 +125,7 @@
         <ng-template matStepLabel>Bringlist</ng-template>
         <form [formGroup]="step5FormGroup">
             <div class="form-row">
-                <label>Do you want a bring list?</label>
+                <label for="bringList">Do you want a bring list?</label>
                 <mat-radio-group formControlName="bringList">
                     <mat-radio-button [value]="true">Yes</mat-radio-button>
                     <mat-radio-button [value]="false">No</mat-radio-button>
