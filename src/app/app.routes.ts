@@ -12,7 +12,7 @@ import { UserArea } from './features/user-area/user-area';
 import { Memento } from './features/memento/memento';
 
 export const routes: Routes = [
-    { path: '', component: landingPage },
+    { path: '', pathMatch: 'full', redirectTo: 'landing' },
     { path: 'landing', component: landingPage, 
     data: { headerVariant: 'landing', headerMode: 'landing' }}, 
     { path: 'login', component: Login,  
