@@ -10,18 +10,30 @@ import { EventPreview } from './features/event-preview/event-preview';
 import { ShareableUrlComponent } from './features/shareable-url/shareable-url';
 import { UserArea } from './features/user-area/user-area';
 import { Memento } from './features/memento/memento';
+
 export const routes: Routes = [
     { path: '', component: landingPage },
-    { path: 'landing', component: landingPage}, 
-    { path: 'login', component: Login }, 
-    { path: 'register', component: Register }, 
-    { path: 'home', component: Home, canActivate: [authGuard] },
-    { path: 'calendar-view', component: CalendarView, canActivate: [authGuard]},
-    { path: 'create', component: EventForm, canActivate: [authGuard] }, 
-    { path: 'event-preview', component: EventPreview, canActivate: [authGuard] },
-    { path: 'event-preview/:id', component: EventPreview, canActivate: [authGuard] },
-    { path: 'shareable-url/:id', component: ShareableUrlComponent, canActivate: [authGuard] },
-    { path: 'user-area', component: UserArea, canActivate: [authGuard] },
-    { path: 'memento', component: Memento, canActivate: [authGuard] },
+    { path: 'landing', component: landingPage, 
+    data: { headerVariant: 'landing', headerMode: 'landing' }}, 
+    { path: 'login', component: Login,  
+    data: { headerVariant: 'compact', headerMode: 'auth' } }, 
+    { path: 'register', component: Register, 
+    data: { headerVariant: 'compact', headerMode: 'auth' } }, 
+    { path: 'home', component: Home, canActivate: [authGuard], 
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'calendar-view', component: CalendarView, canActivate: [authGuard], 
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'create', component: EventForm, canActivate: [authGuard], 
+    data: { headerVariant: 'compact', headerMode: 'main' } }, 
+    { path: 'event-preview', component: EventPreview, canActivate: [authGuard],
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'event-preview/:id', component: EventPreview, canActivate: [authGuard],
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'shareable-url/:id', component: ShareableUrlComponent, canActivate: [authGuard],
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'user-area', component: UserArea, canActivate: [authGuard],
+    data: { headerVariant: 'compact', headerMode: 'main' } },
+    { path: 'memento', component: Memento, canActivate: [authGuard],
+    data: { headerVariant: 'compact', headerMode: 'main' } },
     { path: '**', redirectTo: '' } 
 ]; 

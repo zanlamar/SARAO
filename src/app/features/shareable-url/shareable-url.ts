@@ -4,6 +4,7 @@ import { Event } from '../../core/models/event.model';
 import { ShareUrlService } from '../../core/services/shareable-url.service';
 import { EventService } from '../../core/services/event.service';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-shareable-url',
   imports: [CommonModule],
