@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'login', component: Login,  
     data: { headerVariant: 'compact', headerMode: 'auth', footerVariant: 'minimal' } }, 
     { path: 'register', component: Register, 
-    data: { headerVariant: 'compact', headerMode: 'auth', footerVariant: 'full' } }, 
+    data: { headerVariant: 'compact', headerMode: 'auth', footerVariant: 'minimal' } }, 
     { path: 'home', component: Home, canActivate: [authGuard], 
     data: { headerVariant: 'compact', headerMode: 'main' } },
     { path: 'calendar-view', component: CalendarView, canActivate: [authGuard], 
