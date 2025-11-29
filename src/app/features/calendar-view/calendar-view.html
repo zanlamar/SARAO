@@ -10,19 +10,19 @@
                         </div>
                         <div class="filter-buttons">
                             <button
-                                class="filter-btn"
+                                class="btn-filter"
                                 [class.active]="activeFilter() === 'upcoming'"
                                 (click)="setFilter('upcoming')"
                                 [disabled]="selectedDate$()"
                             >Upcoming</button>
                             <button 
-                                class="filter-btn"
+                                class="btn-filter"
                                 [class.active]="activeFilter() === 'hosting'"
                                 (click)="setFilter('hosting')"
                                 [disabled]="selectedDate$()"
                             >Hosting</button>
                             <button 
-                                class="filter-btn"
+                                class="btn-filter"
                                 [class.active]="activeFilter() === 'all'"
                                 (click)="setFilter('all')"
                                 [disabled]="selectedDate$()"

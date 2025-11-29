@@ -23,7 +23,7 @@
                     <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -47,7 +47,7 @@
                         </ng-template>
                     </p-datepicker>
             </div>
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
@@ -62,13 +62,13 @@
                     <input matInput formControlName="location" placeholder="Enter location name" />
                 </mat-form-field>
             </div>
-            <div class="form-row full">
+            <!-- <div class="form-row full"> -->
                 @if (isStep3Active()) {
                     <app-location-search
                         (locationSelected)="onLocationSelected($event)">
                     </app-location-search>
                 }
-            </div>
+            <!-- </div> -->
 
             @if (confirmedLocationAddress()) {
                 <div class="form-row full">
@@ -83,7 +83,7 @@
                 </div>
             }
 
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
@@ -107,14 +107,14 @@
                         <button mat-button (click)="triggerFileInput()">Choose Image</button>
                     </mat-form-field>
                 </div>
-            <div class="form-row">
-                <label for="allowedPlusOne">Are +1 people allowed?</label>
+            <div class="form-row full">
+                <label for="allowedPlusOne">Can I bring someone?</label>
                 <mat-radio-group formControlName="allowedPlusOne">
                 <mat-radio-button [value]="true">Yes</mat-radio-button>
                 <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
@@ -124,7 +124,7 @@
     <mat-step [stepControl]="step5FormGroup">
         <ng-template matStepLabel>Bringlist</ng-template>
         <form [formGroup]="step5FormGroup">
-            <div class="form-row">
+            <div class="form-row full">
                 <label for="bringList">Do you want a bring list?</label>
                 <mat-radio-group formControlName="bringList">
                     <mat-radio-button [value]="true">Yes</mat-radio-button>
@@ -140,7 +140,7 @@
                 </div>
             }
 
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
                 @if (isEditMode()) {
                     <button mat-button (click)="onSubmit()">Save Changes</button>
@@ -153,5 +153,4 @@
     
     </mat-stepper>  
     </div>
-    <!-- <app-footer></app-footer> -->
 </div>

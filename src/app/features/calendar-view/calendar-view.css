@@ -76,23 +76,22 @@
   margin-bottom: 20px;
   justify-content: center;
 }
-.filter-btn {
-  padding: 0.5rem 1.5rem;
-  background-color: #7489ff;
+.btn-filter {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-azul);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.9rem;
   width: 80%;
-  font-family: 'Koulen', sans-serif;
   letter-spacing: 2px;
 }
-.filter-btn:hover {
-  background: #ffd13a;
+.btn-filter:hover {
+  background: var(--color-banana);
 }
-.filter-btn.active {
+.btn-filter.active {
   border-color: #000;
   background: #1f2937; 
   color: white;
