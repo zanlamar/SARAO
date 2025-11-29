@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
-import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service';
 import { PreviewMap } from '../../shared/components/preview-map/preview-map';
 import { Bringlist } from '../bringlist/bringlist';
 
 @Component({
   selector: 'app-event-preview',
-  imports: [CommonModule, Footer, PreviewMap, Bringlist],
+  imports: [CommonModule, PreviewMap, Bringlist],
   templateUrl: './event-preview.html',
   styleUrl: './event-preview.css',
   standalone: true,

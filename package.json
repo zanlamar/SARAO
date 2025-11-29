@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node -r dotenv/config envreader.js && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -38,6 +38,7 @@
     "@types/geojson": "^7946.0.16",
     "@types/maplibre-gl": "^1.13.2",
     "chart.js": "^4.5.1",
+    "dotenv": "^17.2.3",
     "firebase": "^12.4.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
