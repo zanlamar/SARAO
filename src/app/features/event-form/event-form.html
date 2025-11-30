@@ -137,14 +137,16 @@
                     <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
-
+            
             @if (step5FormGroup.get('bringList')?.value === true) {
                 <div class="form-row full">
-                    <app-bringlist 
-                        (listConfirmed)="onBringlistConfirmed($event)">
-                    </app-bringlist>
+                    <div class="step5-scroll-area">
+                        <app-bringlist 
+                                (listConfirmed)="onBringlistConfirmed($event)">
+                        </app-bringlist>
+                    </div>
                 </div>
-            }
+                }
 
             <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>

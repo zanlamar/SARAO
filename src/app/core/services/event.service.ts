@@ -61,6 +61,7 @@ export class EventService {
 
     async getGuestEvents(): Promise<Event[]> {
         const user = this.authService.currentUser();
+
         if (!user) return [];
 
         try { 

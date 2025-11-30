@@ -29,7 +29,6 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  height: 600px;
   flex-direction: column;
   background-color: white;
 }
@@ -231,10 +230,7 @@ button[matStepperPrevious]:hover {
   .event-form-container {
     padding: 1.5rem;
   }
-  .button-container {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+
   button[mat-button] {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -249,9 +245,7 @@ button[matStepperPrevious]:hover {
 ::ng-deep .p-datepicker .p-datepicker-group {
   width: 100% !important;
 }
-.event-form-container {
-  overflow: visible !important;
-}
+
 ::ng-deep .p-calendar-container {
   min-width: 320px !important;
   width: auto !important;
@@ -271,4 +265,22 @@ button[matStepperNext][disabled]:hover,
 button[matStepperPrevious][disabled]:hover {
   background-color: #ccc;
   color: #666;
+}
+
+.event-form-container form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.step5-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .event-form-container {
+    padding: 2rem;
+    max-width: 900px;
+  }
 }
