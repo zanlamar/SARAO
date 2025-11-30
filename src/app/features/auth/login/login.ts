@@ -17,7 +17,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
   ) {}
   async onLogin() {
     this.loading.set(true);
