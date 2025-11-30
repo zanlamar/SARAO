@@ -2,6 +2,14 @@
   align-items: center;
   justify-content: center;
 }
+
+.bringlistContainer {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+
 .bl-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -31,12 +39,12 @@
   outline: none;
 }
 
-.btn-bringlist-ok {
+.btn-next {
   padding: 0.5rem 1rem;
   display: block;
   background-color: var(--color-azul);
   border: none;
-  color: var(--color-dark);
+  color: white;
   cursor: pointer;
   transition: background-color 0.15s;
   border-radius: 9999px;
@@ -56,12 +64,6 @@
   border-radius: 6px;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-}
-
-.confirm-btn {
-  margin-top: 1rem;
-  width: 100%;
-  border-radius: 9999px;
 }
 
 .confirmed {
