@@ -48,8 +48,11 @@ button,
 .btn-filter,
 .btn-next,
 .btn-bringlist-ok,
+.btn-back,
 .btn-littleAdd,
-.btn-memento {
+.btn-memento,
+.btn-season,
+.btn-period {
   font-family: 'Koulen', sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;

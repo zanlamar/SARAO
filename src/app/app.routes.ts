@@ -31,7 +31,7 @@ export const routes: Routes = [
     { path: 'event-preview/:id', component: EventPreview, canActivate: [authGuard],
     data: { headerVariant: 'compact', headerMode: 'main', footerVariant: 'minimal' } },
     { path: 'shareable-url/:id', component: ShareableUrlComponent, canActivate: [authGuard],
-    data: { headerVariant: 'compact', headerMode: 'main', footerVariant: 'minimal' } },
+    data: { headerVariant: 'compact', headerMode: 'main', footerVariant: 'full' } },
     { path: 'user-area', component: UserArea, canActivate: [authGuard],
     data: { headerVariant: 'compact', headerMode: 'main', footerVariant: 'minimal' } },
     { path: 'memento', component: Memento, canActivate: [authGuard],

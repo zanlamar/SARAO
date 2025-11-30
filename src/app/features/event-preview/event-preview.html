@@ -1,12 +1,12 @@
 <div class="preview-wrapper">
     @if (isCreating()) {
         <div class="preview-top-buttons">
-            <button class="btn-secondary" (click)="onEdit()"> < EDIT</button>
-            <button class="btn-primary" (click)="onConfirm()">CONFIRM ></button>
+            <button class="btn-back" (click)="onEdit()"> < EDIT</button>
+            <button class="btn-next" (click)="onConfirm()">CONFIRM ></button>
         </div>
     } @else {
         <div class="preview-top-buttons">
-            <button class="btn-secondary" (click)="onBack()"> < BACK</button>
+            <button class="btn-back" (click)="onBack()"> < BACK</button>
         </div>
     }
 
