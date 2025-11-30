@@ -130,23 +130,23 @@
     <mat-step [stepControl]="step5FormGroup">
         <ng-template matStepLabel>Bringlist</ng-template>
         <form [formGroup]="step5FormGroup">
-            <div class="step5-scroll-area">
+            <div class="form-row full">
+                <label for="bringList">Do you want a bring list? *</label>
+                <mat-radio-group formControlName="bringList">
+                    <mat-radio-button [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            
+            @if (step5FormGroup.get('bringList')?.value === true) {
                 <div class="form-row full">
-                    <label for="bringList">Do you want a bring list? *</label>
-                    <mat-radio-group formControlName="bringList">
-                        <mat-radio-button [value]="true">Yes</mat-radio-button>
-                        <mat-radio-button [value]="false">No</mat-radio-button>
-                    </mat-radio-group>
-                </div>
-
-                @if (step5FormGroup.get('bringList')?.value === true) {
-                    <div class="form-row full">
+                    <div class="step5-scroll-area">
                         <app-bringlist 
-                            (listConfirmed)="onBringlistConfirmed($event)">
+                                (listConfirmed)="onBringlistConfirmed($event)">
                         </app-bringlist>
                     </div>
+                </div>
                 }
-            </div>
 
             <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
