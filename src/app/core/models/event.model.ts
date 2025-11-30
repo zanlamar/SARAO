@@ -11,6 +11,7 @@ export interface EventFormDTO {
     };
     allowPlusOne: boolean;
     bringList?: boolean;
+    bringListItems?: BringlistItem[];
 }
 
 export interface EventFromDB {
@@ -42,3 +43,20 @@ export interface EventWithStats extends Event {
     percentageConfirmed: number;
 }
 
+export interface GeocodingResult {
+    latitude: number;
+    longitude: number;
+    displayName: string;
+}
+
+export interface BringlistItem {
+    item: string;
+    checked: boolean;
+    }
+
+export interface EmailAttendeesByStatus {
+    confirmed: string[];
+    notComing: string[];
+    pending: string[];
+    undecided?: string[];
+}

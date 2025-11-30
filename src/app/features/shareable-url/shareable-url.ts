@@ -1,13 +1,13 @@
 import { Component, OnInit, inject, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Event } from '../../core/models/event.model';
-import { Footer } from '../../shared/components/footer/footer';
 import { ShareUrlService } from '../../core/services/shareable-url.service';
 import { EventService } from '../../core/services/event.service';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-shareable-url',
-  imports: [CommonModule, Footer],
+  imports: [CommonModule],
   templateUrl: './shareable-url.html',
   styleUrl: './shareable-url.css',
   standalone: true

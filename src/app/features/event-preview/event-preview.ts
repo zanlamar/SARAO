@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
-import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service';
+import { PreviewMap } from '../../shared/components/preview-map/preview-map';
+import { Bringlist } from '../bringlist/bringlist';
+
 @Component({
   selector: 'app-event-preview',
-  imports: [CommonModule, Footer],
+  imports: [CommonModule, PreviewMap, Bringlist],
   templateUrl: './event-preview.html',
   styleUrl: './event-preview.css',
   standalone: true,
@@ -17,32 +19,37 @@ export class EventPreview implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
+
   event = signal<EventFormDTO | Event | null>(null);
   isCreating = signal<boolean>(false);
   rsvpResponse = signal<'yes' | 'maybe' | 'no' | null>(null);
-  constructor(
-  ) {}
+
+  constructor() {}
+
   ngOnInit(): void {
     this.route.params.subscribe(async params => {
       const eventId = params['id'];
       
       if (eventId) {
-        this.loadEventFromDatabase(eventId);
+        await this.loadEventFromDatabase(eventId);
+
         this.isCreating.set(false);
 
         const user = this.authService.currentUser();
+        const currentEvent = this.event() as Event;
 
-          if (user) {
-            try {
-              await this.eventService.saveInvitation(
-                eventId, 
-                user.uid, 
-                user.email || ''
-              );
-            } catch (error: any) {
-              console.error('❌ Error al guardar invitation:', error);
-            }
+        if (user && currentEvent && user.uid !== currentEvent.userId) {
+          try {
+            await this.eventService.saveInvitation(
+              eventId, 
+              user.uid, 
+              user.email || ''
+            );
+          } catch (error: any) {
+            console.error('❌ Error al guardar invitation:', error);
           }
+        }
+
       } else {
         const previewData = this.eventService.eventPreview();
         this.event.set(previewData);
@@ -52,11 +59,12 @@ export class EventPreview implements OnInit {
   }
 
   private async loadEventFromDatabase(eventId: string): Promise<void> {
+
     try {
       const loadedEvent = await this.eventService.getEventById(eventId);
       this.event.set(loadedEvent);
       
-    } catch (error) {
+    } catch (error: any) {
       this.router.navigate(['/calendar-view']);
     }
   }
@@ -92,35 +100,37 @@ export class EventPreview implements OnInit {
   }
 
   async onRSVP(response: 'yes' | 'maybe' | 'no'): Promise<void> {
-  const user = this.authService.currentUser();
-  const currentEvent = this.event() as Event;
-  
-
-  if (!user || !currentEvent?.id) {
-    console.error('❌ Falta usuario o evento');
-    return;
-  }
-
-  try {
-    await this.eventService.saveInvitation(
-      currentEvent.id,
-      user.uid,
-      user.email || ''
-    );
-
-    await this.eventService.updateRSVP(
-      currentEvent.id,
-      user.uid,
-      response
-    );
-
-    this.rsvpResponse.set(response);
-  } catch (error) {
-    console.error('❌ Error:', error);
-  }
-}
+    const user = this.authService.currentUser();
+    const currentEvent = this.event() as Event;
     
-}
+    if (!user || !currentEvent?.id) {
+      console.error('❌ Missing user or event');
+      return;
+    }
+
+    if (user.uid === currentEvent.userId) {
+    return;
+    }
+
+    try {
+        await this.eventService.saveInvitation(
+          currentEvent.id,
+          user.uid,
+          user.email || ''
+        );
+
+        await this.eventService.updateRSVP(
+          currentEvent.id,
+          user.uid,
+          response
+        );
+        
+        this.rsvpResponse.set(response);
+      } catch (error: any) {
+        console.error('❌ Error:', error);
+      }
+    }
+  }
 
 
 

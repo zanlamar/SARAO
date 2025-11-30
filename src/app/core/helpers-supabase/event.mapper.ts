@@ -40,8 +40,12 @@ export function mapEventFormDTOToSupabase(
         real_date: realDate,
         image_url: eventData.imageUrl || null,
         location_alias: eventData.location.alias,
+        location_address: eventData.location.address || null,    
+        location_latitude: eventData.location.latitude || null,    
+        location_longitude: eventData.location.longitude || null,  
         allow_companion: eventData.allowPlusOne, 
         bring_list: eventData.bringList || false,
+        bring_list_items: eventData.bringListItems || [], 
         updated_at: new Date()
     };
 }
@@ -60,7 +64,9 @@ export function mapSupabaseResponseToEvent(data: any): Event {
         },
         allowPlusOne: data.allow_companion,
         bringList: data.bring_list,
-        
+        bringListItems: typeof data.bring_list_items === 'string' 
+            ? JSON.parse(data.bring_list_items) 
+            : (data.bring_list_items || []),
         id: data.id,
         userId: data.creator_id,
         createdAt: new Date(data.created_at),

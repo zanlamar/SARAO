@@ -14,9 +14,12 @@ import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service'; 
 import { EventService } from '../../core/services/event.service';   
 import { StorageService } from '../../core/services/storage.service';
-import { EventFormDTO } from '../../core/models/event.model';
+import { EventFormDTO, GeocodingResult, BringlistItem } from '../../core/models/event.model';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
+import { LocationSearch  } from '../../shared/components/location-search/location-search';
+import { Bringlist } from '../../features/bringlist/bringlist';
+
 @Component({
   selector: 'app-event-form',
   imports: [
@@ -30,9 +33,10 @@ import { DatePicker } from 'primeng/datepicker';
     MatButtonModule, 
     MatRadioModule, 
     MatTimepickerModule, 
-    Footer, 
     FormsModule, 
     DatePicker,
+    LocationSearch,
+    Bringlist
   ],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
@@ -43,9 +47,16 @@ export class EventForm implements OnInit {
   step2FormGroup: FormGroup;
   step3FormGroup: FormGroup;
   step4FormGroup: FormGroup;
+  step5FormGroup: FormGroup;
+
   selectedFileName = '';
   isEditMode = signal(false);
   currentEventId = signal<string | null>(null);
+  isStep3Active = signal(false);
+  confirmedLocationAddress = signal<string | null>(null);
+  selectedLocationCoords: GeocodingResult | null = null;
+  confirmedBringlistItems: BringlistItem[] = [];
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -67,9 +78,20 @@ export class EventForm implements OnInit {
     this.step4FormGroup = this.formBuilder.group({
       image: ['', Validators.required],
       allowedPlusOne: [false, Validators.required],
-      bringList: ['']
     });
+    this.step5FormGroup = this.formBuilder.group({
+      bringList: [''],
+    })
   }
+
+  onStepChange(event: any) {
+    this.isStep3Active.set(event.selectedIndex === 2);
+  }
+
+  onBringlistConfirmed(items: BringlistItem[]):void {
+    this.confirmedBringlistItems = items;
+  }
+
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       const id = params['id'];
@@ -109,18 +131,20 @@ export class EventForm implements OnInit {
       };
 
     const imageUrl = this.step4FormGroup.value.image;
-
     const eventData: EventFormDTO = {
       title: this.step1FormGroup.value.eventTitle,
       description: this.step1FormGroup.value.description,
       eventDateTime: this.step2FormGroup.value.eventDateTime,
       location: {
         alias: this.step3FormGroup.value.location,
-        address: '',
+        address: this.selectedLocationCoords?.displayName || '',
+        latitude: this.selectedLocationCoords?.latitude,
+        longitude: this.selectedLocationCoords?.longitude
       },
       imageUrl: imageUrl  || '',
       allowPlusOne: this.step4FormGroup.value.allowedPlusOne,
-      bringList: this.step4FormGroup.value.bringList || false,
+      bringList: this.step5FormGroup.value.bringList || false,
+      bringListItems: this.confirmedBringlistItems
     };
 
     try {
@@ -158,5 +182,10 @@ export class EventForm implements OnInit {
     } catch (error) {
       console.error('Error al cargar el evento:', error);
     }
+  }
+
+  onLocationSelected(location: GeocodingResult) {
+    this.confirmedLocationAddress.set(location.displayName);
+    this.selectedLocationCoords = location;
   }
 }

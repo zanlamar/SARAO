@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Signal, Output, EventEmitter, inject, signal } from '@angular/core';
+import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular/core';
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
@@ -20,6 +20,7 @@ export class EventsList {
   @Output() eventClicked = new EventEmitter<Event>();
   @Output() onEventDeleted = new EventEmitter<void>();
   @Input() activeFilter!: Signal<'hosting' | 'upcoming' | 'all'>;
+  
   onEventClick(event: Event): void {
     this.eventClicked.emit(event);
   }
@@ -29,10 +30,15 @@ export class EventsList {
   onDeleteClick(event: Event): void {
     this.eventToDelete = event;
   }
-  onConfirmDelete(event: Event): void {
-    this.eventService.deleteEvent(event.id);
-    this.eventToDelete = null;
-    this.onEventDeleted.emit();
+
+  async onConfirmDelete(event: Event): Promise<void> {
+    try { 
+      await this.eventService.deleteEvent(event.id);
+      this.eventToDelete = null;
+      this.onEventDeleted.emit();
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
   }
   onSee(event: Event): void {
     this.eventClicked.emit(event);

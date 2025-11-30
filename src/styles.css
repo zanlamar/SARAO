@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Koulen&family=Nunito+Sans:wght@400;600;700&display=swap');
+
 :root {
   --color-ice: #e8f0e9;
   --color-dark: #010101;
@@ -12,17 +13,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  padding: revert-layer;
 }
 html {
   scroll-behavior: smooth;
 }
 body {
-    font-family: 'Nunito Sans', sans-serif;
-    color: var(--color-dark);
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--color-dark);
+  background: var(--color-ice);
 }
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Koulen', cursive;
+  font-family: 'Koulen', sans-serif;
 }
 @keyframes fadeInUp {
   from {
@@ -37,6 +39,21 @@ h1, h2, h3, h4, h5, h6 {
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out;
 }
-button {
-  font-family: 'Nunito Sans', sans-serif;
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-dark,
+.btn-logout,
+.btn-filter,
+.btn-next,
+.btn-bringlist-ok,
+.btn-back,
+.btn-littleAdd,
+.btn-memento,
+.btn-season,
+.btn-period {
+  font-family: 'Koulen', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }

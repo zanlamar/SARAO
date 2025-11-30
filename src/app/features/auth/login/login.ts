@@ -26,11 +26,12 @@ export class Login {
       const result = await this.authService.login(this.email, this.password);
       if (result.success) {
         await this.authService.waitForAuthentication();
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-        if (returnUrl === '/login' || returnUrl === '/register') {
-          this.router.navigate(['/home']);
-        } else {
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+        
+      if (returnUrl && returnUrl !== '/login' && returnUrl !== '/register') {
           this.router.navigateByUrl(returnUrl);
+        } else {
+          this.router.navigate(['/calendar-view']);
         }
       } else {
         this.errorMessage.set('Invalid password or email');
@@ -43,4 +44,3 @@ export class Login {
     }
   }
 }
-

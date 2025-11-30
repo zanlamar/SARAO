@@ -1,0 +1,147 @@
+.chart-container {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    min-height: 550px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.chart-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin: 0 0 0.5rem 0;
+    font-family: 'Koulen', sans-serif;
+}
+
+.chart-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.period-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;  
+}
+
+.season-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;  
+}
+
+.btn-filter {
+    padding: 0.30rem 1rem;
+    background-color: var(--color-azul);
+    color: white;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: transparent;
+}
+
+.btn-filter:hover {
+    background-color: var(--color-banana);
+    color: var(--color-dark);
+}
+
+.btn-filter.active {
+  border-color: #000;
+  background: #1f2937; 
+  color: white;
+}
+
+.btn-filter:active {
+    transform: scale(0.98);
+}
+
+.btn-season {
+    padding: 0.30rem 1rem;
+    background-color: #f3f4f6;
+    color: var(--color-dark);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Koulen', sans-serif;
+}
+
+.btn-season:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-season.active {
+    background-color: var(--color-banana);
+    color: black;
+}
+
+.btn-season:active {
+    transform: scale(0.98);
+}
+
+.canvas-wrapper {
+    position: relative;
+    height: 300px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af;
+    font-style: italic;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+@media (max-width: 640px) {
+    .chart-container {
+        padding: 1rem;
+    }
+
+    .chart-title {
+        font-size: 1.25rem;
+    }
+
+    .period-selector,
+    .season-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .btn-season,
+    .btn-period {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .canvas-wrapper {
+        height: 250px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .period-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .season-selector {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

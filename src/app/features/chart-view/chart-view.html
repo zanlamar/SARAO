@@ -1,0 +1,58 @@
+<div class="chart-container">
+    <div class="chart-header">
+        <h2 class="chart-title">Guest Overview</h2>
+        <p class="chart-subtitle">Total invites: {{ stats().total }}</p>
+    </div>
+
+    <div class="period-selector">
+        <button 
+            class="btn-filter"
+            [class.active]="isSelected('thisMonth')"
+            (click)="selectPeriod('thisMonth')">
+            This Month
+        </button>
+        <button 
+            class="btn-filter"
+            [class.active]="isSelected('nextMonth')"
+            (click)="selectPeriod('nextMonth')">
+            Next Month
+        </button>
+    </div>
+
+    <div class="season-selector">
+        <button 
+            class="btn-season"
+            [class.active]="isSelected('spring')"
+            (click)="selectPeriod('spring')">
+            🌸 Spring
+        </button>
+        <button 
+            class="btn-season"
+            [class.active]="isSelected('summer')"
+            (click)="selectPeriod('summer')">
+            ☀️ Summer
+        </button>
+        <button 
+            class="btn-season"
+            [class.active]="isSelected('autumn')"
+            (click)="selectPeriod('autumn')">
+            🍂 Autumn
+        </button>
+        <button 
+            class="btn-season"
+            [class.active]="isSelected('winter')"
+            (click)="selectPeriod('winter')">
+            ❄️ Winter
+        </button>
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas #doughnutCanvas></canvas>
+    </div>
+
+    @if (stats().total === 0) {
+        <div class="no-data">
+            <p>No events found for this period</p>
+        </div>
+    }
+</div>
