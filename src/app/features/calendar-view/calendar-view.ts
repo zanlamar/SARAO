@@ -51,7 +51,11 @@ export class CalendarView implements OnInit {
   async loadUserEvents(): Promise<void> { 
     const createdEvents = await this.eventService.getLoggedUserEvents();
     const guestEvents = await this.eventService.getGuestEvents();
-    const allEvents = [...createdEvents, ...guestEvents];
+
+    const createdIds = new Set(createdEvents.map(e => e.id));
+    const pureGuestEvents = guestEvents.filter(e => !createdIds.has(e.id));
+
+    const allEvents = [...createdEvents, ...pureGuestEvents];
 
     allEvents.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
 
