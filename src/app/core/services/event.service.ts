@@ -33,7 +33,6 @@ export class EventService {
 
     async getLoggedUserEvents(): Promise<Event[]> {
         const userId = await getSupabaseUserId(this.authService, this.supabaseService);
-        console.log('getLoggedUserEvents → supabase userId:', userId);
         return this.eventDataService.getEventsByUserId(userId);
     }
 
@@ -62,7 +61,6 @@ export class EventService {
 
     async getGuestEvents(): Promise<Event[]> {
         const user = this.authService.currentUser();
-        console.log('getGuestEvents → firebase uid:', user?.uid);
 
         if (!user) return [];
 
