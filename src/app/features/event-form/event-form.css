@@ -188,7 +188,7 @@ button[mat-button] {
 }
 button[mat-button]:not([matStepperNext]):not([matStepperPrevious]) {
   background-color: var(--color-azul);
-  color: var(--color-dark);
+  color: white
 }
 button[mat-button]:not([matStepperNext]):not([matStepperPrevious]):hover {
   background-color: var(--color-banana);
@@ -197,10 +197,11 @@ button[mat-button]:not([matStepperNext]):not([matStepperPrevious]):hover {
 }
 button[matStepperNext] {
   background-color: var(--color-azul);
-  color: var(--color-dark);
+  color: white
 }
 button[matStepperNext]:hover {
   background-color: var(--color-banana);
+  color: var(--color-dark);
 }
 button[matStepperPrevious] {
   background-color: transparent;
@@ -254,4 +255,20 @@ button[matStepperPrevious]:hover {
 ::ng-deep .p-calendar-container {
   min-width: 320px !important;
   width: auto !important;
+}
+
+button[mat-button][disabled],
+button[matStepperNext][disabled],
+button[matStepperPrevious][disabled] {
+  background-color: #ccc;       
+  color: #666;                   
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+button[mat-button][disabled]:hover,
+button[matStepperNext][disabled]:hover,
+button[matStepperPrevious][disabled]:hover {
+  background-color: #ccc;
+  color: #666;
 }
