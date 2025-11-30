@@ -62,18 +62,19 @@
     width: 100%;
     padding: 0.875rem 1.5rem;
     background-color: var(--color-azul);
-    color: var(--color-dark);
+    color: white;
     border: none;
     border-radius: 9999px;
     font-size: 1rem;
     cursor: pointer;
-    font-weight: 600;
     transition: all 0.2s ease;
+    letter-spacing: 4px;
 }
 .btn-primary:hover:not(:disabled) {
     background-color: var(--color-banana);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 209, 58, 0.3);
+    color: var(--color-dark);
 }
 .btn-primary:active:not(:disabled) {
     transform: translateY(0);
