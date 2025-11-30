@@ -37,28 +37,27 @@
     margin-bottom: 1.5rem;
 }
 
-.season-btn {
+.btn-season {
     padding: 0.30rem 1rem;
     background-color: #f3f4f6;
     color: var(--color-dark);
     border: 2px solid transparent;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'Koulen', sans-serif;
 }
 
-.season-btn:hover {
+.btn-season:hover {
     background-color: #e5e7eb;
 }
 
-.season-btn.active {
+.btn-season.active {
     background-color: var(--color-banana);
     color: black;
 }
 
-.season-btn:active {
+.btn-season:active {
     transform: scale(0.98);
 }
 

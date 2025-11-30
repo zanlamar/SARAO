@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, computed} from '@angular/core';
 import { EventService } from '../../core/services/event.service';
 import { Event } from '../../core/models/event.model';
-import { Footer } from "../../shared/components/footer/footer";
 import { CalendarDay } from '../../core/models/calendar.model';
 import { EventsList } from './events-list/events-list';
 import { CalendarService } from '../../core/services/calendar.service';
@@ -10,7 +9,7 @@ import { CalendarGrid } from './calendar-grid/calendar-grid';
 import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-calendar-view',
-  imports: [CommonModule, Footer, EventsList, CalendarGrid],
+  imports: [CommonModule, EventsList, CalendarGrid],
   templateUrl: './calendar-view.html',
   styleUrl: './calendar-view.css',
   standalone: true,
@@ -53,17 +52,20 @@ export class CalendarView implements OnInit {
     const createdEvents = await this.eventService.getLoggedUserEvents();
     const guestEvents = await this.eventService.getGuestEvents();
     const allEvents = [...createdEvents, ...guestEvents];
+
     allEvents.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
 
-      
       this.userEvents$.set(allEvents);
       this.updateFilteredEvents(); 
     if (this.selectedDate$()) {
       this.selectDay(this.selectedDate$());
     }
   }
+
   selectDay(dateString: string): void {
     this.selectedDate$.set(dateString);
+    this.activeFilter.set('all');
+
     const filtered = this.userEvents$().filter(event => {
       const eventDateString = this.calendarService.formatDateToString(event.eventDateTime);
       return eventDateString === dateString;
@@ -114,6 +116,12 @@ export class CalendarView implements OnInit {
     } else {
       this.filteredEvents$.set(allEvents);
     }
+  }
+
+  clearDaySelection(): void {
+    this.selectedDate$.set('');
+    this.selectedDateEvents$.set([]);
+    this.updateFilteredEvents();
   }
 }
 

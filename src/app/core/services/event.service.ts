@@ -95,7 +95,7 @@ export class EventService {
             const events = await this.getLoggedUserEvents();
             const eventsWithStats: EventWithStats[] = [];
 
-            for (let event of events) {
+            for (const event of events) {
                 try {
                     const stats = await this.eventDataService.getEventStats(event.id);
                     const eventWithStats: EventWithStats = {
@@ -130,6 +130,7 @@ export class EventService {
         confirmed: string[];
         notComing: string[];
         pending: string[];
+        undecided?: string[];
     }> {
     const result = await this.eventDataService.getEventStats(eventId);
     return result.attendees;

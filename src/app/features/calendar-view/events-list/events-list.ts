@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Signal, Output, EventEmitter, inject, signal } from '@angular/core';
+import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular/core';
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
@@ -20,6 +20,7 @@ export class EventsList {
   @Output() eventClicked = new EventEmitter<Event>();
   @Output() onEventDeleted = new EventEmitter<void>();
   @Input() activeFilter!: Signal<'hosting' | 'upcoming' | 'all'>;
+  
   onEventClick(event: Event): void {
     this.eventClicked.emit(event);
   }

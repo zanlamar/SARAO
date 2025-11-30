@@ -33,7 +33,6 @@ import { Bringlist } from '../../features/bringlist/bringlist';
     MatButtonModule, 
     MatRadioModule, 
     MatTimepickerModule, 
-    Footer, 
     FormsModule, 
     DatePicker,
     LocationSearch,

@@ -6,6 +6,7 @@
             } @else {
                 <h2>Create New sarao</h2>
             }
+            <p class="mandatory-note">All fields are mandatory. Fill with care 💛 </p>
         </div>
         <mat-stepper linear #stepper (selectionChange)="onStepChange($event)">
         <mat-step [stepControl]="step1FormGroup">
@@ -13,18 +14,20 @@
         <form [formGroup]="step1FormGroup">
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Event Name</label>
+                    <label for="eventTitle">Event Name *</label>
                     <input matInput formControlName="eventTitle" placeholder="Enter event name" />
                 </mat-form-field>
             </div>
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Event Description</label>
+                    <label for="description">Event Description *</label>
                     <textarea matInput formControlName="description" placeholder="Describe your event..."></textarea>
                 </mat-form-field>
             </div>
-            <div class="button-container">
-                <button mat-button matStepperNext>Next</button>
+            <div class="btn-next">
+                <button mat-button matStepperNext 
+                [disabled]="!step1FormGroup.valid"
+                >Next</button>
             </div>
         </form>
         </mat-step>
@@ -32,7 +35,7 @@
         <ng-template matStepLabel>Date & Time</ng-template>
         <form [formGroup]="step2FormGroup">
             <div class="form-row full">
-                <label>Event Date & Time</label>
+                <label for="eventDateTime">Event Date & Time *</label>
                     <p-datepicker 
                         formControlName="eventDateTime"
                         dateFormat="dd/mm/yy"
@@ -47,9 +50,10 @@
                         </ng-template>
                     </p-datepicker>
             </div>
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                [disabled]="!step2FormGroup.valid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -58,22 +62,22 @@
         <form [formGroup]="step3FormGroup">
             <div class="form-row">
                 <mat-form-field>
-                    <label>Location Alias</label>
+                    <label for="location">Location Alias *</label>
                     <input matInput formControlName="location" placeholder="Enter location name" />
                 </mat-form-field>
             </div>
-            <div class="form-row full">
+            <!-- <div class="form-row full"> -->
                 @if (isStep3Active()) {
                     <app-location-search
                         (locationSelected)="onLocationSelected($event)">
                     </app-location-search>
                 }
-            </div>
+            <!-- </div> -->
 
             @if (confirmedLocationAddress()) {
                 <div class="form-row full">
                     <mat-form-field>
-                    <label>Confirmed Address</label>
+                    <label for="confirmedLocationAddress">Confirmed Address *</label>
                     <input 
                         matInput 
                         [value]="confirmedLocationAddress()" 
@@ -83,9 +87,10 @@
                 </div>
             }
 
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                [disabled]="!step3FormGroup.valid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -94,7 +99,7 @@
         <form [formGroup]="step4FormGroup">
             <div class="form-row full">
                 <mat-form-field>
-                    <label>Upload Cover Image</label>
+                    <label for="selectedFileName">Upload Cover Image *</label>
                     <input matInput [value]="selectedFileName || ''" readonly />
                     <input
                             type="file"
@@ -107,16 +112,17 @@
                         <button mat-button (click)="triggerFileInput()">Choose Image</button>
                     </mat-form-field>
                 </div>
-            <div class="form-row">
-                <label>Are +1 people allowed?</label>
+            <div class="form-row full">
+                <label for="allowedPlusOne">Can I bring someone? *</label>
                 <mat-radio-group formControlName="allowedPlusOne">
                 <mat-radio-button [value]="true">Yes</mat-radio-button>
                 <mat-radio-button [value]="false">No</mat-radio-button>
                 </mat-radio-group>
             </div>
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext
+                [disabled]="!step4FormGroup.valid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -124,8 +130,8 @@
     <mat-step [stepControl]="step5FormGroup">
         <ng-template matStepLabel>Bringlist</ng-template>
         <form [formGroup]="step5FormGroup">
-            <div class="form-row">
-                <label>Do you want a bring list?</label>
+            <div class="form-row full">
+                <label for="bringList">Do you want a bring list? *</label>
                 <mat-radio-group formControlName="bringList">
                     <mat-radio-button [value]="true">Yes</mat-radio-button>
                     <mat-radio-button [value]="false">No</mat-radio-button>
@@ -140,12 +146,27 @@
                 </div>
             }
 
-            <div class="button-container">
+            <div class="btn-next">
                 <button mat-button matStepperPrevious>Back</button>
                 @if (isEditMode()) {
-                    <button mat-button (click)="onSubmit()">Save Changes</button>
+                    <button mat-button (click)="onSubmit()"
+                    [disabled]="
+                    !step1FormGroup.valid ||
+                    !step2FormGroup.valid ||
+                    !step3FormGroup.valid ||
+                    !step4FormGroup.valid ||
+                    step5FormGroup.get('bringList')?.value === ''
+                    ">Save Changes</button>
                 } @else {
-                    <button mat-button (click)="onSubmit()">Create Event</button>
+                    <button mat-button (click)="onSubmit()"
+                    [disabled]="
+                    !step1FormGroup.valid ||
+                    !step2FormGroup.valid ||
+                    !step3FormGroup.valid ||
+                    !step4FormGroup.valid ||
+                    step5FormGroup.get('bringList')?.value === ''
+
+                    ">Create</button>
                 }
             </div>
         </form>
@@ -153,5 +174,4 @@
     
     </mat-stepper>  
     </div>
-    <app-footer></app-footer>
 </div>

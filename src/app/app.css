@@ -1,38 +1,9 @@
-:root {
-  --color-ice: #e8f0e9;
-  --color-dark: #010101;
-  --color-azul: #7489ff;
-  --color-azul-dark: #5a6dd4;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
-body {
-  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-} 
 .landing-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
+
 .hero-section {
   flex-grow: 1;
   display: flex;
@@ -115,7 +86,6 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.875rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 @media (min-width: 640px) {
   .btn {

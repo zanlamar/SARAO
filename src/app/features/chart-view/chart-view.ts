@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed, effect, ViewChild, ElementRef, input } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, effect, ViewChild, ElementRef, input, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { EventWithStats } from '../../core/models/event.model';
@@ -14,7 +14,7 @@ type Period = 'thisMonth' | 'nextMonth' | 'spring' | 'summer' | 'autumn' | 'wint
   styleUrl: './chart-view.css',
   standalone: true
 })
-export class ChartView implements OnInit {
+export class ChartView implements OnInit, AfterViewInit, OnDestroy {
 
   events = input.required<EventWithStats[]>();
   

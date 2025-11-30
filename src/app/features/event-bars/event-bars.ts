@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed, effect, ViewChild, ElementRef, input } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, effect, ViewChild, ElementRef, input, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { EventWithStats } from '../../core/models/event.model';
@@ -14,7 +14,7 @@ type Season = 'spring' | 'summer' | 'autumn' | 'winter';
   styleUrl: './event-bars.css',
   standalone: true
 })
-export class EventBars implements OnInit {
+export class EventBars implements OnInit, AfterViewInit, OnDestroy {
   events = input.required<EventWithStats[]>();
   
   @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
