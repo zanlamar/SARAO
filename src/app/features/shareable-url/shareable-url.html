@@ -3,10 +3,10 @@
         @if (event()) {
         <div class="preview-content">
             <div class="share-header">
-                <h1 class="share-title">You are good to go!</h1>
+                <h1 class="share-title">💃 You are good to go! 💃</h1>
                 <p class="share-subtitle">Share this URL with your guests</p>
             </div>
-            <h2 class="event-title">{{ event()?.title }}</h2>
+    
             <div class="share-url-container">
                 <div class="share-url-wrapper">
                     <input 
@@ -16,7 +16,7 @@
                         readonly
                     />
                     <button 
-                        class="share-copy-btn"
+                        class="btn-dark"
                         (click)="copyToClipboard()"
                         [class.copied]="copied()"
                     >
@@ -29,6 +29,7 @@
                     </button>
                 </div>
             </div>
+            <h2 class="event-title">{{ event()?.title }}</h2>
             <div class="preview-image">
                 @if (event()?.imageUrl && event()?.imageUrl !== '') {
                     <img [src]="event()?.imageUrl" alt="{{ event()?.title }}" />
@@ -37,7 +38,8 @@
                 }
             </div>
             <div class="share-info">
-                <p>✨ Your guests can now see all the details and RSVP!</p>
+                <p>✨ Congrats! Your sarao is created and visible on your calendar.
+                    Share this URL with your guest and check their RSVP on your user-area. </p>
             </div>
         </div>
         } @else {
@@ -46,5 +48,5 @@
         </div>
         }
     </main>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
 </div>

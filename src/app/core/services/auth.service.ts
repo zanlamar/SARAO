@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, user } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { SupabaseService } from "./supabase.service";

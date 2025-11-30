@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
-import { Footer } from '../../shared/components/footer/footer';
 import { AuthService } from '../../core/services/auth.service';
 import { PreviewMap } from '../../shared/components/preview-map/preview-map';
 import { Bringlist } from '../bringlist/bringlist';
 
 @Component({
   selector: 'app-event-preview',
-  imports: [CommonModule, Footer, PreviewMap, Bringlist],
+  imports: [CommonModule, PreviewMap, Bringlist],
   templateUrl: './event-preview.html',
   styleUrl: './event-preview.css',
   standalone: true,
@@ -28,15 +27,11 @@ export class EventPreview implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('🔍 ngOnInit ejecutado');
     this.route.params.subscribe(async params => {
       const eventId = params['id'];
-      console.log('🔍 eventId recibido:', eventId);
       
       if (eventId) {
-        console.log('🔍 Intentando cargar evento...');
         await this.loadEventFromDatabase(eventId);
-        console.log('🔍 Evento cargado:', this.event());
 
         this.isCreating.set(false);
 
@@ -64,11 +59,9 @@ export class EventPreview implements OnInit {
   }
 
   private async loadEventFromDatabase(eventId: string): Promise<void> {
-    console.log('🔍 loadEventFromDatabase iniciado');
 
     try {
       const loadedEvent = await this.eventService.getEventById(eventId);
-      console.log('🔍 Evento obtenido de BD:', loadedEvent);
       this.event.set(loadedEvent);
       
     } catch (error: any) {

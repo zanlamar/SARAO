@@ -20,7 +20,7 @@ const defaultIcon = L.icon({
 export class PreviewMap implements AfterViewInit {
   @Input() latitude: number | undefined = undefined;
   @Input() longitude: number | undefined = undefined;
-  @Input() address: string = '';
+  @Input() address = '';
 
   private map: L.Map | null = null;
 
@@ -32,16 +32,11 @@ export class PreviewMap implements AfterViewInit {
 
   private initializeMap() {
     if (!this.latitude || !this.longitude) {
-      console.log('❌ Sin coordenadas:', { latitude: this.latitude, longitude: this.longitude });
       return;
     }
 
-    console.log('✅ Iniciando mapa con coords:', { latitude: this.latitude, longitude: this.longitude });
-
     try {
       const container = document.getElementById('event-map-container');
-      console.log('🔍 Container encontrado?', !!container);
-
   
       this.map = L.map('event-map-container').setView(
         [this.latitude, this.longitude],
@@ -53,21 +48,17 @@ export class PreviewMap implements AfterViewInit {
         maxZoom: 19
       }).addTo(this.map);
 
-      console.log('✅ Mapa creado exitosamente');
-
       L.marker([this.latitude, this.longitude], { icon: defaultIcon })
         .bindPopup(this.address || 'Event Location')
         .openPopup()
         .addTo(this.map);
 
-        // ← MÚLTIPLES invalidateSize para asegurar
         setTimeout(() => this.map?.invalidateSize(true), 100);
         setTimeout(() => this.map?.invalidateSize(true), 300);
         setTimeout(() => this.map?.invalidateSize(true), 600);
 
       setTimeout(() => {
         this.map?.invalidateSize();
-        console.log('✅ invalidateSize ejecutado');
       }, 100);
     } catch (error) {
       console.error('❌ Error initializing event map:', error);

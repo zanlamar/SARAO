@@ -44,6 +44,15 @@
   display: none;
 }
 
+.navbar--compact .navbar-inner {
+  height: 4rem !important;
+  justify-content: space-between;
+}
+
+.navbar--compact .logo-img {
+  max-width: 6rem !important;
+}
+
 .navbar-center {
   position: absolute;
   left: 50%;
@@ -84,33 +93,6 @@
   display: none;
 }
 
-.navbar-home .navbar-inner {
-  height: 4rem;
-}
-
-.navbar-home .logo-img {
-  max-width: 6rem;
-}
-
-.navbar-create-event .navbar-inner,
-.navbar-event-preview .navbar-inner,
-.navbar-calendar-view .navbar-inner,
-.navbar-user-area .navbar-inner,
-.navbar-memento .navbar-inner,
-.navbar-shareable-url .navbar-inner {
-  height: 4rem !important;
-  justify-content: space-between;
-}
-
-.navbar-create-event .logo-img,
-.navbar-event-preview .logo-img,
-.navbar-calendar-view .logo-img,
-.navbar-user-area .logo-img,
-.navbar-memento .logo-img,
-.navbar-shareable-url .logo-img {
-  max-width: 6rem !important;
-}
-
 .navbar-buttons,
 .navbar-buttons-create {
   display: flex;
@@ -126,11 +108,9 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 9999px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 2rem;
-  font-family: 'Nunito Sans', sans-serif;
   text-decoration: none;
 }
 
@@ -140,7 +120,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #ffd13a;
+  background-color: var(--color-banana);
 }
 
 .btn-secondary {
@@ -189,10 +169,11 @@
 }
 
 .logout-text {
-  font-size: 0.65rem;
+  font-size: 0.55rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .notification-bell {

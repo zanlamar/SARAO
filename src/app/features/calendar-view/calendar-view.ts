@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, computed} from '@angular/core';
 import { EventService } from '../../core/services/event.service';
 import { Event } from '../../core/models/event.model';
-import { Footer } from "../../shared/components/footer/footer";
 import { CalendarDay } from '../../core/models/calendar.model';
 import { EventsList } from './events-list/events-list';
 import { CalendarService } from '../../core/services/calendar.service';
@@ -10,7 +9,7 @@ import { CalendarGrid } from './calendar-grid/calendar-grid';
 import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-calendar-view',
-  imports: [CommonModule, Footer, EventsList, CalendarGrid],
+  imports: [CommonModule, EventsList, CalendarGrid],
   templateUrl: './calendar-view.html',
   styleUrl: './calendar-view.css',
   standalone: true,

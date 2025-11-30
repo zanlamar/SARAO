@@ -44,54 +44,54 @@
     margin-bottom: 1.5rem;  
 }
 
-.period-btn {
+.btn-filter {
     padding: 0.30rem 1rem;
-    background-color: #f3f4f6;
-    color: var(--color-dark);
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
+    background-color: var(--color-azul);
+    color: white;
+    border-radius: 999px;
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'Koulen', sans-serif; 
+    border: transparent;
 }
 
-.period-btn:hover {
-    background-color: #e5e7eb;
+.btn-filter:hover {
+    background-color: var(--color-banana);
+    color: var(--color-dark);
 }
 
-.period-btn.active {
-    background-color: var(--color-azul);
-    color: white;
-    border-color: var(--color-azul-dark);
+.btn-filter.active {
+  border-color: #000;
+  background: #1f2937; 
+  color: white;
 }
 
-.period-btn:active {
+.btn-filter:active {
     transform: scale(0.98);
 }
 
-.season-btn {
+.btn-season {
     padding: 0.30rem 1rem;
     background-color: #f3f4f6;
     color: var(--color-dark);
     border: 2px solid transparent;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'Koulen', sans-serif;  /* Tu branding */
+    font-family: 'Koulen', sans-serif;
 }
 
-.season-btn:hover {
+.btn-season:hover {
     background-color: #e5e7eb;
 }
 
-.season-btn.active {
+.btn-season.active {
     background-color: var(--color-banana);
     color: black;
 }
 
-.season-btn:active {
+.btn-season:active {
     transform: scale(0.98);
 }
 
@@ -125,8 +125,8 @@
         gap: 0.5rem;
     }
 
-    .period-btn,
-    .season-btn {
+    .btn-season,
+    .btn-period {
         padding: 0.6rem 0.75rem;
         font-size: 0.75rem;
     }

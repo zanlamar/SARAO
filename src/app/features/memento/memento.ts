@@ -30,7 +30,6 @@ export class Memento implements OnInit {
     try {
       const events = await this.eventService.getLoggedUserEventsWithStats();
       this.userEvents.set(events);
-      console.log('✅ Eventos cargados en memento:', events.length);
     } catch (error) {
       console.error('❌ Error cargando eventos en memento:', error);
       this.userEvents.set([]);

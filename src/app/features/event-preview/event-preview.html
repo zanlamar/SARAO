@@ -1,12 +1,12 @@
 <div class="preview-wrapper">
     @if (isCreating()) {
         <div class="preview-top-buttons">
-            <button class="btn-secondary" (click)="onEdit()"> < EDIT</button>
-            <button class="btn-primary" (click)="onConfirm()">CONFIRM ></button>
+            <button class="btn-back" (click)="onEdit()"> < EDIT</button>
+            <button class="btn-next" (click)="onConfirm()">CONFIRM ></button>
         </div>
     } @else {
         <div class="preview-top-buttons">
-            <button class="btn-secondary" (click)="onBack()"> < BACK</button>
+            <button class="btn-back" (click)="onBack()"> < BACK</button>
         </div>
     }
 
@@ -51,14 +51,14 @@
             
 
             
-            <div class="preview-extras">
-                @if (event()?.bringList && event()?.bringListItems && event()?.bringListItems!.length > 0) {
+            @if (event()?.bringList && event()?.bringListItems && event()?.bringListItems!.length > 0) {
+                <div class="preview-extras">
                     <app-bringlist 
                         [readonly]="true"
                         [items]="event()!.bringListItems ?? []">
                     </app-bringlist>
-                }
-            </div>
+                </div>
+            }
 
             @if (!isCreating()) {
                 <div class="rsvp-section">
@@ -91,12 +91,12 @@
                     </div>
                 </div>
             }
-                <div class="preview-where">
-                <span class="main-label">📍 ADRESS</span>
-                <span class="main-value">{{ event()?.location?.address }}</span>
-            </div>
-
             @if (event()?.location?.latitude && event()?.location?.longitude) {
+                <div class="preview-where">
+                    <span class="main-label">📍 ADRESS</span>
+                    <span class="main-value">{{ event()?.location?.address }}</span>
+                </div>
+
                 <div class="map-section">
                     <app-preview-map 
                         [latitude]="event()?.location?.latitude"
@@ -112,5 +112,5 @@
         </div>
     }
     </main>
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
 </div>

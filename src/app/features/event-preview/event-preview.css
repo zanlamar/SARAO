@@ -218,18 +218,16 @@ button {
   padding: 0.75rem 2rem;
   border-radius: 9999px;
   border: none;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Koulen', sans-serif;
 }
-.btn-primary {
+.btn-next {
   background-color: var(--color-azul);
   color: var(--color-dark);
 }
-.btn-primary:hover {
+.btn-next:hover {
   background-color: var(--color-banana);
-  transform: translateY(-2px);
 }
 .btn-secondary {
   background-color: transparent;
@@ -276,4 +274,21 @@ button {
     font-size: 0.9rem;
     padding: 0.6rem 1.5rem;
   }
+}
+
+.preview-top-buttons .btn-back {
+    padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: 'Koulen', sans-serif;
+
+  background-color: transparent;
+  color: var(--color-dark);
+  border: 2px solid var(--color-dark);
+}
+
+.preview-top-buttons .btn-back:hover {
+  background-color: var(--color-dark);
+  color: var(--color-ice);
 }
