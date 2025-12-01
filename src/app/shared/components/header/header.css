@@ -4,8 +4,12 @@
   left: 0;
   right: 0;
   z-index: 50;
-  background-color: var(--color-dark);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background-color: rgba(248, 250, 252, 0.46);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease, border-color 0.2s ease;
 }
 
 .navbar-content {
@@ -19,8 +23,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 8rem;
-  transition: height 0.3s ease;
+  height: 7.2rem;
+  transition: height 0.25s ease;
 }
 
 .navbar-logo {
@@ -31,10 +35,10 @@
 }
 
 .logo-img {
-  max-width: 14rem;
+  max-width: 12rem;
   width: auto;
   object-fit: contain;
-  transition: max-width 0.3s ease;
+  transition: max-width 0.25s ease;
 }
 
 .logo-text {
@@ -71,7 +75,7 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--color-ice);
+  color: #1f2937;
   padding: 0.5rem;
   text-decoration: none;
 }
@@ -82,7 +86,7 @@
 }
 
 .btn-memento.active {
-  color: var(--color-blush);
+  color: var(--color-azul);
 }
 
 .btn-memento .material-symbols-outlined {
@@ -124,14 +128,14 @@
 }
 
 .btn-secondary {
-  color: var(--color-ice);
-  border: 1px solid var(--color-ice);
+  color: #1f2937;
+  border: 1px solid #1f2937;
   background-color: transparent;
 }
 
 .btn-secondary:hover {
   background-color: var(--color-ice);
-  color: var(--color-dark);
+  color: #1f2937;
 }
 
 .btn-dark {
@@ -153,7 +157,7 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--color-ice);
+  color: #1f2937;
   padding: 0.5rem;
 }
 
@@ -182,7 +186,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-ice);
+  color: #1f2937;
 }
 
 .icon-bell {
