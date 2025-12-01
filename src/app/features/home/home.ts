@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./home.css']
 })
 export class Home implements OnInit {
-  username = 'Pendón';
   constructor(private router: Router) {}
   ngOnInit(): void {
   }

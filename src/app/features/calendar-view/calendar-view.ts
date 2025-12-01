@@ -119,8 +119,7 @@ export class CalendarView implements OnInit {
     this.currentYear$.set(year);
     this.generateCalendar();
   }
-  onEventClicked(event: Event): void {
-  }
+
   setFilter(filter: 'hosting' | 'upcoming' | 'all'): void {
   this.selectedDate$.set('');
   this.selectedDateEvents$.set([]);
