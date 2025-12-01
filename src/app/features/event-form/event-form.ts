@@ -56,6 +56,7 @@ export class EventForm implements OnInit {
   confirmedLocationAddress = signal<string | null>(null);
   selectedLocationCoords: GeocodingResult | null = null;
   confirmedBringlistItems: BringlistItem[] = [];
+  datePickerLocale = { firstDayOfWeek: 1 };
 
   constructor(
     private router: Router,
@@ -70,7 +71,7 @@ export class EventForm implements OnInit {
       description: ['', Validators.required],
     });
     this.step2FormGroup = this.formBuilder.group({
-      eventDateTime: ['', Validators.required]
+      eventDateTime: [this.getDefaultNoonDate(), Validators.required]
     });
     this.step3FormGroup = this.formBuilder.group({
       location: ['', Validators.required],
@@ -82,6 +83,12 @@ export class EventForm implements OnInit {
     this.step5FormGroup = this.formBuilder.group({
       bringList: [''],
     })
+  }
+
+  private getDefaultNoonDate(): Date {
+    const d = new Date();
+    d.setHours(12, 0, 0, 0);
+    return d;
   }
 
   onStepChange(event: any) {

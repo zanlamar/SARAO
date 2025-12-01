@@ -44,9 +44,9 @@
                         hourFormat="24"
                         placeholder="When? What time?"
                         appendTo="body"
-                        >
+                        [firstDayOfWeek]="1">
                         <ng-template pTemplate="date" let-date>
-                                {{ date.day }}
+                            {{ date.day }}
                         </ng-template>
                     </p-datepicker>
             </div>

@@ -214,18 +214,6 @@ button[matStepperPrevious]:hover {
 #fileInput {
   display: none;
 }
-::ng-deep .cdk-overlay-pane {
-  z-index: 1000 !important;
-}
-::ng-deep .cdk-overlay-backdrop {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(8px);
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-}
 @media (max-width: 640px) {
   .event-form-container {
     padding: 1.5rem;
@@ -239,16 +227,18 @@ button[matStepperPrevious]:hover {
     font-size: 0.9rem;
   }
 }
-::ng-deep .p-datepicker {
-  z-index: 1050 !important;
+::ng-deep .p-datepicker .p-timepicker {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 ::ng-deep .p-datepicker .p-datepicker-group {
-  width: 100% !important;
+  width: 100%;
 }
 
 ::ng-deep .p-calendar-container {
-  min-width: 320px !important;
-  width: auto !important;
+  min-width: 260px; 
+  width: auto;
 }
 
 button[mat-button][disabled],
