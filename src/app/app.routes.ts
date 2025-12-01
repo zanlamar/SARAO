@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { authGuard } from './core/guards/auth.guard';
-import { landingPage } from './features/landingPage/landingPage';
+import { landingPage } from './features/landing-page/landingPage';
 import { Home } from './features/home/home';
 import { EventForm } from './features/event-form/event-form';
 import { CalendarView } from './features/calendar-view/calendar-view';
