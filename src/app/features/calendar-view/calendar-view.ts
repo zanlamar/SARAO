@@ -37,8 +37,9 @@ export class CalendarView implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
-    this.loadUserEvents();
+  async ngOnInit(): Promise<void> {
+    await this.authService.waitForAuthentication();
+    await this.loadUserEvents();
     this.generateCalendar();
     this.updateFilteredEvents();
   }
@@ -48,24 +49,43 @@ export class CalendarView implements OnInit {
     );
     this.calendarDays$.set(days);
   }
+
   async loadUserEvents(): Promise<void> { 
+    const userId = await this.eventService.getCurrentSupabaseUserId();
     const createdEvents = await this.eventService.getLoggedUserEvents();
     const guestEvents = await this.eventService.getGuestEvents();
 
-    const createdIds = new Set(createdEvents.map(e => e.id));
-    const pureGuestEvents = guestEvents.filter(e => !createdIds.has(e.id));
+  const createdIds = createdEvents.map(event => event.id);
+  const pureGuestEvents = guestEvents.filter(guestEvent => {
+    return !createdIds.includes(guestEvent.id);
+  });
 
-    const allEvents = [...createdEvents, ...pureGuestEvents];
+  const mergedEvents = [...createdEvents, ...pureGuestEvents];
 
-    allEvents.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
+  const eventsWithFlags = mergedEvents.map(event => {
+    const isHost = event.userId === userId;
+    const isGuest = (event as any).isGuest === true;
 
-      this.userEvents$.set(allEvents);
-      this.updateFilteredEvents(); 
-    
-    if (this.selectedDate$()) {
-      this.selectDay(this.selectedDate$());
-    }
+    return {
+      ...event,
+      isHost: isHost,
+      isGuest: isGuest,
+    } as any;
+  });
+
+  eventsWithFlags.sort((a, b) => {
+    const dateA = new Date(a.eventDateTime).getTime();
+    const dateB = new Date(b.eventDateTime).getTime();
+    return dateA - dateB;
+  });
+
+  this.userEvents$.set(eventsWithFlags);
+  this.updateFilteredEvents();
+
+  if (this.selectedDate$()) {
+    this.selectDay(this.selectedDate$());
   }
+}
 
   selectDay(dateString: string): void {
     this.selectedDate$.set(dateString);
@@ -120,7 +140,7 @@ export class CalendarView implements OnInit {
     });
     
     if (this.activeFilter() === 'hosting') {
-      const filtered = futureEvents.filter(e => !(e as any).isGuest);
+      const filtered = futureEvents.filter(e => (e as any).isHost);
       this.filteredEvents$.set(filtered);
     } else if (this.activeFilter() === 'upcoming') {
       const filtered = futureEvents.filter(e => (e as any).isGuest);

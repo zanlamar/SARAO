@@ -47,8 +47,9 @@ export class EventsList {
   onShareEvent(eventId: string): void {
     this.router.navigate(['/shareable-url', eventId]);
   }
-  isHostEvent(event: Event): boolean {
-    return !(event as any).isGuest;
+
+  isHostEvent(event: Event & { isHost?: boolean }): boolean {
+  return !!(event as any).isHost;
   }
 }
 
