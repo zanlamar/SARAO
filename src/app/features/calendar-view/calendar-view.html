@@ -31,7 +31,7 @@
 
                         @if (selectedDate$()) {
                             <div class="selected-day-indicator">
-                                <span> Checking {{ selectedDate$() | date:'mediumDate' }} </span>
+                                <span> 👀 Checking {{ selectedDate$() | date:'mediumDate' }} </span>
                                 <button (click)="clearDaySelection()">✕</button>
                             </div>
                         }

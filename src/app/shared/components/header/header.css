@@ -139,12 +139,12 @@
 }
 
 .btn-dark {
-  background-color: #1a1a1a;
+  background-color: var(--color-dark);
   color: var(--color-ice);
 }
 
 .btn-dark:hover {
-  background-color: #333;
+  background-color: var(--color-blush);
 }
 
 .btn-logout {
