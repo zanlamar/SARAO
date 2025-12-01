@@ -4,8 +4,12 @@
   left: 0;
   right: 0;
   z-index: 40;
-  background-color: var(--color-dark);
-  padding: 0.5rem 0;
+  background-color: rgba(248, 250, 252, 0.6);
+  padding: 0.45rem 0;
+  box-shadow: 0 -8px 20px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(148, 163, 184, 0.45);
 }
 
 .footer-inner {
@@ -21,7 +25,7 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--color-ice);
+  color: #1f2937;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -42,7 +46,7 @@
 }
 
 .footer-icon-add:hover {
-  background-color: #ffc107;
+  background-color: var(--color-blush);
   transform: scale(1.1);
   color: var(--color-dark);
 }
@@ -59,12 +63,12 @@
 }
 
 .footer--full {
-  padding: 0.5rem 0;
+  padding: 0.45rem 0;
 }
 
 .footer--minimal {
   padding: 0.65rem 0;
-  background-color: var(--color-dark);
+  background-color: var(--color-azul);
 }
 
 .footer-minimal-content {

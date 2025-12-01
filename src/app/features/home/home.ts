@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule} from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -9,11 +8,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class Home implements OnInit {
-  username = 'Pendón';
+export class Home {
   constructor(private router: Router) {}
-  ngOnInit(): void {
-  }
+
   onLogout() {
     this.router.navigate(['/login']);
   }

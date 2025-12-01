@@ -19,7 +19,6 @@ export class Header {
   
   headerMode: 'landing' | 'auth' | 'main' = 'landing';
   variant: 'landing' | 'compact' = 'compact';
-  username = 'Pendón';
   
   constructor() {
     this.router.events 
