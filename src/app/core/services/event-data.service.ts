@@ -16,8 +16,6 @@ export class EventDataService {
             .from('events')
             .insert([eventToInsert])
             .select();
-
-        
         if (error) {
             console.error('❌ ERROR EN INSERT:', error);
             throw new Error(error.message);
@@ -58,7 +56,7 @@ export class EventDataService {
             .eq('id', eventId)
             .eq('creator_id', userId);            
         if (error) throw new Error(error.message);  
-        }
+    }
         
     async saveInvitation(eventId: string, guestId: string, email: string): Promise<void> {
         try {
@@ -111,6 +109,7 @@ export class EventDataService {
             .eq('guest_id', guestId);
         if (error) throw new Error(error.message);
     }
+    
     async getGuestEvents(): Promise<Event[]> {
         const user = this.authService.currentUser();
         
@@ -121,9 +120,6 @@ export class EventDataService {
                 .select('event_id')
                 .eq('guest_id', user.uid)
                 .in('rsvp_status', ['yes', 'maybe']);
-
-            
-
             if (error || !data?.length) {
                 return [];
             }

@@ -6,7 +6,11 @@ export async function getSupabaseUserId(
     authService: AuthService,
     supabaseService: SupabaseService
 ): Promise<string> {
-    const firebaseUid = authService.currentUser().uid;
+    const firebaseUser = authService.currentUser();
+    if (!firebaseUser) {
+        throw new Error('No authenticated Firebase user when resolving Supabase user ID');
+    }
+    const firebaseUid = firebaseUser.uid;
 
     const { data, error } = await supabaseService.getClient()
         .from('users')

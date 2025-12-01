@@ -1,7 +1,7 @@
 import { Component, signal, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';  
 @Component({
   selector: 'app-register',
@@ -19,6 +19,7 @@ export class Register {
   constructor(
     private authService: AuthService,
     private router: Router,
+    public route: ActivatedRoute,
   ) {}
   async onRegister() {
     if (this.password !== this.confirmPassword) {
@@ -31,9 +32,16 @@ export class Register {
     }
     this.loading.set(true);
     this.errorMessage.set('');
+
     const result = await this.authService.register(this.email, this.password);
     if (result. success) {
-      this.router.navigate(['/calendar-view']);
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+
+      if (returnUrl && returnUrl !== '/login' && returnUrl !== '/register') {
+        this.router.navigateByUrl(returnUrl);
+        } else {
+          this.router.navigate(['/calendar-view']);
+        }
     } else {
       if (result.error?.includes('email-already-in-use')) {
         this.errorMessage.set('That email is already registered.');

@@ -11,6 +11,8 @@ import { SupabaseService } from "./supabase.service";
 export class EventService {
     eventPreview = signal<EventFormDTO | null>(null);
     imageFilePreview: File | null = null;
+    private supabaseUserIdCache: string | null = null;
+
     constructor(
         private authService: AuthService,
         private storageService: StorageService,
@@ -135,5 +137,12 @@ export class EventService {
     }> {
     const result = await this.eventDataService.getEventStats(eventId);
     return result.attendees;
+    }
+
+    async getCurrentSupabaseUserId(): Promise<string> {
+        if (!this.supabaseUserIdCache) {
+            this.supabaseUserIdCache = await getSupabaseUserId(this.authService, this.supabaseService);
+        }
+        return this.supabaseUserIdCache;
     }
 }

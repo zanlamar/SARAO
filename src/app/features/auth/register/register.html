@@ -54,7 +54,9 @@
         </form>
         <p class="auth-footer">
         Already have an account? 
-        <a routerLink="/login">Login here</a>
+        <a routerLink="/login"
+        [queryParams]="{ returnUrl: route.snapshot.queryParams['returnUrl'] }"
+        >Login here</a>
         </p>
     </div>
 </div>
