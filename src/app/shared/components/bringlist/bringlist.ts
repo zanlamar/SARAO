@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, signal, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { BringlistItem } from '../../core/models/event.model';
+import { BringlistItem } from '../../../core/models/event.model';
 
 @Component({
   selector: 'app-bringlist',

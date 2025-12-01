@@ -17,8 +17,8 @@ import { StorageService } from '../../core/services/storage.service';
 import { EventFormDTO, GeocodingResult, BringlistItem } from '../../core/models/event.model';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
-import { LocationSearch  } from '../../shared/components/location-search/location-search';
-import { Bringlist } from '../../features/bringlist/bringlist';
+import { LocationSearch  } from './location-search/location-search';
+import { Bringlist } from '../../shared/components/bringlist/bringlist';
 
 @Component({
   selector: 'app-event-form',
