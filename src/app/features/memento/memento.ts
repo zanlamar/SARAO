@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { EventService } from '../../core/services/event.service';
 import { AuthService } from '../../core/services/auth.service';
 import { EventWithStats } from '../../core/models/event.model';
-import { EventBars } from '../event-bars/event-bars';
-import { ChartView } from '../chart-view/chart-view';
+import { EventBars } from './event-bars/event-bars';
+import { ChartView } from './chart-view/chart-view';
 import { Footer } from '../../shared/components/footer/footer';
 
 @Component({
