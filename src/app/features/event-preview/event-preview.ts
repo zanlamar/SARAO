@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
 import { AuthService } from '../../core/services/auth.service';
-import { PreviewMap } from '../../shared/components/preview-map/preview-map';
-import { Bringlist } from '../event-form/bringlist/bringlist';
+import { PreviewMap } from './preview-map/preview-map';
+import { Bringlist } from '../../shared/components/bringlist/bringlist';
 
 @Component({
   selector: 'app-event-preview',
@@ -86,6 +86,7 @@ export class EventPreview implements OnInit {
     if (this.isCreating()) {
       this.router.navigate(['/create']);
     } else {
+      return;
     }
   }
   
