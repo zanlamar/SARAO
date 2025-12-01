@@ -51,7 +51,6 @@ export class CalendarView implements OnInit {
   }
 
   async loadUserEvents(): Promise<void> { 
-    const userId = await this.eventService.getCurrentSupabaseUserId();
     const createdEvents = await this.eventService.getLoggedUserEvents();
     const guestEvents = await this.eventService.getGuestEvents();
 
@@ -60,18 +59,18 @@ export class CalendarView implements OnInit {
     return !createdIds.includes(guestEvent.id);
   });
 
-  const mergedEvents = [...createdEvents, ...pureGuestEvents];
-
-  const eventsWithFlags = mergedEvents.map(event => {
-    const isHost = event.userId === userId;
-    const isGuest = (event as any).isGuest === true;
-
-    return {
+  const eventsWithFlags = [
+    ...createdEvents.map(event => ({
       ...event,
-      isHost: isHost,
-      isGuest: isGuest,
-    } as any;
-  });
+      isHost: true,
+      isGuest: false,
+    } as any)),
+    ...pureGuestEvents.map(event => ({
+      ...event,
+      isHost: false,
+      isGuest: true,
+    } as any)),
+  ];
 
   eventsWithFlags.sort((a, b) => {
     const dateA = new Date(a.eventDateTime).getTime();
