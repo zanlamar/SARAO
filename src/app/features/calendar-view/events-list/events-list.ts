@@ -40,6 +40,7 @@ export class EventsList {
       console.error('Error deleting event:', error);
     }
   }
+  
   onSee(event: Event): void {
     this.eventClicked.emit(event);
     this.router.navigate(['/event-preview', event.id]);
