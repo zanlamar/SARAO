@@ -3,7 +3,7 @@ import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
-import { DeleteModal } from "../../../shared/components/delete-modal/delete-modal";
+import { DeleteModal } from "../delete-modal/delete-modal";
 @Component({
   selector: 'app-events-list',
   imports: [CommonModule, DeleteModal],
