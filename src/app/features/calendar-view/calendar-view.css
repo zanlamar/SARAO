@@ -147,7 +147,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.5rem 0.75rem;
-  background: #dbeafe;
+  background: var(--color-blush);
   border-radius: 8px;
   margin: 1rem 0;
   font-family: 'Koulen', sans-serif;
