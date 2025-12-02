@@ -6,6 +6,8 @@ import { StorageService } from "./storage.service";
 import { EventDataService } from "./event-data.service";
 import { SupabaseService } from "./supabase.service";
 import { InvitationService } from "./invitation.service";
+import { EventStatsService } from "./event-stats.service";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -19,7 +21,8 @@ export class EventService {
         private storageService: StorageService,
         private eventDataService: EventDataService,
         private supabaseService: SupabaseService,
-        private invitationService: InvitationService
+        private invitationService: InvitationService,
+        private eventStatsService: EventStatsService
     ) {}
 
     async createEvent(eventData: EventFormDTO, imageFile: File | null): Promise<Event> {
@@ -69,49 +72,15 @@ export class EventService {
     }
 
     async getLoggedUserEventsWithStats(): Promise<EventWithStats[]> {
-        try {
-            const events = await this.getLoggedUserEvents();
-            const eventsWithStats: EventWithStats[] = [];
-
-            for (const event of events) {
-                try {
-                    const stats = await this.eventDataService.getEventStats(event.id);
-                    const eventWithStats: EventWithStats = {
-                        ...event,
-                        confirmed: stats.stats.confirmed || 0,
-                        notComing: stats.stats.notComing || 0,
-                        undecided: stats.stats.undecided || 0,
-                        pending: stats.stats.pending || 0,
-                        totalInvites: 0,
-                        percentageConfirmed: 0
-                    };
-                    eventsWithStats.push(eventWithStats);
-                } catch (error) {
-                    console.error(`Error cargando stats del evento ${event.id}:`, error);
-                }
-            }
-            return eventsWithStats;
-        } catch (error) {
-            console.error('Error obteniendo eventos con stats:', error);
-        return [];
-        }
-    };
-
-    async getEventStatsWithAttendees(eventId: string): Promise<{
-        stats: { confirmed: number; notComing: number; undecided: number; pending: number };
-        attendees: { confirmed: string[]; notComing: string[]; pending: string[] };
-    }> {
-        return this.eventDataService.getEventStats(eventId);
+        return this.eventStatsService.getLoggedUserEventsWithStats();
     }
 
-    async getAttendeesByEvent(eventId: string): Promise<{
-        confirmed: string[];
-        notComing: string[];
-        pending: string[];
-        undecided?: string[];
-    }> {
-    const result = await this.eventDataService.getEventStats(eventId);
-    return result.attendees;
+    async getEventStatsWithAttendees(eventId: string) {
+        return this.eventStatsService.getEventStatsWithAttendees(eventId);
+    }
+
+    async getAttendeesByEvent(eventId: string) {
+        return this.eventStatsService.getAttendeesByEvent(eventId);
     }
 
     async getCurrentSupabaseUserId(): Promise<string> {
