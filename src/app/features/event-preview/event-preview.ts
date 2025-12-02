@@ -49,7 +49,6 @@ export class EventPreview implements OnInit {
           this.currentSupabaseUserId = supabaseUserId;
           this.isHost = supabaseUserId === currentEvent.userId;
 
-
           if (supabaseUserId !== currentEvent.userId) {
             try {
               await this.eventService.saveInvitation(

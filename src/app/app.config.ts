@@ -10,6 +10,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideHttpClient } from '@angular/common/http';
+import { PreloadAllModules, withPreloading } from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideAnimationsAsync(),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     providePrimeNG({ theme: { preset: Aura } }),
   ]
 };

@@ -30,13 +30,27 @@
 
                 @case ('main') {
                 <div class="navbar-center">
-                        <a routerLink="/memento"
-                            class="btn-memento"
-                            [class.active]="router.url.startsWith('/memento')">
-                            <span class="material-symbols-outlined">diversity_1</span>
-                        </a>
-                    </div>
-                    <div class="navbar-buttons-create">
+                    <a routerLink="/memento"
+                        class="btn-memento"
+                        [class.active]="router.url.startsWith('/memento')">
+                        <span class="material-symbols-outlined">diversity_1</span>
+                    </a>
+                </div>
+
+                <div class="navbar-buttons-create">
+                    <a routerLink="/memento"
+                        class="btn-memento btn-memento-mobile"
+                        [class.active]="router.url.startsWith('/memento')">
+                        <span class="material-symbols-outlined">diversity_1</span>
+                    </a>
+                    <button (click)="onCalendarClick()" class="btn-logout">
+                        <span class="material-symbols-outlined">event</span>
+                        <span class="calendar-text">calendar</span>
+                    </button>
+                    <button (click)="onUserAreaClick()" class="btn-logout">
+                        <span class="material-symbols-outlined">patient_list</span>
+                        <span class="patient-text">See who</span>
+                    </button>
                     <button (click)="onLogout()" class="btn-logout">
                         <span class="material-symbols-outlined">logout</span>
                         <span class="logout-text">Logout</span>
