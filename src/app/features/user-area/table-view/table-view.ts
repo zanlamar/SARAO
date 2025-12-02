@@ -1,9 +1,9 @@
 import { Component, Input, Signal, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { EventWithStats, EmailAttendeesByStatus } from '../../core/models/event.model';
-import { EventService } from '../../core/services/event.service';
-import { TableCard } from '../../shared/components/table-card/table-card';
+import { EventWithStats, EmailAttendeesByStatus } from '../../../core/models/event.model';
+import { EventService } from '../../../core/services/event.service';
+import { TableCard } from '../table-card/table-card';
 
 @Component({
   selector: 'app-table-view',

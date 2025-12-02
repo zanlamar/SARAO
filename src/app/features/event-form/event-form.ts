@@ -17,8 +17,8 @@ import { StorageService } from '../../core/services/storage.service';
 import { EventFormDTO, GeocodingResult, BringlistItem } from '../../core/models/event.model';
 import { FormsModule } from '@angular/forms';
 import { DatePicker } from 'primeng/datepicker';
-import { LocationSearch  } from '../../shared/components/location-search/location-search';
-import { Bringlist } from '../../features/bringlist/bringlist';
+import { LocationSearch  } from './location-search/location-search';
+import { Bringlist } from '../../shared/components/bringlist/bringlist';
 
 @Component({
   selector: 'app-event-form',
@@ -102,6 +102,11 @@ export class EventForm implements OnInit {
       } else {
         this.isEditMode.set(false);
         this.currentEventId.set(null);
+
+        const previewData = this.eventService.eventPreview();
+          if (previewData) {
+            this.loadFormFromDto(previewData);
+          }
       }
     })
   }
@@ -187,5 +192,39 @@ export class EventForm implements OnInit {
   onLocationSelected(location: GeocodingResult) {
     this.confirmedLocationAddress.set(location.displayName);
     this.selectedLocationCoords = location;
+  }
+
+  private loadFormFromDto(dto: EventFormDTO): void {
+  this.step1FormGroup.patchValue({
+    eventTitle: dto.title,
+    description: dto.description,
+  });
+
+  this.step2FormGroup.patchValue({
+    eventDateTime: dto.eventDateTime,
+  });
+
+  this.step3FormGroup.patchValue({
+    location: dto.location.alias,
+  });
+
+  this.step4FormGroup.patchValue({
+    image: dto.imageUrl,
+    allowedPlusOne: dto.allowPlusOne,
+  });
+
+  this.step5FormGroup.patchValue({
+    bringList: dto.bringList,
+  });
+
+  this.confirmedLocationAddress.set(dto.location.address || null);
+  this.selectedLocationCoords = {
+    displayName: dto.location.address || '',
+    latitude: dto.location.latitude,
+    longitude: dto.location.longitude,
+  } as GeocodingResult;
+
+  this.confirmedBringlistItems = dto.bringListItems || [];
+  this.selectedFileName = dto.imageUrl ? 'Current image' : '';
   }
 }

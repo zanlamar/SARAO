@@ -3,7 +3,7 @@ import { Component, Input, Signal, Output, EventEmitter, inject } from '@angular
 import { Event } from '../../../core/models/event.model';
 import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
-import { DeleteModal } from "../../../shared/components/delete-modal/delete-modal";
+import { DeleteModal } from "../delete-modal/delete-modal";
 @Component({
   selector: 'app-events-list',
   imports: [CommonModule, DeleteModal],
@@ -40,6 +40,7 @@ export class EventsList {
       console.error('Error deleting event:', error);
     }
   }
+  
   onSee(event: Event): void {
     this.eventClicked.emit(event);
     this.router.navigate(['/event-preview', event.id]);
@@ -47,8 +48,9 @@ export class EventsList {
   onShareEvent(eventId: string): void {
     this.router.navigate(['/shareable-url', eventId]);
   }
-  isHostEvent(event: Event): boolean {
-    return !(event as any).isGuest;
+
+  isHostEvent(event: Event & { isHost?: boolean }): boolean {
+  return !!(event as any).isHost;
   }
 }
 

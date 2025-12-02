@@ -62,17 +62,8 @@
   }
 }
 .btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 1rem;
-}
-@media (min-width: 640px) {
-  .btn {
-    font-size: 1rem;
-  }
 }
 .btn-primary {
   background-color: var(--color-azul);

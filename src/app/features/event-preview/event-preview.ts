@@ -1,11 +1,13 @@
+import { SupabaseService } from '../../core/services/supabase.service';
+import { getSupabaseUserId } from '../../core/helpers-supabase/event.mapper';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 import { EventFormDTO, Event } from '../../core/models/event.model';
 import { AuthService } from '../../core/services/auth.service';
-import { PreviewMap } from '../../shared/components/preview-map/preview-map';
-import { Bringlist } from '../bringlist/bringlist';
+import { PreviewMap } from './preview-map/preview-map';
+import { Bringlist } from '../../shared/components/bringlist/bringlist';
 
 @Component({
   selector: 'app-event-preview',
@@ -19,10 +21,14 @@ export class EventPreview implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
+  private supabaseService = inject(SupabaseService);
+  private currentSupabaseUserId: string | null = null;
+
 
   event = signal<EventFormDTO | Event | null>(null);
   isCreating = signal<boolean>(false);
   rsvpResponse = signal<'yes' | 'maybe' | 'no' | null>(null);
+  isHost = false;
 
   constructor() {}
 
@@ -38,15 +44,22 @@ export class EventPreview implements OnInit {
         const user = this.authService.currentUser();
         const currentEvent = this.event() as Event;
 
-        if (user && currentEvent && user.uid !== currentEvent.userId) {
-          try {
-            await this.eventService.saveInvitation(
-              eventId, 
-              user.uid, 
-              user.email || ''
-            );
-          } catch (error: any) {
-            console.error('❌ Error al guardar invitation:', error);
+        if (user && currentEvent) {
+          const supabaseUserId = await getSupabaseUserId(this.authService, this.supabaseService);
+          this.currentSupabaseUserId = supabaseUserId;
+          this.isHost = supabaseUserId === currentEvent.userId;
+
+
+          if (supabaseUserId !== currentEvent.userId) {
+            try {
+              await this.eventService.saveInvitation(
+                eventId, 
+                user.uid, 
+                user.email || ''
+              );
+            } catch (error: any) {
+              console.error('❌ Error al guardar invitation:', error);
+            }
           }
         }
 
@@ -73,6 +86,7 @@ export class EventPreview implements OnInit {
     if (this.isCreating()) {
       this.router.navigate(['/create']);
     } else {
+      return;
     }
   }
   
@@ -108,8 +122,11 @@ export class EventPreview implements OnInit {
       return;
     }
 
-    if (user.uid === currentEvent.userId) {
-    return;
+    const supabaseUserId = this.currentSupabaseUserId ??
+    await getSupabaseUserId(this.authService, this.supabaseService);
+
+    if (supabaseUserId === currentEvent.userId) {
+      return;
     }
 
     try {

@@ -3,7 +3,7 @@
 
 :root {
   --color-ice: #e8f0e9;
-  --color-dark: #010101;
+  --color-dark: #1f2937;
   --color-azul: #7489ff;
   --color-azul-dark: #5a6dd4;
   --color-banana: #ffd13a;
@@ -56,4 +56,37 @@ button,
   font-family: 'Koulen', sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .btn {
+    font-size: 1rem;
+  }
+}
+
+.btn-primary {
+  padding: 0.875rem 1.5rem;
+  background-color: var(--color-azul);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-banana);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 209, 58, 0.3);
+  color: var(--color-dark);
 }

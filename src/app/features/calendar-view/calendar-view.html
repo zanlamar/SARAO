@@ -31,7 +31,7 @@
 
                         @if (selectedDate$()) {
                             <div class="selected-day-indicator">
-                                <span> Checking {{ selectedDate$() | date:'mediumDate' }} </span>
+                                <span> 👀 Checking {{ selectedDate$() | date:'mediumDate' }} </span>
                                 <button (click)="clearDaySelection()">✕</button>
                             </div>
                         }
@@ -39,7 +39,6 @@
                     <app-events-list
                         [events$]="displayedEvents$"
                         [activeFilter]="activeFilter"
-                        (eventClicked)="onEventClicked($event)"
                         [selectedDate$]="selectedDate$"
                         (onEventDeleted)="loadUserEvents()"
                     ></app-events-list>
@@ -59,5 +58,4 @@
             </div>
         </div>
     </main> 
-    <!-- <app-footer></app-footer> -->
 </div>

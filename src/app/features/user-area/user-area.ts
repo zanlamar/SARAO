@@ -1,20 +1,18 @@
 import { Component, OnInit, inject, signal, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableView } from '../table-view/table-view';
+import { TableView } from './table-view/table-view';
 import { AuthService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';
 import { EventWithStats } from '../../core/models/event.model';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-import { Footer } from '../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-user-area',
   imports: [
     CommonModule, 
-    TableView, 
-    Footer, 
+    TableView,
     IconFieldModule, 
     InputIconModule, 
     InputTextModule,

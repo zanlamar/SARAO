@@ -60,7 +60,7 @@
                 </div>
             }
 
-            @if (!isCreating()) {
+            @if (!isCreating() && !isHost) {
                 <div class="rsvp-section">
                     <h3 class="rsvp-title">RSVP</h3>
                     <div class="rsvp-buttons">
@@ -112,5 +112,4 @@
         </div>
     }
     </main>
-    <!-- <app-footer></app-footer> -->
 </div>

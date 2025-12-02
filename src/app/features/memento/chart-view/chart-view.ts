@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal, computed, effect, ViewChild, ElementRef, input, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { EventWithStats } from '../../core/models/event.model';
+import { EventWithStats } from '../../../core/models/event.model';
 
 Chart.register(...registerables);
 
