@@ -29,70 +29,33 @@ A modern, full-stack event management fun application built with **Angular 20**,
 
 ## 📂 Project Structure
 
-This project follows a **feature-based modular structure**, scalable and easy to maintain.
+The project follows a clean **feature-based modular Angular structure**. Core logic and feature modules are organized under src/app, while reusable components and pipes live in shared. Assets are stored in src/assets, and essential configuration files remain at the root of src. This structure keeps the codebase organized, scalable, and easy to navigate.
 
 ```
 SARAO/
-├── .angular/                    # Angular CLI cache
-├── .vscode/                     # VS Code configuration
-├── src/
-│   ├── app/
-│   │   ├── core/                # Core application logic
-│   │   │   ├── guards/          # Route guards
-│   │   │   │   └── auth.guard.ts
-│   │   │   ├── helpers-supabase/ # Database mappers
-│   │   │   │   └── event.mapper.ts
-│   │   │   ├── models/          # TypeScript interfaces
-│   │   │   │   ├── calendar.model.ts
-│   │   │   │   └── event.model.ts
-│   │   │   └── services/        # Business logic services
-│   │   │       ├── auth.service.ts
-│   │   │       ├── calendar.service.ts
-│   │   │       ├── event.service.ts
-│   │   │       ├── event-data.service.ts
-│   │   │       ├── event-stats.service.ts
-│   │   │       ├── geocoding.service.ts
-│   │   │       ├── invitation.service.ts
-│   │   │       ├── shareable-url.service.ts
-│   │   │       ├── storage.service.ts
-│   │   │       └── supabase.service.ts
-│   │   ├── features/            # Feature modules
-│   │   │   ├── auth/            # Authentication pages
-│   │   │   │   ├── login/
-│   │   │   │   └── register/
-│   │   │   ├── calendar-view/   # Calendar functionality
-│   │   │   │   ├── calendar-grid/
-│   │   │   │   ├── delete-modal/
-│   │   │   │   └── events-list/
-│   │   │   ├── event-form/      # Event creation/editing
-│   │   │   │   └── location-search/
-│   │   │   ├── event-preview/   # Event preview and management
-│   │   │   │   └── preview-map/
-│   │   │   ├── home/            # Dashboard
-│   │   │   ├── landing-page/    # Public landing
-│   │   │   ├── memento/         # Analytics dashboard
-│   │   │   │   ├── chart-view/
-│   │   │   │   └── event-bars/
-│   │   │   ├── shareable-url/   # Public event pages
-│   │   │   └── user-area/       # User management
-│   │   │       ├── table-card/
-│   │   │       └── table-view/
-│   │   ├── shared/              # Shared components
-│   │   │   ├── components/
-│   │   │   │   ├── bringlist/
-│   │   │   │   ├── footer/
-│   │   │   │   └── header/
-│   │   │   └── pipes/
-│   │   ├── app.config.ts        # App configuration
-│   │   ├── app.routes.ts        # Route definitions
-│   │   └── app.ts               # Root component
-│   ├── assets/                  # Static assets
-│   ├── environments/            # Environment configs
-│   └── index.html               # Main HTML file
-├── angular.json                 # Angular CLI config
-├── package.json                 # Dependencies
-├── tsconfig.json               # TypeScript config
-└── README.md                   # Project documentation
+
+src/
+├── app/
+│   ├── core/
+│   │   ├── features/
+│   │   ├── guards/
+│   │   ├── helpers-supabase/
+│   │   ├── models/
+│   │   └── services/
+│   ├── shared/
+│   │   ├── components/
+│   │   └── pipes/
+│   ├── app.config.ts
+│   ├── app.html
+│   ├── app.css
+│   ├── app.routes.ts
+│   └── app.ts
+├── assets/
+│   └── images/
+├── environments/
+├── index.html
+├── main.ts
+└── styles.css
 
 ```
 
