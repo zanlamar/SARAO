@@ -47,12 +47,13 @@
     gap: 0;
     align-items: stretch;
     border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     overflow: hidden;
 }
 .search-wrapper p-iconfield {
     flex: 1;
     width: 100%;
+    border-radius: 999px;
 }
 :host ::ng-deep .p-iconfield {
     width: 100%;
@@ -63,7 +64,7 @@
     padding: 0.75rem 1rem;
     padding-left: 2.5rem;
     border: none;
-    border-radius: 0;
+    border-radius: 999px;
     font-size: 0.875rem;
     font-family: 'Nunito Sans', sans-serif;
     transition: background-color 0.2s ease;
@@ -83,7 +84,7 @@
     background-color: var(--color-azul);
     color: white;
     border: none;
-    border-radius: 0;
+    border-radius: 999px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     font-size: 0.8rem;
@@ -92,7 +93,7 @@
     height: auto;
 }
 .search-btn:hover {
-    background-color: var(--color-azul-dark);
+    background-color: var(--color-banana);
 }
 .search-btn:active {
     transform: scale(0.98);
@@ -123,7 +124,7 @@
     background-color: var(--color-azul);
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     font-size: 0.8rem;
@@ -136,8 +137,8 @@
     }
 }
 .month-btn:hover {
-    background-color: var(--color-azul-dark);
-    color: white;
+    background-color: var(--color-banana);
+    color: var(--color-ice);
 }
 .month-btn:active {
     transform: scale(0.98);
@@ -147,7 +148,7 @@
     background-color: #1f2937;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.8rem;
@@ -160,8 +161,8 @@
     }
 }
 .clear-btn:hover {
-    background-color: var(--color-blush);
-    color: #1f2937;
+    background-color: var(--color-neon);
+    color: var(--color-ice);
     border: 1px solid #e5e7eb;
 }
 .clear-btn:active {

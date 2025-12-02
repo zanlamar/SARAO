@@ -52,7 +52,7 @@
 }
 .error-message {
     background-color: #fee;
-    color: var(--color-blush);
+    color: var(--color-neon);
     padding: 0.75rem;
     border-radius: 8px;
     margin-bottom: 1rem;

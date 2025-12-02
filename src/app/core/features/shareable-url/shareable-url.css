@@ -100,7 +100,7 @@
   transition: all 0.2s ease;
 }
 .btn-dark:hover {
-  background-color: var(--color-blush);
+  background-color: var(--color-neon);
   transform: translateY(-2px);
 }
 .btn-dark.copied {

@@ -162,12 +162,12 @@
 }
 .calendar-day.selected {
   background-color: #ffe2d9;
-  border: 2px solid var(--color-blush);
+  border: 2px solid var(--color-neon);
 }
 .calendar-day.selected .day-number {
-  color: var(--color-dark);
+  color: var(--color-ice);
   font-weight: 700;
-  background-color: var(--color-blush);
+  background-color: var(--color-neon);
   width: 1.5rem;
   height: 1.5rem;
   display: flex;

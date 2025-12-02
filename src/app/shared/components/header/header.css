@@ -152,7 +152,8 @@
 }
 
 .btn-dark:hover {
-  background-color: var(--color-blush);
+  background-color: var(--color-neon);
+  color: var(--color-ice);
 }
 
 .btn-logout {
