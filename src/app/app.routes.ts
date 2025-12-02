@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/auth/login/login';
-import { Register } from './features/auth/register/register';
+import { Login } from './core/features/auth/login/login';
+import { Register } from './core/features/auth/register/register';
 import { authGuard } from './core/guards/auth.guard';
-import { landingPage } from './features/landing-page/landingPage';
-import { Home } from './features/home/home';
-import { EventForm } from './features/event-form/event-form';
-import { CalendarView } from './features/calendar-view/calendar-view';
-import { EventPreview } from './features/event-preview/event-preview';
-import { ShareableUrlComponent } from './features/shareable-url/shareable-url';
-import { UserArea } from './features/user-area/user-area';
-import { Memento } from './features/memento/memento';
+import { landingPage } from './core/features/landing-page/landingPage';
+import { Home } from './core/features/home/home';
+import { EventForm } from './core/features/event-form/event-form';
+import { CalendarView } from './core/features/calendar-view/calendar-view';
+import { EventPreview } from './core/features/event-preview/event-preview';
+import { ShareableUrlComponent } from './core/features/shareable-url/shareable-url';
+import { UserArea } from './core/features/user-area/user-area';
+import { Memento } from './core/features/memento/memento';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'landing' },

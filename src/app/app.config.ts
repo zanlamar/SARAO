@@ -16,12 +16,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(firebaseConfig.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideAnimationsAsync(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
     providePrimeNG({ theme: { preset: Aura } }),
   ]
 };
