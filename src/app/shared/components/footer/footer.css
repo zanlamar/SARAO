@@ -46,9 +46,9 @@
 }
 
 .footer-icon-add:hover {
-  background-color: var(--color-blush);
+  background-color: var(--color-neon);
   transform: scale(1.1);
-  color: var(--color-dark);
+  color: var(--color-ice);
 }
 
 .material-symbols-outlined {

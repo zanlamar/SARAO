@@ -18,9 +18,8 @@ export class Footer {
   constructor() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => { this.updateFooterFromRoute();
-        this.updateFooterFromRoute();
-      });
+      .subscribe(() => this.updateFooterFromRoute());
+    this.updateFooterFromRoute();
   }
 
   private updateFooterFromRoute() {
