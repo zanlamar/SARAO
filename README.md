@@ -1,20 +1,29 @@
 # SARAO: Event Management Platform
 
-A modern, full-stack event management application built with **Angular 20**, **Firebase Authentication**, and **Supabase**, designed for seamless event scheduling, calendar visualization, and secure user access. This project demonstrates modular architecture, reactive programming with RxJS, and a scalable feature-based structure.
+A modern, full-stack event management FUN application built with **Angular 20**, **Firebase Authentication**, and **Supabase**. Designed for seamless event scheduling, calendar visualization, and secure user access. 
+
+## 🚀 Live Demo
+[Feeling curious? Take a look to the live demo](https://sarao.vercel.app/landing)
 
 ---
 
-## 🍏 Features
+## 🍏 Key Features
 
-- **Event scheduling system** — create, edit, and delete events with real-time database synchronization.
-- **Interactive calendar view** — visualize events using a dynamic, user-friendly calendar interface.
-- **User authentication** — secure access powered by Firebase.
-- **Event previews** — inspect event details before saving or updating.
-- **User dashboard** — centralized space for personal events, settings, and quick actions.
-- **Responsive UI** — built with PrimeNG and PrimeFlex.
-- **Data validation** — strong client-side validation and robust route protection.
-- **Lazy loading** — optimized feature loading.
-- **Signals-based reactive state** — efficient and predictable UI updates.
+🔐 **User Authentication** — Firebase-based registration and login system
+
+💃 **Event Creation** — Multi-step event creation with location search and image upload
+
+🔗 **Shareable URLs** — Generate and share event invitation links
+
+📝 **Bring Lists** — Collaborative item lists for events
+
+👥 **Guest Management** — Comprehensive invitation, RSVP system and analytics
+
+🗓️ **Calendar View** — Interactive calendar with event visualization
+
+📍 **Location Integration** — Geocoding and map integration for event locations
+
+📈 **Analytics Dashboard** — Event performance metrics and charts
 
 ---
 
@@ -22,35 +31,72 @@ A modern, full-stack event management application built with **Angular 20**, **F
 
 This project follows a **feature-based modular structure**, scalable and easy to maintain.
 
-    src/
-    ├── app/
-    │   ├── core/
-    │   │   ├── guards/            # Route guards for authentication
-    │   │   ├── services/          # Core services (auth, events, etc.)
-    │   │   └── models/            # Data models and interfaces
-    │   │
-    │   ├── features/              # Feature modules
-    │   │   ├── auth/              # Authentication components
-    │   │   ├── calendar-view/     # Calendar visualization
-    │   │   ├── event-form/        # Event creation/editing
-    │   │   ├── event-preview/     # Event preview functionality
-    │   │   ├── home/              # Main dashboard
-    │   │   ├── landing-page/      # Public landing page
-    │   │   └── user-area/         # User profile and settings
-    │   │
-    │   ├── shared/                # Shared components and pipes
-    │   │   ├── components/        # Reusable UI components
-    │   │   └── pipes/             # Custom pipes
-    │   │
-    │   ├── app.routes.ts          # Application routing
-    │   └── app.config.ts          # Application configuration
-    │
-    ├── assets/                    # Static assets
-    │   └── images/                # Image resources
-    │
-    └── environments/              # Environment configurations
+```
+SARAO/
+├── .angular/                    # Angular CLI cache
+├── .vscode/                     # VS Code configuration
+├── src/
+│   ├── app/
+│   │   ├── core/                # Core application logic
+│   │   │   ├── guards/          # Route guards
+│   │   │   │   └── auth.guard.ts
+│   │   │   ├── helpers-supabase/ # Database mappers
+│   │   │   │   └── event.mapper.ts
+│   │   │   ├── models/          # TypeScript interfaces
+│   │   │   │   ├── calendar.model.ts
+│   │   │   │   └── event.model.ts
+│   │   │   └── services/        # Business logic services
+│   │   │       ├── auth.service.ts
+│   │   │       ├── calendar.service.ts
+│   │   │       ├── event.service.ts
+│   │   │       ├── event-data.service.ts
+│   │   │       ├── event-stats.service.ts
+│   │   │       ├── geocoding.service.ts
+│   │   │       ├── invitation.service.ts
+│   │   │       ├── shareable-url.service.ts
+│   │   │       ├── storage.service.ts
+│   │   │       └── supabase.service.ts
+│   │   ├── features/            # Feature modules
+│   │   │   ├── auth/            # Authentication pages
+│   │   │   │   ├── login/
+│   │   │   │   └── register/
+│   │   │   ├── calendar-view/   # Calendar functionality
+│   │   │   │   ├── calendar-grid/
+│   │   │   │   ├── delete-modal/
+│   │   │   │   └── events-list/
+│   │   │   ├── event-form/      # Event creation/editing
+│   │   │   │   └── location-search/
+│   │   │   ├── event-preview/   # Event preview and management
+│   │   │   │   └── preview-map/
+│   │   │   ├── home/            # Dashboard
+│   │   │   ├── landing-page/    # Public landing
+│   │   │   ├── memento/         # Analytics dashboard
+│   │   │   │   ├── chart-view/
+│   │   │   │   └── event-bars/
+│   │   │   ├── shareable-url/   # Public event pages
+│   │   │   └── user-area/       # User management
+│   │   │       ├── table-card/
+│   │   │       └── table-view/
+│   │   ├── shared/              # Shared components
+│   │   │   ├── components/
+│   │   │   │   ├── bringlist/
+│   │   │   │   ├── footer/
+│   │   │   │   └── header/
+│   │   │   └── pipes/
+│   │   ├── app.config.ts        # App configuration
+│   │   ├── app.routes.ts        # Route definitions
+│   │   └── app.ts               # Root component
+│   ├── assets/                  # Static assets
+│   ├── environments/            # Environment configs
+│   └── index.html               # Main HTML file
+├── angular.json                 # Angular CLI config
+├── package.json                 # Dependencies
+├── tsconfig.json               # TypeScript config
+└── README.md                   # Project documentation
 
-### Architecture Layers
+```
+
+### 🏗️ Architecture Layers
 
 - **Presentation Layer** → User-facing components & screens  
 - **Business Logic Layer** → Services handling logic, APIs, and state  
@@ -62,68 +108,88 @@ This project follows a **feature-based modular structure**, scalable and easy to
 
 ## 👾 Technologies Used
 
-- **Angular 20** (standalone architecture + Signals)
+- **Angular 20** - Latest Angular with standalone components
+- **RxJS 7.8** - Reactive programming
+- **Angular Material 20** - Material Design components
+- **PrimeNG 20 & PrimeIcons** -  UI component library
+- **Prettier** - Code formatting
+
 - **Firebase Authentication**
 - **Supabase** (DB + Storage)
-- **RxJS**
-- **PrimeNG & PrimeFlex**
-- **SCSS**
-- **Angular Router**
+- **Firebase Storage** - File storage solution
+
+- **Chart.js** - Data visualization library
+- **Leaflet** - Interactive maps
+- **MapLibre GL** - Vector tile rendering
+- **Geocoding API** - Address to coordinates conversion
+
 
 ---
 
 ## 👩‍💻 Prerequisites
 
-- Node.js v18+  
-- npm  
-- Angular CLI 20+  
-- Firebase project  
-- Supabase project  
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+- Angular CLI (v20 or higher)
+- Firebase Account (for authentication)
+- Supabase Account (for database)
 
 ---
 
 ## ⚙️ Installation
 
-1. Install Angular CLI:
+1. **Install Angular CLI:**
 
-        npm install -g @angular/cli
+        ```npm install -g @angular/cli``
 
-2. Clone the repository:
+2. **Clone the repository:**
 
         git clone [your-repo-url]
-        cd EntryPoint
+        cd SARAO
 
-3. Install dependencies:
+3. **Install dependencies:**
 
         npm install
 
-4. Configure `environment.ts`:
+4. **Configure `environment.ts`:**
+
+
+       // environment.ts
 
         export const environment = {
-          firebase: {
-            apiKey: 'your_firebase_api_key',
-            authDomain: 'your_project.firebaseapp.com',
-          },
-          supabase: {
-            url: 'your_supabase_url',
-            key: 'your_supabase_key'
-          }
+        production: false,
+        supabase: {
+        url: 'YOUR_SUPABASE_URL',
+        anonKey: 'YOUR_SUPABASE_ANON_KEY'
+        }
         };
 
-5. Run the development server:
+        // firebase.config.ts
 
-        ng serve
+        export const firebaseConfig = {
+        firebaseConfig: {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+        }
+        };
 
-6. Open the app:
+5. **Database Setup:**
 
-        http://localhost:4200/
+Run the provided SQL scripts in your Supabase dashboard to create the required tables.
+
+6. **Start Development Server:**
+
+        npm start
+
+7. **Build for Production:**
+
+        npm run build
 
 ---
 
-## 🔮 Future Improvements
 
-- Advanced calendar filters  
-- Multi-user collaboration features  
-- Push notifications  
-- Analytics dashboard  
 
