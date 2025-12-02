@@ -66,9 +66,17 @@
 
 .event-button {
     width: 25%;
-    background-color: #010101;
+    background-color: var(--color-dark);
     border: none;
+    border-radius: 999px;
     font-family: 'Koulen', sans-serif;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.event-button:hover {
+    background-color: var(--color-neon);
+    color: var(--color-ice);
 }
 
 .event-card ::ng-deep .p-card-body {

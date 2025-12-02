@@ -132,7 +132,7 @@
     font-size: 0.8rem;
     padding: 0.25rem 0.5rem;
     background-color: var(--color-dark);
-    border-radius: 10px;
+    border-radius: 999px;   
     color: white;
     cursor: pointer;
     border: none;
@@ -140,7 +140,7 @@
 }
 
 .more-info-btn:hover {
-    background-color: var(--color-azul);
+    background-color: var(--color-neon);
 }
 
 .attendees-details {
