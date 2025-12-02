@@ -1,0 +1,120 @@
+.event-card {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.event-body {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1rem 1rem;
+    border-radius: 8px 8px 0 0;
+}
+
+.event-details {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+}
+
+.event-title {
+    font-family: 'Koulen', sans-serif;
+    font-size: 1.3rem;
+    margin: 0;
+    letter-spacing: .5px;
+}
+
+.event-date {
+    display: flex;
+    gap: .4rem;
+    color: #555;
+    font-size: 1rem;
+}
+
+.event-location {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.event-stats {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin-bottom: 1rem;
+}
+
+.event-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: .95rem;
+    padding: .3rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.event-button {
+    width: 25%;
+    background-color: var(--color-dark);
+    border: none;
+    border-radius: 999px;
+    font-family: 'Koulen', sans-serif;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.event-button:hover {
+    background-color: var(--color-neon);
+    color: var(--color-ice);
+}
+
+.event-card ::ng-deep .p-card-body {
+    padding-top: 0 !important;
+}
+
+.event-card ::ng-deep .p-card-content {
+    padding: 0 !important;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+    font-family: 'Koulen', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.attendees-modal {
+    h3 {
+        margin-top: 1rem;
+        margin-bottom: .5rem;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .email-row {
+        display: flex;
+        justify-content: space-between;
+        padding: .4rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .email-icon {
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .empty-state {
+        font-size: .9rem;
+        color: #999;
+        padding: .3rem 0;
+    }
+}

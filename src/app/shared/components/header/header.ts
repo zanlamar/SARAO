@@ -38,4 +38,12 @@ export class Header {
   onLogout() {
     this.authService.logout();
   }
+
+  onCalendarClick() {
+    this.router.navigate(['/calendar-view']);
+  }
+
+  onUserAreaClick() {
+    this.router.navigate(['/user-area']);
+  }
 }

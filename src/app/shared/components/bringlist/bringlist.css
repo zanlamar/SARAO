@@ -24,14 +24,16 @@
   margin-bottom: 1rem;
   width: 100%;
   margin-inline: auto;
+  font-family: 'Nunito', sans-serif;
 }
 
 .bl-input {
   flex: 1;
   padding: 0.5rem 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.9rem;
+  color: var(--color-grey);
 }
 
 .bl-input:focus {
@@ -87,6 +89,7 @@
 }
 
 .btn-littleAdd:hover {
-  background-color: var(--color-blush);
+  background-color: var(--color-neon);
+  color: var(--color-ice);
 }
 
