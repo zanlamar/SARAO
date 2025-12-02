@@ -1,6 +1,6 @@
 # SARAO: Event Management Platform
 
-A modern, full-stack event management FUN application built with **Angular 20**, **Firebase Authentication**, and **Supabase**. Designed for seamless event scheduling, calendar visualization, and secure user access. 
+A modern, full-stack event management fun application built with **Angular 20**, **Firebase Authentication**, and **Supabase**. Designed for seamless event scheduling, calendar visualization, and secure user access. 
 
 ## 🚀 Live Demo
 [Feeling curious? Take a look to the live demo](https://sarao.vercel.app/landing)
