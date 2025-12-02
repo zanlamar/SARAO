@@ -38,6 +38,7 @@
 }
 .calendar-column {
   order: 1;
+  padding: 0.5em;
 }
 @media (min-width: 1024px) {
   .events-column {
